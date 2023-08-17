@@ -1,5 +1,6 @@
 package com.app.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,11 +11,12 @@ import com.app.service.LeaveApplicationService;
 @Service
 @Transactional
 public class LeaveApplicationRepositoryImpl implements LeaveApplicationService {
+	@Autowired
+	private LeaveApplicationRepository leaveRep;
 
 	@Override
 	public ApiResponseDto addLeaveAppDetails(LeaveApplication leaveAppDetail) {
-		// TODO Auto-generated method stub
-		return LeaveApplicationRepository.save(leaveAppDetail);
+		leaveRep.save(leaveAppDetail);
+		return new ApiResponseDto("Leave Application Submitted Successful...");
 	}
-	//Find the Leave Application
 }
