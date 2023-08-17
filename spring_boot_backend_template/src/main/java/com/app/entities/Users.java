@@ -1,11 +1,15 @@
 package com.app.entities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -35,7 +39,8 @@ public class Users
 	private String mobileNo;
 	@Column(nullable = false)
 	private String password;
-	
+	@OneToMany(mappedBy = "studentId")
+	private List<Feedback> feedbacks=new ArrayList<Feedback>();
 	
 	//private byte[] profilePic;
 	
