@@ -8,21 +8,21 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.app.entities.Department;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
-@Table(name = "new_user") // to specify table name
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
 public class SignupRequest {
-	
+  	
   private int userId;
   @NotBlank(message = "first name can't be blank")
   private String firstName;
@@ -34,6 +34,8 @@ public class SignupRequest {
   private String mobileNo;
   @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})",message = "invalid password format")
   private String password;
+  private Department dept;
+  
   
   
 }
