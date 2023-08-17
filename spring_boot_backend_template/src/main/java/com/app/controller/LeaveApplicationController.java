@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.service.LeaveApplicationService;
 
 @RestController
-@RequestMapping("/feedback")
+@RequestMapping("/leaveapp")
 public class LeaveApplicationController {
 	@Autowired
 	private LeaveApplicationService leaveService;

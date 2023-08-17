@@ -44,7 +44,7 @@ public class Users
 	private Role role;
 	@OneToMany(mappedBy = "studentId")
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
-<<<<<<< HEAD
+
 	@OneToMany(mappedBy = "user")
 =======
 <<<<<<< HEAD
