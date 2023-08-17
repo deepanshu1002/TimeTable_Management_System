@@ -1,6 +1,5 @@
 package com.app.entities;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,20 +19,19 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="users_tbl")
+@Table(name = "users_tbl")
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"password"})
-public class Users
-{
+@ToString(exclude = { "password" })
+public class Users {
 	@Id
 	private Long userId;
 	@Column(length = 30, nullable = false)
 	private String firstName;
 	@Column(length = 30, nullable = false)
 	private String lastName;
-	@Column(length = 30,unique = true, nullable = false)
+	@Column(length = 30, unique = true, nullable = false)
 	private String email;
 	@Column(length = 30, nullable = false)
 	private String mobileNo;
@@ -43,21 +41,23 @@ public class Users
 	@JoinColumn(name = "role_id")
 	private Role role;
 	@OneToMany(mappedBy = "studentId")
+<<<<<<< HEAD
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
 
 	@OneToMany(mappedBy = "user")
 =======
 <<<<<<< HEAD
+=======
+	private List<Feedback> feedbacks = new ArrayList<Feedback>();
+
+>>>>>>> fda47600b6baa12330a7454d0ee9b71910b87ae8
 	@ManyToOne
 	@JoinColumn(name = "dept_id")
 	private Department dept;
 	
-=======
-	@OneToMany
->>>>>>> 410391f985cd1aad83f35c173ff325f9b09f7444
-	private List<LeaveApplication> leaves=new ArrayList<LeaveApplication>();
->>>>>>> 825b365fe58c5093d60fce9fa077336703d486dd
-	
-	//private byte[] profilePic;
-	
+	@OneToMany(mappedBy = "user")
+	private List<LeaveApplication> leaves = new ArrayList<LeaveApplication>();
+
+	// private byte[] profilePic;
+
 }

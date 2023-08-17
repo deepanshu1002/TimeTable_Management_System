@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "*")
 public class UserController {
-	@PostMapping("/signup")
-	public ResponseEntity<?> registerUser(@RequestBody @Valid SignupRequest request)
-	{
-		return ResponseEntity.status(HttpStatus.CREATED).body(empService.signupEmp(request));
-	}
+	//@PostMapping("/signup")
+//	public ResponseEntity<?> registerUser(@RequestBody @Valid SignupRequest request)
+//	{
+//		return ResponseEntity.status(HttpStatus.CREATED).body(empService.signupEmp(request));
+//	}
 	
 	
 	
