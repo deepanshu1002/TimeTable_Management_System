@@ -44,6 +44,8 @@ public class Users
 	private Role role;
 	@OneToMany(mappedBy = "studentId")
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
+	@OneToMany
+	private List<LeaveApplication> leaves=new ArrayList<LeaveApplication>();
 	
 	//private byte[] profilePic;
 	
