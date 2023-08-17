@@ -1,4 +1,4 @@
-package com.app.repository;
+package com.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,11 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dto.ApiResponseDto;
 import com.app.entities.LeaveApplication;
-import com.app.service.LeaveApplicationService;
+import com.app.repository.LeaveApplicationRepository;
 
 @Service
 @Transactional
-public class LeaveApplicationRepositoryImpl implements LeaveApplicationService {
+public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 	@Autowired
 	private LeaveApplicationRepository leaveRep;
 
