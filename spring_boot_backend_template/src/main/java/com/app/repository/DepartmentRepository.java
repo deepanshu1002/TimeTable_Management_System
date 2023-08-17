@@ -3,8 +3,7 @@ package com.app.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.app.entities.Department;
-import com.app.entities.Lecture;
 
-public interface LectureRepository extends JpaRepository<Lecture, Long>{
+public interface DepartmentRepository extends JpaRepository<Department, Long > {
 
 }

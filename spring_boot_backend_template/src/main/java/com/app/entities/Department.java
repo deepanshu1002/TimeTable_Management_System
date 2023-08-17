@@ -32,4 +32,13 @@ public class Department {
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
 	@OneToMany
 	private List <ClassroomTbl> classroom = new ArrayList<>();
+	
+	public void addLecture(Lecture l) {
+        lectures.add(l);// dept --> emp
+		l.setDept(this);// emp --> dept
+	}
+	public void removeLecture(Lecture l) {
+		lectures.remove(l);
+		l.setDept(null);
+	}
 }
