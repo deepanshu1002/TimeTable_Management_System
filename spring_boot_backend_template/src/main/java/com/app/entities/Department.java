@@ -30,4 +30,6 @@ public class Department {
 	private List <Lecture> lectures = new ArrayList<>();
 	@OneToMany(mappedBy = "deptId")
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
+	@OneToMany
+	private List <ClassroomTbl> classroom = new ArrayList<>();
 }
