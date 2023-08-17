@@ -28,8 +28,8 @@ public class Department {
 	private String deptName;
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Lecture> lectures = new ArrayList<>();
-	@OneToMany(mappedBy = "deptId")
-	private List<Feedback> feedbacks = new ArrayList<Feedback>();
+//	@OneToMany(mappedBy = "deptId")
+//	private List<Feedback> feedbacks = new ArrayList<Feedback>();
 	@OneToMany(mappedBy = "dept")
 	private List<ClassroomTbl> classroom = new ArrayList<>();
 	@OneToMany(mappedBy = "dept")

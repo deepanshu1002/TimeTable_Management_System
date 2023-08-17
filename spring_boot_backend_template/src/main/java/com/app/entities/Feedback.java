@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -26,6 +28,7 @@ import lombok.ToString;
 @Setter
 public class Feedback {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long feedbackId;
 	@ManyToOne
 	@JoinColumn(name = "student_id")
@@ -33,10 +36,6 @@ public class Feedback {
 	@ManyToOne
 	@JoinColumn(name = "subject_id")
 	private Subject subjectId;
-	@ManyToOne
-	@JoinColumn(name = "dept_id")
-	private Department deptId;
-
 	private LocalDate date;
 	@Column(length = 5)
 	private Long rating;

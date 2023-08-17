@@ -15,11 +15,14 @@ import com.app.dto.AddFeedbackReqDTO;
 import com.app.dto.ApiResponseDto;
 import com.app.entities.Feedback;
 import com.app.repository.FeedbackRepository;
+import com.app.repository.SubjectRepository;
 
 public class FeedbackServiceImpl implements FeedbackService {
 	
 	@Autowired
 	private FeedbackRepository feedbackRepo;
+	@Autowired
+	private SubjectRepository subjectRepo;
 	
 	@Override
 	public ApiResponseDto addFeedback(AddFeedbackReqDTO feedback) {

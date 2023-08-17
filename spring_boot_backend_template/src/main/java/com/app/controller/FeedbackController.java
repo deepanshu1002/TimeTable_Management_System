@@ -20,6 +20,6 @@ public class FeedbackController {
 	
 	@PostMapping
 	public ResponseEntity<?> addFeedback(@RequestBody AddFeedbackReqDTO feedback){
-		return ResponseEntity.status(HttpStatus.CREATED).body(null);
+		return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.addFeedback(feedback));
 	}
 }
