@@ -39,6 +39,9 @@ public class Users
 	private String mobileNo;
 	@Column(nullable = false)
 	private String password;
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private Role role;
 	@OneToMany(mappedBy = "studentId")
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
 	

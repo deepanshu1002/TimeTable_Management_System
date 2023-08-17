@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,11 +28,14 @@ public class Feedback {
 	@Id
 	private int feedbackId;
 	@ManyToOne
+	@JoinColumn(name = "student_id")
 	private Users studentId;
 	@ManyToOne
-	private int subjectId;
+	@JoinColumn(name = "subject_id")
+	private Subject subjectId;
 	@ManyToOne
-	private int deptId;
+	@JoinColumn(name = "dept_id")
+	private Department deptId;
 
 	private LocalDate date;
 	@Column(length = 5)
