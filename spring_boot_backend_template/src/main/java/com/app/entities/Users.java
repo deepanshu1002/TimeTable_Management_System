@@ -41,16 +41,8 @@ public class Users {
 	@JoinColumn(name = "role_id")
 	private Role role;
 	@OneToMany(mappedBy = "studentId")
-<<<<<<< HEAD
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
 
-	@OneToMany(mappedBy = "user")
-=======
-<<<<<<< HEAD
-=======
-	private List<Feedback> feedbacks = new ArrayList<Feedback>();
-
->>>>>>> fda47600b6baa12330a7454d0ee9b71910b87ae8
 	@ManyToOne
 	@JoinColumn(name = "dept_id")
 	private Department dept;
