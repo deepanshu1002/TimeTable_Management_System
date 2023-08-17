@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.AddLeaveApplicationDTO;
 import com.app.dto.ApiResponseDto;
 import com.app.entities.LeaveApplication;
 import com.app.service.LeaveApplicationService;
@@ -26,7 +27,8 @@ public class LeaveApplicationController {
 	}
 	
 	@PostMapping
-	public ApiResponseDto addLeaveAppDetails(@RequestBody LeaveApplication userId) {
+	public ApiResponseDto addLeaveAppDetails(@RequestBody AddLeaveApplicationDTO userId) {
+		System.out.println(userId);
 		return leaveService.addLeaveAppDetails(userId);
 	}
 	
