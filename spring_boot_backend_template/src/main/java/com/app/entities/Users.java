@@ -44,6 +44,10 @@ public class Users
 	private Role role;
 	@OneToMany(mappedBy = "studentId")
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
+	@ManyToOne
+	@JoinColumn(name = "dept_id")
+	private Department dept;
+	
 	
 	//private byte[] profilePic;
 	
