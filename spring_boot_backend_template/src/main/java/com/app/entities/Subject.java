@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,7 +32,9 @@ public class Subject {
 	private Long subjectId;
 	private Long deptId;
 	private String subjectName;
-	private Long teacherId;
+	@ManyToOne
+	@JoinColumn(name = "teacher_id")
+	private Users teacherId;
 	@OneToMany(mappedBy = "subjectId")
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
 	@OneToMany(mappedBy = "sub", cascade = CascadeType.ALL, orphanRemoval = true)

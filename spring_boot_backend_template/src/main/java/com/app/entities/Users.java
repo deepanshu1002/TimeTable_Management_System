@@ -51,7 +51,8 @@ public class Users {
 	private List<LeaveApplication> leaves = new ArrayList<LeaveApplication>();
 
 	// private byte[] profilePic;
-
+	@OneToMany(mappedBy = "teacherId")
+	private List<Subject> subjects = new ArrayList<Subject>();
 	
 	public void addFeedback(Feedback feedback) {
 		feedbacks.add(feedback);// dept --> emp
