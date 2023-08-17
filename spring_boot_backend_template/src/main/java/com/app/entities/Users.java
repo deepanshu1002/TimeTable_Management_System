@@ -20,7 +20,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"role","password"})
+@ToString(exclude = {"password"})
 public class Users
 {
 	@Id
@@ -35,9 +35,8 @@ public class Users
 	private String mobileNo;
 	@Column(nullable = false)
 	private String password;
-	@ManyToOne
-	@JoinColumn(name = "role_id")
-	private Role role;	
+	
+	
 	//private byte[] profilePic;
 	
 }
