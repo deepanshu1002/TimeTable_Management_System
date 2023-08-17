@@ -3,6 +3,7 @@ package com.app.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -25,6 +26,8 @@ public class Department {
 	@Id
 	private int deptId;
 	private String deptName;
+	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List <Lecture> lectures = new ArrayList<>();
 	@OneToMany(mappedBy = "deptId")
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
 }

@@ -1,13 +1,25 @@
 package com.app.entities;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 
 @Entity 
@@ -19,24 +31,16 @@ import lombok.*;
 @ToString
 @IdClass(LecturePkId.class)
 public class Lecture {
-    
-	@Id
-	@Column(name = "dept_id")
-	private int deptId;
-	
-	@Id
-	@Column(name = "sub_id")
-	private int subId;
-	
+    	
 	@Id
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 	
 	@DateTimeFormat(pattern = "HH:mm:ss")
-	private LocalDate startTime;
+	private LocalTime startTime;
 	
 	@DateTimeFormat(pattern = "HH:mm:ss")
-	private LocalDate endTime;
+	private LocalTime endTime;
 	
 	
 	@Column(length = 255)
@@ -47,6 +51,17 @@ public class Lecture {
 	
 	@Column(length= 255)
 	private String tommorrowAgenda;
+	
+	@Id
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "dept_id")
+    private Department dept;
+	
+	@Id
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "sub_id")
+	private Subject sub;
+	
 	
 	
 	
