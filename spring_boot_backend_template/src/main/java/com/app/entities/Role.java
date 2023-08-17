@@ -26,5 +26,6 @@ public class Role {
   private String role;
   @OneToMany(mappedBy = "role")
   private List<Users> users = new ArrayList<>();
+  //check the roles table if available
 
 }
