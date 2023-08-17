@@ -17,7 +17,6 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "Leave_Application_tbl")
-@IdClass(LeaveApplicationPkId.class)
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
