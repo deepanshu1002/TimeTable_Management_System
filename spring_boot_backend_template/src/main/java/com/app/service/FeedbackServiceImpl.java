@@ -2,18 +2,12 @@ package com.app.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.apache.catalina.mapper.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dto.AddFeedbackReqDTO;
 import com.app.dto.ApiResponseDto;
@@ -25,6 +19,8 @@ import com.app.repository.FeedbackRepository;
 import com.app.repository.SubjectRepository;
 import com.app.repository.UserRepository;
 
+@Service
+@Transactional
 public class FeedbackServiceImpl implements FeedbackService {
 
 	@Autowired

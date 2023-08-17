@@ -2,6 +2,8 @@ package com.app.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dto.AuthRequest;
 import com.app.dto.AuthResp;
@@ -10,6 +12,8 @@ import com.app.dto.SignupResp;
 import com.app.entities.Users;
 import com.app.repository.UserRepository;
 
+@Service
+@Transactional
 public class UserServiceImpl {
 	@Autowired
 	private ModelMapper mapper;

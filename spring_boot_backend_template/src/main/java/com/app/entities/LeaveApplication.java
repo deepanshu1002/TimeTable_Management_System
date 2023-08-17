@@ -22,11 +22,12 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class LeaveApplication implements Serializable{
-	@Id
+public class LeaveApplication{
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private Users user;
+	@Id
 	private Long leaveApplicationId;
 	private LocalDate fromDate;
 	private LocalDate toDate;
