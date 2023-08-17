@@ -43,13 +43,11 @@ public class Users {
 	@OneToMany(mappedBy = "studentId")
 	private List<Feedback> feedbacks = new ArrayList<Feedback>();
 
-	@OneToMany(mappedBy = "user")
 	@ManyToOne
 	@JoinColumn(name = "dept_id")
 	private Department dept;
-
-	@OneToMany
-
+	
+	@OneToMany(mappedBy = "user")
 	private List<LeaveApplication> leaves = new ArrayList<LeaveApplication>();
 
 	// private byte[] profilePic;
