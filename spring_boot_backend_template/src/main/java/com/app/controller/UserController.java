@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.AuthRequest;
 import com.app.dto.SignupRequest;
 import com.app.service.UserService;
 
@@ -22,6 +23,11 @@ public class UserController {
 	public ResponseEntity<?> registerUser(@RequestBody @Valid SignupRequest request)
 	{
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.signupUser(request));
+	}
+	@PostMapping("/signIn")
+	public ResponseEntity<?> authenticateUser(@RequestBody @Valid AuthRequest request)
+	{
+		return new ResponseEntity<>(userService.authenticateUser(request),HttpStatus.OK);	
 	}
 	
 	
