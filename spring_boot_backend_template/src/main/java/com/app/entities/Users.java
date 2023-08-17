@@ -52,4 +52,13 @@ public class Users {
 
 	// private byte[] profilePic;
 
+	
+	public void addFeedback(Feedback feedback) {
+		feedbacks.add(feedback);// dept --> emp
+		feedback.setStudentId(this);// emp --> dept
+	}
+	public void removeFeedback(Feedback feedback) {
+		feedbacks.remove(feedback);
+		feedback.setStudentId(null);
+	}
 }

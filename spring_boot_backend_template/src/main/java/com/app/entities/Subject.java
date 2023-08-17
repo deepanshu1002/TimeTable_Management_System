@@ -35,4 +35,13 @@ public class Subject {
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
 	@OneToMany(mappedBy = "sub", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List <Lecture> lectures = new ArrayList<>();
+	
+	public void addFeedback(Feedback feedback) {
+		feedbacks.add(feedback);// dept --> emp
+		feedback.setSubjectId(this);// emp --> dept
+	}
+	public void removeFeedback(Feedback feedback) {
+		feedbacks.remove(feedback);
+		feedback.setSubjectId(null);
+	}
 }

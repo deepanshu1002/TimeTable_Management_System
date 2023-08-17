@@ -22,7 +22,7 @@ import lombok.ToString;
 @ToString
 public class AddFeedbackReqDTO {
 	
-	private Users studentId;
+	private Long studentId;
 	private Long subjectId;
 	private Long deptId;
 	private LocalDate date;
