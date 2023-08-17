@@ -1,6 +1,5 @@
 package com.app.entities;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,20 +19,19 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="users_tbl")
+@Table(name = "users_tbl")
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"password"})
-public class Users
-{
+@ToString(exclude = { "password" })
+public class Users {
 	@Id
 	private Long userId;
 	@Column(length = 30, nullable = false)
 	private String firstName;
 	@Column(length = 30, nullable = false)
 	private String lastName;
-	@Column(length = 30,unique = true, nullable = false)
+	@Column(length = 30, unique = true, nullable = false)
 	private String email;
 	@Column(length = 30, nullable = false)
 	private String mobileNo;
@@ -44,7 +42,14 @@ public class Users
 	private Role role;
 	@OneToMany(mappedBy = "studentId")
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
+
+	@ManyToOne
+	@JoinColumn(name = "dept_id")
+	private Department dept;
 	
-	//private byte[] profilePic;
-	
+	@OneToMany(mappedBy = "user")
+	private List<LeaveApplication> leaves = new ArrayList<LeaveApplication>();
+
+	// private byte[] profilePic;
+
 }

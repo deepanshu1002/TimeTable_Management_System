@@ -30,9 +30,9 @@ public class Department {
 	private List <Lecture> lectures = new ArrayList<>();
 	@OneToMany(mappedBy = "deptId")
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
-	@OneToMany
+	@OneToMany(mappedBy = "dept")
 	private List <ClassroomTbl> classroom = new ArrayList<>();
-	
+
 	public void addLecture(Lecture l) {
         lectures.add(l);// dept --> emp
 		l.setDept(this);// emp --> dept
@@ -41,4 +41,8 @@ public class Department {
 		lectures.remove(l);
 		l.setDept(null);
 	}
+
+	@OneToMany(mappedBy = "dept")
+	private List <Users> user = new ArrayList<>();
+	
 }
