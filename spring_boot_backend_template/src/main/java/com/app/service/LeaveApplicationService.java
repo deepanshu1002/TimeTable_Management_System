@@ -5,5 +5,5 @@ import com.app.entities.LeaveApplication;
 
 public interface LeaveApplicationService {
 	//Get the Leave Application
-	ApiResponseDto getLeaveAppDetails(LeaveApplication leaveAppDetail);
+	ApiResponseDto addLeaveAppDetails(LeaveApplication leaveAppDetail);
 }

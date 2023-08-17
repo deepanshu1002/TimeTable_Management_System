@@ -12,9 +12,9 @@ import com.app.service.LeaveApplicationService;
 public class LeaveApplicationRepositoryImpl implements LeaveApplicationService {
 
 	@Override
-	public ApiResponseDto getLeaveAppDetails(LeaveApplication leaveAppDetail) {
+	public ApiResponseDto addLeaveAppDetails(LeaveApplication leaveAppDetail) {
 		// TODO Auto-generated method stub
-		return null;
+		return LeaveApplicationRepository.save(leaveAppDetail);
 	}
 	//Find the Leave Application
 }
