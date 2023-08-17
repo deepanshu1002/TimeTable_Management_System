@@ -4,6 +4,10 @@ package com.app.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -16,7 +20,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"roleId","password"})
+@ToString(exclude = {"role","password"})
 public class Users
 {
 	@Id
@@ -31,8 +35,9 @@ public class Users
 	private String mobileNo;
 	@Column(nullable = false)
 	private String password;
-	
-	private int roleId;
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private Role role;	
 	//private byte[] profilePic;
 	
 }
