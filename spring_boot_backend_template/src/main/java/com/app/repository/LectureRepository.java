@@ -11,9 +11,9 @@ import com.app.entities.Lecture;
 
 public interface LectureRepository extends JpaRepository<Lecture, Long>{
 
-	@Query("Select new com.app.entities.Lecture"
-			+ "(date,startTime, endTime, topicsCovered, lectureData, tommorrowAgenda)"
-			+ "from Lecture l where l.dept= deptId and l.sub = subId, l.date= date")
-	Lecture getLectureData(Long deptId, Long subId, Date date);
+//	@Query("Select new com.app.entities.Lecture"
+//			+ "(date,startTime, endTime, topicsCovered, lectureData, tommorrowAgenda)"
+//			+ "from Lecture l where l.dept= deptId and l.sub = subId and l.date= date")
+//	Lecture getLectureData(Long deptId, Long subId, Date date);
 
 }

@@ -22,7 +22,6 @@ import com.app.service.LectureService;
 
 @RestController
 @RequestMapping("/lecture")
-@Validated
 public class LectureController {
 
 	
@@ -31,22 +30,22 @@ public class LectureController {
 	
 	
 	@PostMapping
-	public ResponseEntity<?> addlectureData(@RequestBody @Valid AddLectureDTO dto) {
+	public ResponseEntity<?> addlectureData(@RequestBody AddLectureDTO dto) {
 		
 		return ResponseEntity.status(HttpStatus.CREATED).
 				body(lectureService.addNewLectureData(dto));
 	}
 	
 	
-	@GetMapping("/{deptId, subId, date}")
-	public ResponseEntity<?> getEmpsByDepartment(@PathVariable Long deptId, Long subId, Date date) {
-		System.out.println("in get emps " + deptId);
-		LectureRespDTO lectureDetails = lectureService.getLectureDetails(deptId, deptId, date);
-		if (lectureDetails == null)
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		
-		return ResponseEntity.ok(lectureDetails);
-	}
+//	@GetMapping("/{deptId}/{subId}/{date}")
+//	public ResponseEntity<?> getEmpsByDepartment(@PathVariable Long deptId,@PathVariable Long subId,@PathVariable Date date) {
+//		System.out.println("in get emps " + deptId);
+//		LectureRespDTO lectureDetails = lectureService.getLectureDetails(deptId, deptId, date);
+//		if (lectureDetails == null)
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		
+//		return ResponseEntity.ok(lectureDetails);
+//	}
 	
 	
 	

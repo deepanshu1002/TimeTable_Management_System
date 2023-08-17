@@ -11,6 +11,6 @@ public interface LectureService {
 	
 	LectureRespDTO addNewLectureData(AddLectureDTO dto);
 
-	LectureRespDTO getLectureDetails(Long deptId, Long subId, Date date);
+	//LectureRespDTO getLectureDetails(Long deptId, Long subId, Date date);
 	
 }

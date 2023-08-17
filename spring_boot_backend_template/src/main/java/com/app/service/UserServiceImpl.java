@@ -14,7 +14,7 @@ import com.app.repository.UserRepository;
 
 @Service
 @Transactional
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService{
 	@Autowired
 	private ModelMapper mapper;
 	@Autowired

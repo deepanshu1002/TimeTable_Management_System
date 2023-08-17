@@ -47,11 +47,11 @@ public class LectureServiceImpl implements LectureService{
 		return mapper.map(lectureRepo.save(lecture), LectureRespDTO.class);
 	}
 
-	@Override
-	public LectureRespDTO getLectureDetails(Long deptId, Long subId, Date date) {
-		
-		Lecture lecture = lectureRepo.getLectureData(deptId, subId, date);
-		return mapper.map(lecture, LectureRespDTO.class);
-	}
+//	@Override
+//	public LectureRespDTO getLectureDetails(Long deptId, Long subId, Date date) {
+//		
+//		Lecture lecture = lectureRepo.getLectureData(deptId, subId, date);
+//		return mapper.map(lecture, LectureRespDTO.class);
+//	}
 
 }
