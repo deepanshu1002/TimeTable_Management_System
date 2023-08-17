@@ -24,7 +24,7 @@ import lombok.ToString;
 @Setter
 public class Department {
 	@Id
-	private int deptId;
+	private Long deptId;
 	private String deptName;
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List <Lecture> lectures = new ArrayList<>();

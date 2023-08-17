@@ -26,7 +26,7 @@ import lombok.ToString;
 @Setter
 public class Feedback {
 	@Id
-	private int feedbackId;
+	private Long feedbackId;
 	@ManyToOne
 	@JoinColumn(name = "student_id")
 	private Users studentId;
@@ -39,7 +39,7 @@ public class Feedback {
 
 	private LocalDate date;
 	@Column(length = 5)
-	private int rating;
+	private Long rating;
 	@Column(length = 200)
 	private String feedback;
 

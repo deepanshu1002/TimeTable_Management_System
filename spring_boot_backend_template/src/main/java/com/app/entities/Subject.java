@@ -27,10 +27,10 @@ import lombok.ToString;
 public class Subject {
 
 	@Id
-	private int subjectId;
-	private int deptId;
+	private Long subjectId;
+	private Long deptId;
 	private String subjectName;
-	private int teacherId;
+	private Long teacherId;
 	@OneToMany(mappedBy = "subjectId")
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
 	@OneToMany(mappedBy = "sub", cascade = CascadeType.ALL, orphanRemoval = true)
