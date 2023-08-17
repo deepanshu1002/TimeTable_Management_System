@@ -1,7 +1,11 @@
 package com.app.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -16,9 +20,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class RolesTbl {
+public class Role {
 	@Id
   private int roleId;
   private String role;
+  @OneToMany(mappedBy = "role")
+  private List<Users> users = new ArrayList<>();
 
 }
