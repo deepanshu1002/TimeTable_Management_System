@@ -34,4 +34,5 @@ public class LeaveApplication{
 	private Boolean status;
 	private String reason;
 	
+	
 }
