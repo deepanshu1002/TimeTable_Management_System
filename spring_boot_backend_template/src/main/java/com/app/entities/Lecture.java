@@ -62,7 +62,7 @@ public class Lecture {
     private Department dept;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne( cascade = CascadeType.MERGE)
 	@JoinColumn(name = "sub_id")
 	private Subject sub;
 	
