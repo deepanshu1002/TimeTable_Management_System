@@ -1,5 +1,7 @@
 package com.app.service;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,9 +12,11 @@ import com.app.dto.AuthResp;
 import com.app.dto.SignupRequest;
 import com.app.dto.SignupResp;
 import com.app.entities.Department;
+import com.app.entities.IsValidUser;
 import com.app.entities.Role;
 import com.app.entities.Users;
 import com.app.repository.DepartmentRepository;
+import com.app.repository.IsValidUserRepo;
 import com.app.repository.RoleRepository;
 import com.app.repository.UserRepository;
 
@@ -27,20 +31,42 @@ public class UserServiceImpl implements UserService {
 	private DepartmentRepository deptRepo;
 	@Autowired
 	private RoleRepository roleRepo;
+	@Autowired
+	private IsValidUserRepo isValidUser;
 
-	public SignupResp signupUser(SignupRequest request) {
-		Department dept = deptRepo.findById(request.getDeptId()).orElseThrow(null);
-		Role role = roleRepo.findById(request.getRoleId()).orElseThrow(null);
-		Users user = mapper.map(request, Users.class);
+	public SignupResp registerUser(SignupRequest request) {
+		IsValidUser user = mapper.map(request, IsValidUser.class);
+		IsValidUser user2 = isValidUser.save(user);
+		return mapper.map(user2, SignupResp.class);
+	}
+
+	public SignupResp signupUser(Long userId) {
+		IsValidUser validUser = isValidUser.findById(userId).orElseThrow(null);
+		Department dept = deptRepo.findById(validUser.getDeptId()).orElseThrow(null);
+		Role role = roleRepo.findById(validUser.getRoleId()).orElseThrow(null);
+		Users user = mapper.map(validUser, Users.class);
+		deleteNotValidUser(userId);
 		dept.addUser(user);
 		role.addUser(user);
-		Users user2 = userRepo.save(user);
-		return mapper.map(user2, SignupResp.class);
+		Users persistentUser = userRepo.save(user);
+		return mapper.map(persistentUser, SignupResp.class);
 	}
 
 	public AuthResp authenticateUser(AuthRequest request) {
 		Users user = userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword()).orElseThrow();
 		return mapper.map(user, AuthResp.class);
+	}
+
+	public List<IsValidUser> getAllIsValidUser() {
+		return isValidUser.findAll();
+
+	}
+	public String deleteNotValidUser(Long userId)
+	{
+	  IsValidUser user = isValidUser.findById(userId).orElseThrow(null);
+	 
+	  isValidUser.delete(user);
+	  return " non valid user Deleted";
 	}
 
 }

@@ -19,7 +19,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "users")
 public class Role {
 	@Id
   private Long roleId;
