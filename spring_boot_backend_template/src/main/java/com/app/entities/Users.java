@@ -62,4 +62,24 @@ public class Users {
 		feedbacks.remove(feedback);
 		feedback.setStudentId(null);
 	}
+	
+	public void addLeaveApplication(LeaveApplication l) {
+		leaves.add(l);
+		l.setUser(this);
+	}
+	
+	public void removeLeaveApplication(LeaveApplication l) {
+		leaves.remove(l);
+		l.setUser(this);
+	}
+	
+	public void addSubject(Subject sub) {
+		subjects.add(sub);// dept --> emp
+		sub.setTeacherId(this);// emp --> dept
+	}
+
+	public void removeSubject(Subject sub) {
+		subjects.remove(sub);
+		sub.setTeacherId(null);
+	}
 }

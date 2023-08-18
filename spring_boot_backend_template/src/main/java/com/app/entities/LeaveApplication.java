@@ -1,9 +1,10 @@
 package com.app.entities;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,7 +32,8 @@ public class LeaveApplication{
 	private Long leaveApplicationId;
 	private LocalDate fromDate;
 	private LocalDate toDate;
-	private Boolean status;
+	@Enumerated(EnumType.STRING)
+	private Status status;
 	private String reason;
 	
 	

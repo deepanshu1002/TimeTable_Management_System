@@ -2,15 +2,16 @@ package com.app.repository;
 
 
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.app.entities.Lecture;
-import com.app.entities.LecturePkId;
 
-public interface LectureRepository extends JpaRepository<Lecture, LecturePkId>{
+public interface LectureRepository extends JpaRepository<Lecture, Long>{
 
-//	@Query("Select new com.app.entities.Lecture"
-//			+ "(date,startTime, endTime, topicsCovered, lectureData, tommorrowAgenda)"
-//			+ "from Lecture l where l.dept= deptId and l.sub = subId and l.date= date")
-//	Lecture getLectureData(Long deptId, Long subId, Date date);
+	List <Lecture> findByDate(LocalDate date);
 
+	
 }

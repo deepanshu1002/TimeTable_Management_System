@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 public class AddLectureDTO {
  	
-
+    private Long id;
 	private LocalDate date;	
 	private LocalTime startTime;
 	private LocalTime endTime;
