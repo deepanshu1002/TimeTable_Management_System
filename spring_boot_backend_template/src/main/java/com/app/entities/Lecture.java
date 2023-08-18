@@ -7,8 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -29,10 +30,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@IdClass(LecturePkId.class)
 public class Lecture {
     	
-	@Id
+	
+	@Id	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 	
@@ -52,12 +56,12 @@ public class Lecture {
 	@Column(length= 255)
 	private String tommorrowAgenda;
 	
-	@Id
+	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "dept_id")
     private Department dept;
 	
-	@Id
+	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "sub_id")
 	private Subject sub;
