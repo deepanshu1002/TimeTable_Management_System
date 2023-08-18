@@ -1,14 +1,12 @@
 package com.app.controller;
-import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,15 +35,16 @@ public class LectureController {
 	}
 	
 	
-//	@GetMapping("/{deptId}/{subId}/{date}")
-//	public ResponseEntity<?> getEmpsByDepartment(@PathVariable Long deptId,@PathVariable Long subId,@PathVariable Date date) {
-//		System.out.println("in get emps " + deptId);
-//		LectureRespDTO lectureDetails = lectureService.getLectureDetails(deptId, deptId, date);
-//		if (lectureDetails == null)
-//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-//		
-//		return ResponseEntity.ok(lectureDetails);
-//	}
+	@GetMapping("/{deptId}/{subId}/{date}")
+	public ResponseEntity<?> getEmpsByDepartment(@PathVariable Long deptId,@PathVariable Long subId,@PathVariable String date) {
+		
+		 LocalDate date1 = LocalDate.parse(date);
+		LectureRespDTO lectureDetails = lectureService.getLectureDetails(deptId, deptId, date1);
+		if (lectureDetails == null)
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		
+		return ResponseEntity.ok(lectureDetails);
+	}
 	
 	
 	

@@ -1,6 +1,7 @@
 package com.app.service;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -51,11 +52,23 @@ public class LectureServiceImpl implements LectureService{
 		return mapper.map(lect, LectureRespDTO.class);
 	}
 
-//	@Override
-//	public LectureRespDTO getLectureDetails(Long deptId, Long subId, Date date) {
-//		
-//		Lecture lecture = lectureRepo.getLectureData(deptId, subId, date);
-//		return mapper.map(lecture, LectureRespDTO.class);
-//	}
+	@Override
+	public LectureRespDTO getLectureDetails(Long deptId, Long subId, LocalDate date) {
+		
+		List <Lecture> lectures = lectureRepo.findByDate(date);
+		
+		Lecture lecture1=null;
+		for(Lecture l : lectures)
+		{
+			Long departmentId = l.getDept().getDeptId();
+			Long subjectId = l.getSub().getSubjectId();
+			
+			if(departmentId == deptId && subjectId == subId)
+				lecture1= l;
+		}
+		
+		//throw exception if lecture is null
+		return mapper.map(lecture1, LectureRespDTO.class);
+	}
 
 }
