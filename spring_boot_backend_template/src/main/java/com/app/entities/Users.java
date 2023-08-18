@@ -72,4 +72,14 @@ public class Users {
 		leaves.remove(l);
 		l.setUser(this);
 	}
+	
+	public void addSubject(Subject sub) {
+		subjects.add(sub);// dept --> emp
+		sub.setTeacherId(this);// emp --> dept
+	}
+
+	public void removeSubject(Subject sub) {
+		subjects.remove(sub);
+		sub.setTeacherId(null);
+	}
 }
