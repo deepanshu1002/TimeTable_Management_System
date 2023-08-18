@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,16 +26,19 @@ import lombok.ToString;
 @Setter
 public class Department {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long deptId;
 	private String deptName;
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Lecture> lectures = new ArrayList<>();
 //	@OneToMany(mappedBy = "deptId")
 //	private List<Feedback> feedbacks = new ArrayList<Feedback>();
-	@OneToMany(mappedBy = "dept")
+	@OneToMany(mappedBy = "dept",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ClassRoom> classroom = new ArrayList<>();
-	@OneToMany(mappedBy = "dept")
+	@OneToMany(mappedBy = "dept",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Users> user = new ArrayList<>();
+	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Subject> subjects = new ArrayList<>();
 
 	public void addLecture(Lecture l) {
 		lectures.add(l);// dept --> emp
@@ -53,6 +58,16 @@ public class Department {
 	public void removeUser(Users u) {
 		user.remove(u);
 		u.setDept(null);
+	}
+	
+	public void addSubject(Subject sub) {
+		subjects.add(sub);// dept --> emp
+		sub.setDept(this);// emp --> dept
+	}
+
+	public void removeSubject(Subject sub) {
+		subjects.remove(sub);
+		sub.setDept(null);
 	}
 
 }

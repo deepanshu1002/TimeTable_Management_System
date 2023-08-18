@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -29,13 +31,16 @@ import lombok.ToString;
 public class Subject {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long subjectId;
-	private Long deptId;
 	private String subjectName;
+	@ManyToOne
+	@JoinColumn(name = "dept_id")
+	private Department dept;
 	@ManyToOne
 	@JoinColumn(name = "teacher_id")
 	private Users teacherId;
-	@OneToMany(mappedBy = "subjectId")
+	@OneToMany(mappedBy = "subjectId", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Feedback> feedbacks=new ArrayList<Feedback>();
 	@OneToMany(mappedBy = "sub", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List <Lecture> lectures = new ArrayList<>();
