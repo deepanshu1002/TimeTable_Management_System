@@ -27,8 +27,9 @@ public class FeedbackController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.addFeedback(feedback));
 	}
 	
-	@GetMapping("/{date}/{subjectId}")
-	public ResponseEntity<?> getFeedback(@PathVariable LocalDate date,@PathVariable Long subjectId){
+	@GetMapping("/{dateString}/{subjectId}")
+	public ResponseEntity<?> getFeedback(@PathVariable String dateString,@PathVariable Long subjectId){
+		LocalDate date=LocalDate.parse(dateString);
 		return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.getFeedback(date,subjectId));
 	}
 }

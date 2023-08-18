@@ -53,8 +53,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 	@Override
 	public List<GetFeedbackDTO> getFeedback(LocalDate date, Long subjectId) {
 
-		List<Feedback> feedbackList = feedbackRepo.findByDateAndSubjectId(date, subjectId);
-
+		//List<Feedback> feedbackList = feedbackRepo.findByDateAndSubjectId(date, subjectId);
+		List<Feedback> feedbackList = feedbackRepo.findByDate(date);
+		
 		return feedbackList.stream() // Stream<Emp>
 				.map(feedback -> mapper.map(feedback, GetFeedbackDTO.class)) // Stream<DTO>
 				.collect(Collectors.toList());
