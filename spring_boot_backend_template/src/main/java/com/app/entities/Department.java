@@ -31,7 +31,7 @@ public class Department {
 //	@OneToMany(mappedBy = "deptId")
 //	private List<Feedback> feedbacks = new ArrayList<Feedback>();
 	@OneToMany(mappedBy = "dept")
-	private List<ClassroomTbl> classroom = new ArrayList<>();
+	private List<ClassRoom> classroom = new ArrayList<>();
 	@OneToMany(mappedBy = "dept")
 	private List<Users> user = new ArrayList<>();
 

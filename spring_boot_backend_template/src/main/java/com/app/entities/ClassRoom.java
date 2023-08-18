@@ -18,7 +18,7 @@ import lombok.ToString;
 	@Getter
 	@Setter
 	@ToString(exclude = "dept")
-public class ClassroomTbl {
+public class ClassRoom {
 	@Id
 	private int classroomId;
 	private String classroomName;
