@@ -18,6 +18,8 @@ import com.app.repository.DepartmentRepository;
 import com.app.repository.LectureRepository;
 import com.app.repository.SubjectRepository;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 
 @Service
 @Transactional
@@ -51,6 +53,9 @@ public class LectureServiceImpl implements LectureService{
 		
 		return mapper.map(lect, LectureRespDTO.class);
 	}
+	
+	
+	
 
 	@Override
 	public LectureRespDTO getLectureDetails(Long deptId, Long subId, LocalDate date) {
@@ -70,5 +75,33 @@ public class LectureServiceImpl implements LectureService{
 		//throw exception if lecture is null
 		return mapper.map(lecture1, LectureRespDTO.class);
 	}
+
+
+
+
+	@Override
+	public ApiResponse deleteLectureDetails(Long lectureId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	@Override
+	public Lecture getLectureDetailsById(Long lectureId) {
+		
+		Lecture l =lectureRepo.findById(lectureId).orElseThrow();
+			
+			return l;
+	}
+
+//	@Override
+//	public ApiResponse deleteLectureDetails(Long lectureId) {
+//		Lecture lect = getLectureDetails(lectureId);
+//		// => emp id valid
+//		empDao.delete(emp); // OR empDao.deleteById(empId)
+//		return new ApiResponse("emp details deleted !");
+//	}
 
 }

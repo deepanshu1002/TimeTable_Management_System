@@ -51,13 +51,13 @@ public class Lecture {
 	private String topicsCovered;
 	
 	@Column(length= 255)
-	private String lectureDate;
+	private String lectureData;
 	
 	@Column(length= 255)
 	private String tommorrowAgenda;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "dept_id")
     private Department dept;
 	
