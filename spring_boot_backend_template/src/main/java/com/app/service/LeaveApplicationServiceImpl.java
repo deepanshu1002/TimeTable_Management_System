@@ -39,5 +39,10 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 		return new ApiResponseDto("Leave Application Submitted Successful...");
 	}
 
+	@Override
+	public LeaveApplication getAllLeaveApp(Long userId) {
+		return leaveRep.findById(userId).orElseThrow(null);
+	}
+
 	
 }

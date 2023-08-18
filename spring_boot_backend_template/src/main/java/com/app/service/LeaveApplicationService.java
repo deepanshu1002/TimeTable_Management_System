@@ -11,5 +11,8 @@ public interface LeaveApplicationService {
 	List<LeaveApplication> getAllLeaveApp();
 	//post the Leave Application
 	ApiResponseDto addLeaveAppDetails(AddLeaveApplicationDTO leaveAppDetail);
+	//get the leave Application By Id
+	LeaveApplication getAllLeaveApp(Long userId);
+	//Update the Status of leave Application
 	
 }
