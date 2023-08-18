@@ -23,7 +23,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = { "password" })
+@ToString(exclude = { "password","feedbacks","leaves","subjects" })
 public class Users {
 	@Id
 	private Long userId;
