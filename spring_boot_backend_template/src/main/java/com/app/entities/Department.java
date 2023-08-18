@@ -70,5 +70,15 @@ public class Department {
 		subjects.remove(sub);
 		sub.setDept(null);
 	}
+	
+	public void addClassRoom(ClassRoom addClassRoom) {
+		classroom.add(addClassRoom);
+		addClassRoom.setDept(this);
+	}
+	
+	public void removeClassRoom(ClassRoom removeClassRoom) {
+		classroom.remove(removeClassRoom);
+		removeClassRoom.setDept(null);
+	}
 
 }

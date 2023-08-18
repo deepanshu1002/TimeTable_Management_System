@@ -30,7 +30,6 @@ public class LeaveApplicationController {
 	
 	@PostMapping
 	public ApiResponseDto addLeaveAppDetails(@RequestBody AddLeaveApplicationDTO userLeave) {
-		System.out.println(userLeave);
 		return leaveService.addLeaveAppDetails(userLeave);
 	}
 	@GetMapping("/{id}")

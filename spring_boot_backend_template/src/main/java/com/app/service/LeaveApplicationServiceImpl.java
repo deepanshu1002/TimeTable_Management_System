@@ -36,7 +36,7 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 		LeaveApplication leaveApp = mapper.map(leaveAppDetail, LeaveApplication.class);
 		user.addLeaveApplication(leaveApp);
 		LeaveApplication leaveApp2 = leaveRep.save(leaveApp);
-		return new ApiResponseDto("Leave Application Submitted Successful...");
+		return new ApiResponseDto("Leave Application Submitted Successfull...");
 	}
 
 	@Override
