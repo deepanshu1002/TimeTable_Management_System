@@ -44,5 +44,15 @@ public class Department {
 		lectures.remove(l);
 		l.setDept(null);
 	}
+	
+	public void addUser(Users u) {
+		user.add(u);// dept --> emp
+		u.setDept(this);// emp --> dept
+	}
+
+	public void removeUser(Users u) {
+		user.remove(u);
+		u.setDept(null);
+	}
 
 }

@@ -1,14 +1,11 @@
 package com.app.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
-
-import com.app.entities.Department;
+import org.springframework.beans.factory.annotation.Value;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +20,7 @@ import lombok.ToString;
 @ToString
 public class SignupRequest {
   	
-  private int userId;
+  private Long userId;
   @NotBlank(message = "first name can't be blank")
   private String firstName;
   @Length(min=3,max=20, message="Invalid length	of last name")
@@ -34,8 +31,7 @@ public class SignupRequest {
   private String mobileNo;
   @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})",message = "invalid password format")
   private String password;
-  private Department dept;
-  
-  
+  private Long roleId;
+  private Long deptId;
   
 }

@@ -22,10 +22,20 @@ import lombok.ToString;
 @ToString
 public class Role {
 	@Id
-  private int roleId;
+  private Long roleId;
   private String role;
   @OneToMany(mappedBy = "role")
   private List<Users> users = new ArrayList<>();
   //check the roles table if available
+  public void addUser(Users u)
+  {
+	 users.add(u);
+	 u.setRole(this);
+  }
+  public void removeUser(Users u)
+  {
+	  users.remove(u);
+	  u.setRole(null);
+  }
 
 }

@@ -17,5 +17,5 @@ public class AuthResp {
 	private String email;
 	private String mobileNo;
 	private String password;
-	private Department dept;
+	private int deptId;
 }

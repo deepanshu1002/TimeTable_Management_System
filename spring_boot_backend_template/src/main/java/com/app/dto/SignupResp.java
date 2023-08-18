@@ -12,12 +12,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SignupResp {
-	private int userId;
+	private Long userId;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String mobileNo;
 	private String password;
-	private Department dept;
+	private Long deptId;
 
 }
