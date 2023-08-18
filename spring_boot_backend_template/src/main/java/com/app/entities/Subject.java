@@ -48,4 +48,14 @@ public class Subject {
 		feedbacks.remove(feedback);
 		feedback.setSubjectId(null);
 	}
+	
+	public void addLecture(Lecture l) {
+		lectures.add(l);// dept --> emp
+		l.setSub(this);// emp --> dept
+	}
+
+	public void removeLecture(Lecture l) {
+		lectures.remove(l);
+		l.setSub(null);
+	}
 }

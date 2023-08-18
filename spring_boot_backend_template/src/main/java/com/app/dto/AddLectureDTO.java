@@ -22,12 +22,9 @@ public class AddLectureDTO {
 	private LocalTime startTime;
 	private LocalTime endTime;
 	private String topicsCovered;
-	private String lectureDate;
+	private String lectureData;
 	private String tommorrowAgenda;
-    private Department dept;
-	private Subject sub;
-	
-	private Long deptId= dept.getDeptId();
-	private Long subId = sub.getSubjectId();
+	private Long deptartmentId;
+	private Long subjectId;
 
 }

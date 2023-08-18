@@ -1,15 +1,12 @@
 package com.app.repository;
 
-import java.util.Date;
-import java.util.Optional;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
-import com.app.entities.Department;
 import com.app.entities.Lecture;
+import com.app.entities.LecturePkId;
 
-public interface LectureRepository extends JpaRepository<Lecture, Long>{
+public interface LectureRepository extends JpaRepository<Lecture, LecturePkId>{
 
 //	@Query("Select new com.app.entities.Lecture"
 //			+ "(date,startTime, endTime, topicsCovered, lectureData, tommorrowAgenda)"

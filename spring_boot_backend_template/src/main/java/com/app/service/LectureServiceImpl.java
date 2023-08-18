@@ -37,14 +37,18 @@ public class LectureServiceImpl implements LectureService{
 	@Override
 	public LectureRespDTO addNewLectureData(AddLectureDTO dto) {
 		
-		Department dept = deptRepo.findById(dto.getDeptId()).
+		Department dept = deptRepo.findById(dto.getDeptartmentId()).
 				orElseThrow();
 		Lecture lecture = mapper.map(dto, Lecture.class);
 		
 		dept.addLecture(lecture);
+		Subject sub = subRepo.findById(dto.getSubjectId()).orElseThrow();
+		sub.addLecture(lecture);
+		System.out.println("before lecture: " + lecture.getTopicsCovered() + lecture.getDate());
+		Lecture lect = lectureRepo.save(lecture);
+		System.out.println("lecture: " + lect.getTopicsCovered() + lect.getDate());
 		
-		Subject sub = subRepo.findById(dto.getSubId()).orElseThrow();
-		return mapper.map(lectureRepo.save(lecture), LectureRespDTO.class);
+		return mapper.map(lect, LectureRespDTO.class);
 	}
 
 //	@Override
