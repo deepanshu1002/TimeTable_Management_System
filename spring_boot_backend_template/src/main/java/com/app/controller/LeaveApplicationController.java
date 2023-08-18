@@ -27,9 +27,9 @@ public class LeaveApplicationController {
 	}
 	
 	@PostMapping
-	public ApiResponseDto addLeaveAppDetails(@RequestBody AddLeaveApplicationDTO userId) {
-		System.out.println(userId);
-		return leaveService.addLeaveAppDetails(userId);
+	public ApiResponseDto addLeaveAppDetails(@RequestBody AddLeaveApplicationDTO userLeave) {
+		System.out.println(userLeave);
+		return leaveService.addLeaveAppDetails(userLeave);
 	}
 	
 	

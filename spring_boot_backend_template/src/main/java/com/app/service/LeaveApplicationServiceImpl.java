@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.dto.AddLeaveApplicationDTO;
 import com.app.dto.ApiResponseDto;
 import com.app.entities.LeaveApplication;
+import com.app.entities.Users;
 import com.app.repository.LeaveApplicationRepository;
+import com.app.repository.UserRepository;
 
 @Service
 @Transactional
@@ -18,7 +20,10 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 	@Autowired
 	private LeaveApplicationRepository leaveRep;
 	
+	@Autowired
 	private ModelMapper mapper;
+	@Autowired
+	private UserRepository userRepo;
 	
 	@Override
 	public List<LeaveApplication> getAllLeaveApp() {
@@ -27,7 +32,9 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 	
 	@Override
 	public ApiResponseDto addLeaveAppDetails(AddLeaveApplicationDTO leaveAppDetail) {
+		Users user = userRepo.findById(leaveAppDetail.getUserId()).orElseThrow(null);
 		LeaveApplication leaveApp = mapper.map(leaveAppDetail, LeaveApplication.class);
+		user.addLeaveApplication(leaveApp);
 		LeaveApplication leaveApp2 = leaveRep.save(leaveApp);
 		return new ApiResponseDto("Leave Application Submitted Successful...");
 	}

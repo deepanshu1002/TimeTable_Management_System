@@ -9,6 +9,8 @@ import com.app.entities.Users;
 
 import lombok.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString

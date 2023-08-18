@@ -62,4 +62,14 @@ public class Users {
 		feedbacks.remove(feedback);
 		feedback.setStudentId(null);
 	}
+	
+	public void addLeaveApplication(LeaveApplication l) {
+		leaves.add(l);
+		l.setUser(this);
+	}
+	
+	public void removeLeaveApplication(LeaveApplication l) {
+		leaves.remove(l);
+		l.setUser(this);
+	}
 }
