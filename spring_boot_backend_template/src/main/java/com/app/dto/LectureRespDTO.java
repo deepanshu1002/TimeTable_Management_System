@@ -15,10 +15,14 @@ import lombok.ToString;
 @Setter
 @ToString
 public class LectureRespDTO {
+	
+	private Long id;
 	private LocalDate date;	
 	private LocalTime startTime;
 	private LocalTime endTime;
-	
+	private String topicsCovered;
+	private String lectureData;
+	private String tommorrowAgenda;
 
 	
 }

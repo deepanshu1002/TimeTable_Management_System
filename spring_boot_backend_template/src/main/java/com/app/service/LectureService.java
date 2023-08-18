@@ -15,8 +15,8 @@ public interface LectureService {
 
 	LectureRespDTO getLectureDetails(Long deptId, Long subId, LocalDate date);
 
-	ApiResponse deleteLectureDetails(Long lectureId);
+	String deleteLectureDetails(Long lectureId);
 
-	Lecture getLectureDetailsById(Long lectureId);
+	LectureRespDTO getLectureDetailsById(Long lectureId);
 	
 }

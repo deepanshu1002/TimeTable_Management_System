@@ -40,7 +40,7 @@ public class LectureController {
 	@GetMapping("{lectureId}")
 	public ResponseEntity<?> getLectureDetailsById(@PathVariable Long lectureId) {
 		
-		Lecture lecture= lectureService.getLectureDetailsById(lectureId);
+		LectureRespDTO lecture= lectureService.getLectureDetailsById(lectureId);
 		
 		return ResponseEntity.ok(lecture);
 	}
@@ -69,7 +69,7 @@ public class LectureController {
 	
 //	
 	@DeleteMapping("/{lecureId}")
-	public ApiResponse deleteLectureDetails(@PathVariable Long lectureId) {
+	public String deleteLectureDetails(@PathVariable Long lectureId) {
 	
 		return lectureService.deleteLectureDetails(lectureId);
 	}

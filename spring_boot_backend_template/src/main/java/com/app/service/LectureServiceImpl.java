@@ -77,31 +77,22 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 
-
-
 	@Override
-	public ApiResponse deleteLectureDetails(Long lectureId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-
-	@Override
-	public Lecture getLectureDetailsById(Long lectureId) {
+	public LectureRespDTO getLectureDetailsById(Long lectureId) {
 		
 		Lecture l =lectureRepo.findById(lectureId).orElseThrow();
+		LectureRespDTO lectureDto = mapper.map(l, LectureRespDTO.class);
 			
-			return l;
+			return lectureDto;
 	}
 
-//	@Override
-//	public ApiResponse deleteLectureDetails(Long lectureId) {
-//		Lecture lect = getLectureDetails(lectureId);
-//		// => emp id valid
-//		empDao.delete(emp); // OR empDao.deleteById(empId)
-//		return new ApiResponse("emp details deleted !");
-//	}
+	@Override
+	public String deleteLectureDetails(Long lectureId) {
+//		LectureRespDTO lect =getLectureDetailsById(lectureId);
+		// => emp id valid
+		lectureRepo.deleteById(lectureId);
+		
+		return ("emp details deleted !");
+	}
 
 }
