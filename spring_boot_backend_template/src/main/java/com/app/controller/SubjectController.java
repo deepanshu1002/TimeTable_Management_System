@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,16 +30,26 @@ public class SubjectController {
 	private SubjectService subjectService;
 
 	@PostMapping
-	public ResponseEntity<?> addNewDept(@RequestBody @Valid SubjectDTO dto) {
+	public ResponseEntity<?> addNewSubject(@RequestBody @Valid SubjectDTO dto) {
 		System.out.println("in add new subject " + dto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(subjectService.addNewSubject(dto));
 	}
 
-	// get department details
-	// http://host:port/departments/{deptId} , method=GET
 	@GetMapping("/{subId}")
-	public ResponseEntity<?> getDeptDetails(@PathVariable Long subId) {
+	public ResponseEntity<?> getSubjectDetails(@PathVariable Long subId) {
 		System.out.println("in get dept dtls " + subId);
 		return ResponseEntity.ok(subjectService.getSubjectDetails(subId));
+	}
+	
+	@GetMapping("getall/{subId}")
+	public ResponseEntity<?> getSubjectandDeptandTeacherDetails(@PathVariable Long subId) {
+		System.out.println("in get dept dtls " + subId);
+		return ResponseEntity.ok(subjectService.getSubjectandDeptandTeacherDetails(subId));
+	}
+	
+	@PutMapping("{subId}")
+	public ResponseEntity<?> updateSubjectDetails(@RequestBody @Valid SubjectDTO dto,@PathVariable Long subId) {
+		dto.setSubjectId(subId);
+		return ResponseEntity.status(HttpStatus.OK).body(subjectService.updateSubject(dto));
 	}
 }

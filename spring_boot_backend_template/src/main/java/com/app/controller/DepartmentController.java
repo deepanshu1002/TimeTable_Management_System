@@ -43,7 +43,7 @@ public class DepartmentController {
 	@PutMapping("{deptId}")
 	public ResponseEntity<?> updateDeptDetails(@RequestBody @Valid DepartmentDTO dto,@PathVariable Long deptId) {
 		dto.setDeptId(deptId);
-		return ResponseEntity.status(HttpStatus.CREATED).body(departmentService.addNewDepartment(dto));
+		return ResponseEntity.status(HttpStatus.OK).body(departmentService.addNewDepartment(dto));
 	}
 	
 //	@DeleteMapping("{deptId}")
