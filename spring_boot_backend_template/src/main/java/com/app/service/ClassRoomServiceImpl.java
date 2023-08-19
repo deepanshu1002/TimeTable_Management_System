@@ -1,20 +1,17 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.app.dto.ClassRoomDTO;
-import com.app.dto.AddFeedbackReqDTO;
 import com.app.dto.ApiResponseDto;
+import com.app.dto.ClassRoomDTO;
 import com.app.entities.ClassRoom;
 import com.app.entities.Department;
-import com.app.entities.Feedback;
-import com.app.entities.Subject;
-import com.app.entities.Users;
 import com.app.repository.ClassRoomRepository;
 import com.app.repository.DepartmentRepository;
 
@@ -27,9 +24,12 @@ public class ClassRoomServiceImpl implements ClassRoomService {
 	private ModelMapper mapper;
 	@Autowired
 	private DepartmentRepository deptRep;
+	
 	@Override
-	public List<ClassRoom> getAllClassRooms() {
-		return classRoomRep.findAll();
+	public List<ClassRoomDTO> getAllClassRooms() {
+		List<ClassRoom> classList = classRoomRep.findAll();
+		return classList.stream().map(classroom -> mapper.map(classroom, ClassRoomDTO.class))
+				.collect(Collectors.toList());
 	}
 
 	@Override

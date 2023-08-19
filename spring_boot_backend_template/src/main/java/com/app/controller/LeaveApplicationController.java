@@ -3,6 +3,7 @@ package com.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,37 +12,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.AddLeaveApplicationDTO;
 import com.app.dto.ApiResponseDto;
-import com.app.entities.LeaveApplication;
+import com.app.dto.LeaveApplicationDTO;
 import com.app.service.LeaveApplicationService;
-
 
 @RestController
 @RequestMapping("/leaveapp")
 public class LeaveApplicationController {
 	@Autowired
 	private LeaveApplicationService leaveService;
-	
+
 	@GetMapping
-	public List<LeaveApplication> listAllLeavesApp(){
-		return leaveService.getAllLeaveApp();
+	public ResponseEntity<?> listAllLeavesApp() {
+		List<LeaveApplicationDTO> leaveList = leaveService.getAllLeaveApp();
+		return ResponseEntity.ok(leaveList);
 	}
-	
+
 	@PostMapping
-	public ApiResponseDto addLeaveAppDetails(@RequestBody AddLeaveApplicationDTO userLeave) {
+	public ApiResponseDto addLeaveAppDetails(@RequestBody LeaveApplicationDTO userLeave) {
 		return leaveService.addLeaveAppDetails(userLeave);
 	}
-	@GetMapping("/{id}")
-	public LeaveApplication getLeaveApplicationById(@PathVariable Long id) {
-		return leaveService.getAllLeaveApp(id);
+
+	@GetMapping("/pending")
+	public List<LeaveApplicationDTO> getAllPendingLeaveApp() {
+		return leaveService.getAllPendingLeaveApp();
 	}
-	
-	@PutMapping
-	public ApiResponseDto updateLeaveAppDetails(@RequestBody AddLeaveApplicationDTO detachedLeave) {
-		leaveService.getAllLeaveApp(detachedLeave.getLeaveApplicationId());
-		return leaveService.addLeaveAppDetails(detachedLeave);
+
+	@PutMapping("/{leavApplicationId}/{status}")
+	public ApiResponseDto updateLeaveAppDetails(@PathVariable Long leavApplicationId, @PathVariable String status) {
+		return leaveService.getLeaveApp(leavApplicationId, status);
 	}
-	
-	
+
 }
