@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 		return mapper.map(user2, SignupResp.class);
 	}
 
-	public SignupResp signupUser(Long userId) {
+	public SignupResp validUser(Long userId) {
 		IsValidUser validUser = isValidUser.findById(userId).orElseThrow(null);
 		Department dept = deptRepo.findById(validUser.getDeptId()).orElseThrow(null);
 		Role role = roleRepo.findById(validUser.getRoleId()).orElseThrow(null);
@@ -48,8 +48,9 @@ public class UserServiceImpl implements UserService {
 		deleteNotValidUser(userId);
 		dept.addUser(user);
 		role.addUser(user);
-		Users persistentUser = userRepo.save(user);
-		return mapper.map(persistentUser, SignupResp.class);
+		
+	//	Users persistentUser = userRepo.save(user);
+		return mapper.map(user, SignupResp.class);
 	}
 
 	public AuthResp authenticateUser(AuthRequest request) {
@@ -57,16 +58,28 @@ public class UserServiceImpl implements UserService {
 		return mapper.map(user, AuthResp.class);
 	}
 
+	public String deleteNotValidUser(Long userId) {
+
+		IsValidUser user = isValidUser.findById(userId).orElseThrow(null);
+
+		isValidUser.delete(user);
+		return " non valid user Deleted";
+	}
+
+	public SignupResp addUserDetails(SignupRequest user) {
+		Department dept = deptRepo.findById(user.getDeptId()).orElseThrow(null);
+		//System.out.println(dept);
+		Users user1=userRepo.findById(user.getUserId()).orElseThrow(null);
+		//Users user1 = mapper.map(user, Users.class);
+		 mapper.map(user, user1);
+		dept.addUser(user1);
+		System.out.println("after adding users");
+		//Users user2 = userRepo.save(user1);
+		return mapper.map(user1, SignupResp.class);
+	}
 	public List<IsValidUser> getAllIsValidUser() {
 		return isValidUser.findAll();
 
-	}
-	public String deleteNotValidUser(Long userId)
-	{
-	  IsValidUser user = isValidUser.findById(userId).orElseThrow(null);
-	 
-	  isValidUser.delete(user);
-	  return " non valid user Deleted";
 	}
 
 }
