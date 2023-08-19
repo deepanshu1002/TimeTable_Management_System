@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.dto.ApiResponseDto;
 import com.app.dto.DepartmentDTO;
 import com.app.dto.SubjectDTO;
+import com.app.dto.SubjectandDeptandTeacherDTO;
 import com.app.entities.Department;
 import com.app.entities.Subject;
 import com.app.entities.Users;
@@ -50,9 +51,36 @@ public class SubjectServiceImpl implements SubjectService {
 			user.addSubject(subjectEntity);
 			dept.addSubject(subjectEntity);
 			Subject persistentSub = subjectRepo.save(subjectEntity);
-			return new ApiResponseDto("Subject added!");
+			return new ApiResponseDto("Subject updated!");
 		}
 		else
 		return new ApiResponseDto("Not a teacher");
+	}
+
+	@Override
+	public ApiResponseDto updateSubject(SubjectDTO sub) {
+		Subject subject = subjectRepo.findById(sub.getSubjectId())
+				.orElseThrow(null);
+		
+		Users user = userRepo.findById(sub.getTeacherId()).orElseThrow(null);
+		if (user.getRole().getRoleId() == 2) {
+			
+			Department dept = departmentRepo.findById(sub.getDeptId()).orElseThrow(null);
+			mapper.map(sub, subject);
+			user.addSubject(subject);
+			dept.addSubject(subject);
+			
+			return new ApiResponseDto("Subject updated!");
+		}
+		else
+		return new ApiResponseDto("Not a teacher");
+	}
+
+	@Override
+	public SubjectandDeptandTeacherDTO getSubjectandDeptandTeacherDetails(Long subId) {
+		System.out.println("inside getallsubject");
+		
+		subjectRepo.getSubjectandDepartmentandTeacher(subId);
+		return null;
 	}
 }
