@@ -71,9 +71,9 @@ public class Department {
 		sub.setDept(null);
 	}
 	
-	public void addClassRoom(ClassRoom addClassRoom) {
-		classroom.add(addClassRoom);
-		addClassRoom.setDept(this);
+	public void addClassRoom(ClassRoom classRoom) {
+		classroom.add(classRoom);
+		classRoom.setDept(this);
 	}
 	
 	public void removeClassRoom(ClassRoom removeClassRoom) {

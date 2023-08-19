@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.AddClassRoomDTO;
+import com.app.dto.ClassRoomDTO;
 import com.app.dto.ApiResponseDto;
 import com.app.entities.ClassRoom;
 import com.app.service.ClassRoomService;
@@ -27,8 +27,8 @@ public class ClassRoomController {
 	}
 	
 	@PostMapping
-	public ApiResponseDto addClassRoom(@RequestBody AddClassRoomDTO addClassRoom) {
-		return classRoomService.addClassRoom(addClassRoom);
+	public ApiResponseDto addClassRoom(@RequestBody ClassRoomDTO classRoom) {
+		return classRoomService.addClassRoom(classRoom);
 	}
 	
 }

@@ -33,6 +33,7 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 	@Override
 	public ApiResponseDto addLeaveAppDetails(AddLeaveApplicationDTO leaveAppDetail) {
 		Users user = userRepo.findById(leaveAppDetail.getUserId()).orElseThrow(null);
+		System.out.println(user);
 		LeaveApplication leaveApp = mapper.map(leaveAppDetail, LeaveApplication.class);
 		user.addLeaveApplication(leaveApp);
 		LeaveApplication leaveApp2 = leaveRep.save(leaveApp);
