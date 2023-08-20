@@ -30,7 +30,7 @@ public class Department {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long deptId;
 	private String deptName;
-	@OneToMany(fetch=FetchType.EAGER ,mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch=FetchType.EAGER ,mappedBy =  "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Lecture> lectures = new ArrayList<>();
 //	@OneToMany(mappedBy = "deptId")
 //	private List<Feedback> feedbacks = new ArrayList<Feedback>();
@@ -71,9 +71,9 @@ public class Department {
 		sub.setDept(null);
 	}
 	
-	public void addClassRoom(ClassRoom addClassRoom) {
-		classroom.add(addClassRoom);
-		addClassRoom.setDept(this);
+	public void addClassRoom(ClassRoom classRoom) {
+		classroom.add(classRoom);
+		classRoom.setDept(this);
 	}
 	
 	public void removeClassRoom(ClassRoom removeClassRoom) {

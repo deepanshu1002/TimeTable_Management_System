@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AddClassRoomDTO {
+public class ClassRoomDTO {
 	private Long classroomId;
 	private String classroomName;
 	private Long deptId;

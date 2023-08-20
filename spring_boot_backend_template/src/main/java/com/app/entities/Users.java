@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +25,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(exclude = { "password","feedbacks","leaves","subjects" })
+
 public class Users {
 	@Id
 	private Long userId;
@@ -54,6 +56,8 @@ public class Users {
 	@OneToMany(mappedBy = "teacherId")
 	private List<Subject> subjects = new ArrayList<Subject>();
 	
+	
+	
 	public void addFeedback(Feedback feedback) {
 		feedbacks.add(feedback);// dept --> emp
 		feedback.setStudentId(this);// emp --> dept
@@ -82,4 +86,14 @@ public class Users {
 		subjects.remove(sub);
 		sub.setTeacherId(null);
 	}
+	public Users(Long userId, String firstName, String lastName, String email, String mobileNo, String password) {
+		super();
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.mobileNo = mobileNo;
+		this.password = password;
+	}
+	
 }

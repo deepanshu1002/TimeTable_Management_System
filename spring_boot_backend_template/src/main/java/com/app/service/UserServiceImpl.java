@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.AuthRequest;
 import com.app.dto.AuthResp;
 import com.app.dto.SignupRequest;
@@ -40,33 +41,45 @@ public class UserServiceImpl implements UserService {
 		return mapper.map(user2, SignupResp.class);
 	}
 
-	public SignupResp signupUser(Long userId) {
-		IsValidUser validUser = isValidUser.findById(userId).orElseThrow(null);
-		Department dept = deptRepo.findById(validUser.getDeptId()).orElseThrow(null);
-		Role role = roleRepo.findById(validUser.getRoleId()).orElseThrow(null);
+	public SignupResp validUser(Long userId) {
+		IsValidUser validUser = isValidUser.findById(userId).orElseThrow(() -> new ResourceNotFoundException("Invalid userId"));
+		Department dept = deptRepo.findById(validUser.getDeptId()).orElseThrow(() -> new ResourceNotFoundException("Invalid dept ID"));
+		Role role = roleRepo.findById(validUser.getRoleId()).orElseThrow(() -> new ResourceNotFoundException("Invalid role id"));
 		Users user = mapper.map(validUser, Users.class);
 		deleteNotValidUser(userId);
 		dept.addUser(user);
 		role.addUser(user);
-		Users persistentUser = userRepo.save(user);
-		return mapper.map(persistentUser, SignupResp.class);
+		
+	//	Users persistentUser = userRepo.save(user);
+		return mapper.map(user, SignupResp.class);
 	}
 
 	public AuthResp authenticateUser(AuthRequest request) {
-		Users user = userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword()).orElseThrow();
+		Users user = userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword()).orElseThrow(()-> new ResourceNotFoundException("invalid user id"));
 		return mapper.map(user, AuthResp.class);
 	}
 
+	public String deleteNotValidUser(Long userId) {
+
+		IsValidUser user = isValidUser.findById(userId).orElseThrow(() -> new ResourceNotFoundException("Invalid userId"));
+
+		isValidUser.delete(user);
+		return " non valid user Deleted";
+	}
+
+	public SignupResp addUserDetails(SignupRequest user) {
+		Department dept = deptRepo.findById(user.getDeptId()).orElseThrow(() -> new ResourceNotFoundException("Invalid dept Id"));
+		//System.out.println(dept);
+		Users user1=userRepo.findById(user.getUserId()).orElseThrow(() -> new ResourceNotFoundException("Invalid user Id"));
+		//Users user1 = mapper.map(user, Users.class);
+		 mapper.map(user, user1);
+		dept.addUser(user1);
+		//Users user2 = userRepo.save(user1);
+		return mapper.map(user1, SignupResp.class);
+	}
 	public List<IsValidUser> getAllIsValidUser() {
 		return isValidUser.findAll();
 
-	}
-	public String deleteNotValidUser(Long userId)
-	{
-	  IsValidUser user = isValidUser.findById(userId).orElseThrow(null);
-	 
-	  isValidUser.delete(user);
-	  return " non valid user Deleted";
 	}
 
 }

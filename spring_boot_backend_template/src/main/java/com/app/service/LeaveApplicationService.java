@@ -2,17 +2,17 @@ package com.app.service;
 
 import java.util.List;
 
-import com.app.dto.AddLeaveApplicationDTO;
 import com.app.dto.ApiResponseDto;
-import com.app.entities.LeaveApplication;
+import com.app.dto.LeaveApplicationDTO;
 
 public interface LeaveApplicationService {
 	//get the Leave Application
-	List<LeaveApplication> getAllLeaveApp();
+	List<LeaveApplicationDTO> getAllLeaveApp();
 	//post the Leave Application
-	ApiResponseDto addLeaveAppDetails(AddLeaveApplicationDTO leaveAppDetail);
+	ApiResponseDto addLeaveAppDetails(LeaveApplicationDTO leaveAppDetail);
 	//get the leave Application By Id
-	LeaveApplication getAllLeaveApp(Long userId);
+	List<LeaveApplicationDTO> getAllPendingLeaveApp();
 	//Update the Status of leave Application
+	ApiResponseDto getLeaveApp(Long leavApplicationId, String status);
 	
 }
