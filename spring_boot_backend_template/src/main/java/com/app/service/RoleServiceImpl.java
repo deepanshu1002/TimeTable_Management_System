@@ -46,9 +46,11 @@ public class RoleServiceImpl implements RoleService {
 		
 		for(long funId : functions) {
 			FunctionalityTbl function = functionalityRepo.findById(funId).orElseThrow();
-			System.out.println(function);
+			
 			function.getRoles().add(role);
+			role.getFunctionalities().add(function);
 		}
+		
 		
 		
 		roleRepo.save(role);

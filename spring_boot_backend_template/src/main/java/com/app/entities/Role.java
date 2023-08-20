@@ -37,7 +37,9 @@ public class Role {
 	// check the roles table if available
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name = "role_functionalities", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "functionality_id"))
+	@JoinTable(name = "role_functionalities",
+	             joinColumns = @JoinColumn(name = "role_id"),
+	              inverseJoinColumns = @JoinColumn(name = "functionality_id"))
 	private List<FunctionalityTbl> functionalities = new ArrayList<>();
 
 	public void addUser(Users u) {
