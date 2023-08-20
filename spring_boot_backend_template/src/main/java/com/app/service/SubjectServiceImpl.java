@@ -34,7 +34,8 @@ public class SubjectServiceImpl implements SubjectService {
 	@Override
 	public SubjectDTO getSubjectDetails(Long subId) {
 		Subject sub = subjectRepo.findById(subId).orElseThrow(null);
-		SubjectDTO subDTO=new SubjectDTO(sub.getDept().getDeptId(),sub.getSubjectId(),sub.getTeacherId().getUserId(),sub.getSubjectName());
+		SubjectDTO subDTO = new SubjectDTO(sub.getDept().getDeptId(), sub.getSubjectId(),
+				sub.getTeacherId().getUserId(), sub.getSubjectName());
 		return subDTO;
 
 	}
@@ -44,7 +45,7 @@ public class SubjectServiceImpl implements SubjectService {
 
 		Users user = userRepo.findById(sub.getTeacherId()).orElseThrow(null);
 		if (user.getRole().getRoleId() == 2) {
-			
+
 			Department dept = departmentRepo.findById(sub.getDeptId()).orElseThrow(null);
 			Subject subjectEntity = mapper.map(sub, Subject.class);
 			System.out.println(subjectEntity);
@@ -52,35 +53,34 @@ public class SubjectServiceImpl implements SubjectService {
 			dept.addSubject(subjectEntity);
 			Subject persistentSub = subjectRepo.save(subjectEntity);
 			return new ApiResponseDto("Subject updated!");
-		}
-		else
-		return new ApiResponseDto("Not a teacher");
+		} else
+			return new ApiResponseDto("Not a teacher");
 	}
 
 	@Override
 	public ApiResponseDto updateSubject(SubjectDTO sub) {
-		Subject subject = subjectRepo.findById(sub.getSubjectId())
-				.orElseThrow(null);
-		
+		Subject subject = subjectRepo.findById(sub.getSubjectId()).orElseThrow(null);
+
 		Users user = userRepo.findById(sub.getTeacherId()).orElseThrow(null);
 		if (user.getRole().getRoleId() == 2) {
-			
+
 			Department dept = departmentRepo.findById(sub.getDeptId()).orElseThrow(null);
 			mapper.map(sub, subject);
 			user.addSubject(subject);
 			dept.addSubject(subject);
-			
+
 			return new ApiResponseDto("Subject updated!");
-		}
-		else
-		return new ApiResponseDto("Not a teacher");
+		} else
+			return new ApiResponseDto("Not a teacher");
 	}
 
 	@Override
 	public SubjectandDeptandTeacherDTO getSubjectandDeptandTeacherDetails(Long subId) {
-		System.out.println("inside getallsubject");
-		
-		subjectRepo.getSubjectandDepartmentandTeacher(subId);
-		return null;
+
+		Subject sub = subjectRepo.getSubjectandDepartmentandTeacher(subId);
+		//System.out.println(sub);
+		SubjectandDeptandTeacherDTO subjectDetails = new SubjectandDeptandTeacherDTO(sub.getDept().getDeptName(), subId,
+				sub.getTeacherId().getFirstName().concat(sub.getTeacherId().getLastName()), sub.getSubjectName());
+		return subjectDetails;
 	}
 }

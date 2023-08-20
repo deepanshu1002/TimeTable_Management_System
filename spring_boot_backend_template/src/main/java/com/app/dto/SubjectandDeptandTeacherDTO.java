@@ -22,11 +22,11 @@ import lombok.ToString;
 @AllArgsConstructor
 public class SubjectandDeptandTeacherDTO {
 	
-	private Department dept;
+	private String dept;
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long subjectId;
 	
-	private Users teacherId;
+	private String teacher;
 	
 	private String subjectName;
 }

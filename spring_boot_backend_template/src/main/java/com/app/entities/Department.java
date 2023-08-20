@@ -22,7 +22,7 @@ import lombok.ToString;
 @Table(name = "Department_tbl")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude={"lectures","classroom","user"})
+@ToString(exclude={"lectures","classroom","user","subjects"})
 @Getter
 @Setter
 public class Department {

@@ -25,7 +25,7 @@ import lombok.ToString;
 @Table(name = "Subject_tbl")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = {"feedbacks","lectures"})
 @Getter
 @Setter
 public class Subject {
@@ -45,6 +45,14 @@ public class Subject {
 	@OneToMany(mappedBy = "sub", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List <Lecture> lectures = new ArrayList<>();
 	
+	public Subject(Long subjectId, String subjectName, Department dept, Users teacherId) {
+		super();
+		this.subjectId = subjectId;
+		this.subjectName = subjectName;
+		this.dept = dept;
+		this.teacherId = teacherId;
+	}
+	
 	public void addFeedback(Feedback feedback) {
 		feedbacks.add(feedback);// dept --> emp
 		feedback.setSubjectId(this);// emp --> dept
@@ -63,4 +71,5 @@ public class Subject {
 		lectures.remove(l);
 		l.setSub(null);
 	}
+	
 }
