@@ -15,8 +15,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 @Entity
-@Table(name="timetable_subjects_metadat_tbl")
+@Table(name = "timetable_subjects_metadat_tbl")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,16 +27,13 @@ public class TimetableSubjectsMetadata {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
-	@JoinColumn(name="dept_id")
+	@JoinColumn(name = "dept_id")
 	private Department dept;
 	@ManyToOne
-	@JoinColumn(name="subject_id")
+	@JoinColumn(name = "subject_id")
 	private Subject subject;
-	@Column(name="weekly_hrs")
+	@Column(name = "weekly_hrs")
 	private int weeklyHrs;
 	private LocalDate startDate;
-	
-	
-	
 
 }

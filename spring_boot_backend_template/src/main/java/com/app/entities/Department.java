@@ -42,7 +42,6 @@ public class Department {
 	private List<Subject> subjects = new ArrayList<>();
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<TimeTableMetadata> metaData = new ArrayList<>();
-
 	public void addLecture(Lecture l) {
 		lectures.add(l);
 		l.setDept(this);
