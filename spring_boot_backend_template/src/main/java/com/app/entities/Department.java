@@ -40,6 +40,9 @@ public class Department {
 	private List<Users> user = new ArrayList<>();
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Subject> subjects = new ArrayList<>();
+	
+	@OneToMany(mappedBy =  "dept", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<TimetableSlot> timeTableSlots = new ArrayList<>();
 
 	public void addLecture(Lecture l) {
 		lectures.add(l);// dept --> emp
@@ -79,6 +82,16 @@ public class Department {
 	public void removeClassRoom(ClassRoom removeClassRoom) {
 		classroom.remove(removeClassRoom);
 		removeClassRoom.setDept(null);
+	}
+	
+	public void addTimetableSlot(TimetableSlot slot) {
+		timeTableSlots.add(slot);
+		slot.setDept(this);
+	}
+
+	public void removeTimetableSlot(TimetableSlot slot) {
+		timeTableSlots.remove(slot);
+		slot.setDept(null);
 	}
 
 }
