@@ -1,12 +1,14 @@
 package com.app.entities;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -23,12 +25,17 @@ public class TimetableSubjectsMetadata {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@OneToOne(fetch=FetchType.LAZY)
+	@ManyToOne
+	@JoinColumn(name="dept_id")
 	private Department dept;
-	@OneToOne(fetch=FetchType.LAZY)
+	@ManyToOne
+	@JoinColumn(name="subject_id")
 	private Subject subject;
 	@Column(name="weekly_hrs")
 	private int weeklyHrs;
+	private LocalDate startDate;
+	
+	
 	
 
 }

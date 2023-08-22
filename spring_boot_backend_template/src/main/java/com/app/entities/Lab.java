@@ -15,8 +15,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 @Entity
-@Table(name="labs_tbl")
+@Table(name = "labs_tbl")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,19 +26,19 @@ public class Lab {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long labId;
-	@Column(name="lab_venue",length=100)
+	@Column(name = "lab_venue", length = 100)
 	private String labVenue;
-	@OneToMany(mappedBy="labVenue")
-    private List<Subject> subject= new ArrayList<Subject>();
-	public void addSubject(Subject s)
-	{
-	   subject.add(s);
-	   s.setLabVenue(this);
+	@OneToMany(mappedBy = "labVenue")
+	private List<Subject> subject = new ArrayList<Subject>();
+
+		public void addSubject(Subject s) {
+		subject.add(s);
+		s.setLabVenue(this);
 	}
-	public void removeSubject(Subject s)
-	{
+
+	public void removeSubject(Subject s) {
 		subject.remove(s);
 		s.setLabVenue(null);
 	}
-	
+
 }

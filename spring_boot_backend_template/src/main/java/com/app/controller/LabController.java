@@ -19,7 +19,7 @@ public class LabController {
 	private LabServiceImpl labService;
 	@PostMapping
 		public ResponseEntity<?> addNewLabVenue(@RequestBody @Valid LabVenueDTO dto) {
-		System.out.println("in add new dept " + dto);
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(labService.addNewLabVenue(dto));
 	}
 

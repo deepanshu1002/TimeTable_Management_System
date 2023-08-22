@@ -27,4 +27,6 @@ public class SubjectDTO {
 	private Long teacherId;
 	@NotBlank
 	private String subjectName;
+	@NotNull
+	private Long labId;
 }

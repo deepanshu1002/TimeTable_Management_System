@@ -14,9 +14,10 @@ import lombok.ToString;
 @ToString
 public class LabVenueDTO {
 	@JsonProperty(access = Access.READ_ONLY)
-	private Long id;
+	private Long labId;
 	@NotBlank
 	private String labVenue;
+	
 	
 
 }
