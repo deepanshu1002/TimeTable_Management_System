@@ -42,6 +42,8 @@ public class Department {
 	private List<Subject> subjects = new ArrayList<>();
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<TimeTableMetadata> metaData = new ArrayList<>();
+	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Lab> labs = new ArrayList<>();
 
 	public void addLecture(Lecture l) {
 		lectures.add(l);
@@ -91,6 +93,16 @@ public class Department {
 	public void removeMetaData(TimeTableMetadata data) {
 		metaData.remove(data);
 		data.setDept(null);
+	}
+	
+	public void addLab(Lab lab) {
+		labs.add(lab);
+		lab.setDept(this);
+	}
+
+	public void removeLab(Lab lab) {
+		labs.remove(lab);
+		lab.setDept(null);
 	}
 
 }

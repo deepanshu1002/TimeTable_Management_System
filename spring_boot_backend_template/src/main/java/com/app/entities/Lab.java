@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,6 +32,9 @@ public class Lab {
 	private String labVenue;
 	@OneToMany(mappedBy = "labVenue")
 	private List<Subject> subject = new ArrayList<Subject>();
+	@ManyToOne
+	@JoinColumn(name = "dept_id")
+	private Department dept;
 
 		public void addSubject(Subject s) {
 		subject.add(s);
