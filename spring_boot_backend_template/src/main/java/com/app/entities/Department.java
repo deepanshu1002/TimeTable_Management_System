@@ -40,10 +40,12 @@ public class Department {
 	private List<Users> user = new ArrayList<>();
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Subject> subjects = new ArrayList<>();
+	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<TimeTableMetadata> metaData = new ArrayList<>();
 
 	public void addLecture(Lecture l) {
-		lectures.add(l);// dept --> emp
-		l.setDept(this);// emp --> dept
+		lectures.add(l);
+		l.setDept(this);
 	}
 
 	public void removeLecture(Lecture l) {
@@ -52,8 +54,8 @@ public class Department {
 	}
 	
 	public void addUser(Users u) {
-		user.add(u);// dept --> emp
-		u.setDept(this);// emp --> dept
+		user.add(u);
+		u.setDept(this);
 	}
 
 	public void removeUser(Users u) {
@@ -62,8 +64,8 @@ public class Department {
 	}
 	
 	public void addSubject(Subject sub) {
-		subjects.add(sub);// dept --> emp
-		sub.setDept(this);// emp --> dept
+		subjects.add(sub);
+		sub.setDept(this);
 	}
 
 	public void removeSubject(Subject sub) {
@@ -79,6 +81,16 @@ public class Department {
 	public void removeClassRoom(ClassRoom removeClassRoom) {
 		classroom.remove(removeClassRoom);
 		removeClassRoom.setDept(null);
+	}
+	
+	public void addMetaData(TimeTableMetadata data) {
+		metaData.add(data);
+		data.setDept(this);
+	}
+	
+	public void removeMetaData(TimeTableMetadata data) {
+		metaData.remove(data);
+		data.setDept(null);
 	}
 
 }
