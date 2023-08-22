@@ -22,7 +22,7 @@ import lombok.ToString;
 @Table(name = "Department_tbl")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude={"lectures","classroom","user","subjects"})
+@ToString(exclude = { "lectures", "classroom", "user", "subjects" })
 @Getter
 @Setter
 public class Department {
@@ -30,16 +30,20 @@ public class Department {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long deptId;
 	private String deptName;
-	@OneToMany(fetch=FetchType.EAGER ,mappedBy =  "dept", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Lecture> lectures = new ArrayList<>();
 //	@OneToMany(mappedBy = "deptId")
 //	private List<Feedback> feedbacks = new ArrayList<Feedback>();
-	@OneToMany(mappedBy = "dept",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ClassRoom> classroom = new ArrayList<>();
-	@OneToMany(mappedBy = "dept",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Users> user = new ArrayList<>();
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Subject> subjects = new ArrayList<>();
+
+	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<TimetableSlot> timeTableSlots = new ArrayList<>();
+
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<TimeTableMetadata> metaData = new ArrayList<>();
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -54,7 +58,7 @@ public class Department {
 		lectures.remove(l);
 		l.setDept(null);
 	}
-	
+
 	public void addUser(Users u) {
 		user.add(u);
 		u.setDept(this);
@@ -64,7 +68,7 @@ public class Department {
 		user.remove(u);
 		u.setDept(null);
 	}
-	
+
 	public void addSubject(Subject sub) {
 		subjects.add(sub);
 		sub.setDept(this);
@@ -74,25 +78,36 @@ public class Department {
 		subjects.remove(sub);
 		sub.setDept(null);
 	}
-	
+
 	public void addClassRoom(ClassRoom classRoom) {
 		classroom.add(classRoom);
 		classRoom.setDept(this);
 	}
-	
+
 	public void removeClassRoom(ClassRoom removeClassRoom) {
 		classroom.remove(removeClassRoom);
 		removeClassRoom.setDept(null);
 	}
-	
+
+	public void addTimetableSlot(TimetableSlot slot) {
+		timeTableSlots.add(slot);
+		slot.setDept(this);
+	}
+
+	public void removeTimetableSlot(TimetableSlot slot) {
+		timeTableSlots.remove(slot);
+		slot.setDept(null);
+	}
+
 	public void addMetaData(TimeTableMetadata data) {
 		metaData.add(data);
 		data.setDept(this);
 	}
-	
+
 	public void removeMetaData(TimeTableMetadata data) {
 		metaData.remove(data);
 		data.setDept(null);
+
 	}
 	
 	public void addLab(Lab lab) {

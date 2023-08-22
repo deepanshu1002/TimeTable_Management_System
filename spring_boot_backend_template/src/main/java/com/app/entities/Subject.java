@@ -46,6 +46,9 @@ public class Subject {
 	@JoinColumn(name="lab_id")
 	private Lab labVenue;
 	
+	@OneToMany(mappedBy =  "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<TimetableSlot> timeTableSlots = new ArrayList<>();
+	
 	public Subject(Long subjectId, String subjectName, Department dept, Users teacherId) {
 		super();
 		this.subjectId = subjectId;
@@ -71,6 +74,16 @@ public class Subject {
 	public void removeLecture(Lecture l) {
 		lectures.remove(l);
 		l.setSub(null);
+	}
+	
+	public void addTimetableSlot(TimetableSlot slot) {
+		timeTableSlots.add(slot);
+		slot.setSubject(this);
+	}
+
+	public void removeTimetableSlot(TimetableSlot slot) {
+		timeTableSlots.remove(slot);
+		slot.setSubject(null);
 	}
 	
 }
