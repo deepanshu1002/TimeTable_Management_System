@@ -12,11 +12,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class TimetableSubjectMetadataDTO {
-	@JsonProperty(access = Access.READ_ONLY)
-	private Long id;
-	private  Long deptId;
-	private Long subjectId;
-	private int weeklyHrs;
-	private LocalDate startDate;
+public class SubjectMetadataResp {
+		@JsonProperty(access = Access.READ_ONLY)
+		private Long id;
+		private  String deptName;
+		private String subjectName;
+		private int weeklyHrs;
+		private LocalDate startDate;
 }
