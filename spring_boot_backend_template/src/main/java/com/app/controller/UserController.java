@@ -42,7 +42,7 @@ public class UserController {
 		return userService.deleteNotValidUser(userId);
 	}
 
-	@GetMapping("/validuser/{userId}")
+	@GetMapping("/validuser/{userId}") 
 	public ResponseEntity<?> validUser(@PathVariable Long userId) {
 		return ResponseEntity.ok(userService.validUser(userId));
 	}
