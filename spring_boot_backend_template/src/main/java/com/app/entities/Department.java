@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -34,10 +35,14 @@ public class Department {
 	private List<Lecture> lectures = new ArrayList<>();
 //	@OneToMany(mappedBy = "deptId")
 //	private List<Feedback> feedbacks = new ArrayList<Feedback>();
-	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<ClassRoom> classroom = new ArrayList<>();
+//	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<ClassRoom> classroom = new ArrayList<>();
+	@OneToOne(mappedBy = "dept", cascade = CascadeType.ALL)
+	private ClassRoom classroom;
+	
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Users> user = new ArrayList<>();
+	
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Subject> subjects = new ArrayList<>();
 
@@ -46,6 +51,7 @@ public class Department {
 
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<TimeTableMetadata> metaData = new ArrayList<>();
+	
 	@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Lab> labs = new ArrayList<>();
 
@@ -79,15 +85,15 @@ public class Department {
 		sub.setDept(null);
 	}
 
-	public void addClassRoom(ClassRoom classRoom) {
-		classroom.add(classRoom);
-		classRoom.setDept(this);
-	}
-
-	public void removeClassRoom(ClassRoom removeClassRoom) {
-		classroom.remove(removeClassRoom);
-		removeClassRoom.setDept(null);
-	}
+//	public void addClassRoom(ClassRoom classRoom) {
+//		classroom.add(classRoom);
+//		classRoom.setDept(this);
+//	}
+//
+//	public void removeClassRoom(ClassRoom removeClassRoom) {
+//		classroom.remove(removeClassRoom);
+//		removeClassRoom.setDept(null);
+//	}
 
 	public void addTimetableSlot(TimetableSlot slot) {
 		timeTableSlots.add(slot);
@@ -109,7 +115,7 @@ public class Department {
 		data.setDept(null);
 
 	}
-	
+
 	public void addLab(Lab lab) {
 		labs.add(lab);
 		lab.setDept(this);

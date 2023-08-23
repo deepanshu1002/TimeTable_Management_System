@@ -45,7 +45,9 @@ public class TimeTableMetadataServiceImpl implements TimeTableMetadataService {
 		TimeTableMetadata metaData = mapper.map(data, TimeTableMetadata.class);
 		// This sets the week end date according to start date of the week
 		metaData.setEndDate(metaData.getStartDate().plusDays(metaData.getNoOfDaysThisWeek()));
-		dept.addMetaData(metaData);
+		dept.addMetaData(metaData); 
+		//calcultes the total no of hours based on data provided look into entity class for logic
+		metaData.setNoOfHrsThisWeek();
 		metaDataRepo.save(metaData);
 		return new ApiResponseDto("Metadata added successfully for " + dept.getDeptName());
 	}
@@ -53,6 +55,8 @@ public class TimeTableMetadataServiceImpl implements TimeTableMetadataService {
 	@Override
 	public TimeTableMetadataDto getDataByDateAndDeptId(String dateString, Long deptId) {
 		TimeTableMetadata metaData = metaDataRepo.getByWeekStartDateandDeptId(LocalDate.parse(dateString), deptId);
+		//TimeTableMetadata metaData = metaDataRepo.findByStartDateAndDeptDeptId(LocalDate.parse(dateString), deptId);
+		System.out.println(metaData.getId());
 		TimeTableMetadataDto data = mapper.map(metaData, TimeTableMetadataDto.class);
 		data.setDeptId(metaData.getDept().getDeptId());
 		return data;

@@ -10,6 +10,8 @@ import com.app.entities.Feedback;
 import com.app.entities.TimeTableMetadata;
 
 public interface TimeTableMetadataRepository extends JpaRepository<TimeTableMetadata, Long> {
-	@Query(value = "select t from TimeTableMetadata t where t.StartDate=?1 and t.dept.deptId=?2")
+	@Query(value = "select t from TimeTableMetadata t where t.startDate=?1 and t.dept.deptId=?2")
 	TimeTableMetadata getByWeekStartDateandDeptId(LocalDate date,Long id);
+	
+	//TimeTableMetadata findByStartDateAndDeptDeptId(LocalDate date,Long id);
 }

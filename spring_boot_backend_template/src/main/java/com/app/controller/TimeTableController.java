@@ -17,21 +17,18 @@ import com.app.dto.TimeTableMetadataDto;
 import com.app.entities.Feedback;
 import com.app.service.FeedbackService;
 import com.app.service.TimeTableMetadataService;
+import com.app.service.TimetableService;
 
 @RestController
-@RequestMapping("/metadata")
-public class TimeTableMetadataController {
+@RequestMapping("/timettable")
+public class TimeTableController {
 	
 	@Autowired
-	private TimeTableMetadataService dataService;
+	private TimetableService timeTableService;
 	
-	@PostMapping
-	public ResponseEntity<?> addData(@RequestBody TimeTableMetadataDto data){
-		return ResponseEntity.status(HttpStatus.CREATED).body(dataService.addData(data));
-	}
 	
-	@GetMapping("/{dateString}/{deptId}")
-	public ResponseEntity<?> getData(@PathVariable String dateString,@PathVariable Long deptId){
-		return ResponseEntity.status(HttpStatus.OK).body(dataService.getDataByDateAndDeptId(dateString,deptId));
+	@GetMapping("/{deptId}/{date}")
+	public ResponseEntity<?> genTimeTable(@PathVariable Long deptId,@PathVariable String date){
+		return ResponseEntity.status(HttpStatus.CREATED).body(timeTableService.genTimeTable(deptId,LocalDate.parse(date)));
 	}
 }

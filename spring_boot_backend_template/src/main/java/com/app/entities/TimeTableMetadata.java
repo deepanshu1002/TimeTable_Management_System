@@ -1,7 +1,9 @@
 package com.app.entities;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -25,7 +27,7 @@ import lombok.ToString;
 @Table(name = "TimeTableMetadata_tbl")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"dept"})
+@ToString(exclude = { "dept" })
 @Getter
 @Setter
 public class TimeTableMetadata {
@@ -56,7 +58,40 @@ public class TimeTableMetadata {
 	private Long noOfLabHrsDaily;
 	private Long noOfLectursPerDay;
 	private Long noOfDaysThisWeek;
-	private LocalDate StartDate;
-	private LocalDate EndDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
+	private Double noOfHrsThisWeek;
+
+	public Double breakTime1() {
+		if (!(breakStartTime1.equals(LocalTime.MIDNIGHT))) {
+			return (double)(breakStartTime1.until(breakEndTime1, ChronoUnit.MINUTES))/60;
+		}
+		return 0.0;
+	}
 	
+	public Double breakTime2() {
+		if (!(breakStartTime2.equals(LocalTime.MIDNIGHT))) {
+			return (double)(breakStartTime2.until(breakEndTime2, ChronoUnit.MINUTES))/60;
+			
+		}
+		return 0.0;
+	}
+	
+	public Double breakTime3() {
+		if (!(breakStartTime3.equals(LocalTime.MIDNIGHT))) {
+			return (double)(breakStartTime2.until(breakEndTime3, ChronoUnit.MINUTES))/60;
+			
+		}	
+		return 0.0;
+	}
+
+	public void setNoOfHrsThisWeek() {
+
+		Double lectureHrsPerDay=(double)(collegeStartTime.until(collegeEndTime, ChronoUnit.MINUTES))/60-(breakTime1()+breakTime2()+breakTime3());
+		System.out.println(lectureHrsPerDay);
+		noOfHrsThisWeek=lectureHrsPerDay*noOfDaysThisWeek;
+	}
+	
+	
+
 }

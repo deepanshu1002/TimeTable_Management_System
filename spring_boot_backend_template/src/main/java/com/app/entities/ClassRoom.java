@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public class ClassRoom {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long classroomId;
 	private String classroomName;
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "dept_id")
 	private Department dept;
 	
