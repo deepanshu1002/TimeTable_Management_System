@@ -3,8 +3,10 @@ package com.app.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -56,7 +58,8 @@ public class Users {
 	@OneToMany(mappedBy = "teacherId")
 	private List<Subject> subjects = new ArrayList<Subject>();
 	
-	
+	@OneToMany(mappedBy =  "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<TimetableSlot> timeTableSlots = new ArrayList<>();
 	
 	public void addFeedback(Feedback feedback) {
 		feedbacks.add(feedback);// dept --> emp
@@ -86,6 +89,17 @@ public class Users {
 		subjects.remove(sub);
 		sub.setTeacherId(null);
 	}
+	
+	public void addTimetableSlot(TimetableSlot slot) {
+		timeTableSlots.add(slot);
+		slot.setTeacher(this);
+	}
+
+	public void removeTimetableSlot(TimetableSlot slot) {
+		timeTableSlots.remove(slot);
+		slot.setTeacher(null);
+	}
+	
 	public Users(Long userId, String firstName, String lastName, String email, String mobileNo, String password) {
 		super();
 		this.userId = userId;

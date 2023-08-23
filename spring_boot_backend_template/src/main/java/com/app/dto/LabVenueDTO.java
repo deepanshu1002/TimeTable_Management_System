@@ -17,7 +17,6 @@ public class LabVenueDTO {
 	private Long labId;
 	@NotBlank
 	private String labVenue;
+	private Long deptId;
 	
-	
-
 }
