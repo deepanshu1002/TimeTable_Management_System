@@ -40,17 +40,13 @@ public class TimetableSlotController {
 		return ResponseEntity.ok(timetableSlotDTO);
 	}
 	
-	@GetMapping("/{date}/{startTime}")
-	public ResponseEntity<?> getLectureData(@PathVariable String date, @PathVariable String startTime) {
+	@GetMapping("/{date}/{deptId}")
+	public ResponseEntity<?> getLectureData(@PathVariable String date, @PathVariable Long deptId) {
 		
 		 LocalDate date1 = LocalDate.parse(date);
-		 
-		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-
-	        LocalTime time1 = LocalTime.parse(startTime, formatter);
 		
 		 
-		TimetableSlotRespoDTO timetableSlotDetails = timetableSlotService.getLectureDetails(date1, time1);
+		TimetableSlotRespoDTO timetableSlotDetails = timetableSlotService.getLectureDetails(date1, deptId);
 		System.out.println("timetableSlotDetails= " +timetableSlotDetails);
 		if (timetableSlotDetails == null)
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

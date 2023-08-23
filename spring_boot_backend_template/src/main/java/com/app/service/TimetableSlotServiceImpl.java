@@ -93,22 +93,16 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
 	}
 
 	@Override
-	public TimetableSlotRespoDTO getLectureDetails(LocalDate date1, LocalTime time1) {
+	public TimetableSlotRespoDTO getLectureDetails(LocalDate date1, Long deptId) {
 		List <TimetableSlot> listOfSlots= timeTableSlotRepo.findByDate(date1);
 //		System.out.println("listOfSlots= "+ listOfSlots);
 		TimetableSlot timetableSlot=null;
 		
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-//
-//        String timeStringArg = time1.format(formatter);
 		for(TimetableSlot t : listOfSlots)
 		{
-			LocalTime time = t.getStartTime();
-//			System.out.println("timetableSlot= "+ t);
-//			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss");
-//
-//	        String timeString = time.format(formatter1);
-			if(time.compareTo(time1)==0)
+			Long id= t.getDept().getDeptId();
+//			
+			if(id == deptId)
 				timetableSlot= t;
 		}
 		return mapper.map(timetableSlot, TimetableSlotRespoDTO.class);
