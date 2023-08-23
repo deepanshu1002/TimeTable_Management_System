@@ -1,5 +1,9 @@
 package com.app.controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.AddTimetableSlotDTO;
 import com.app.dto.TimetableSlotRespoDTO;
-import com.app.entities.TimetableSlot;
 import com.app.service.TimetableSlotService;
 
 @RestController
@@ -35,6 +38,24 @@ public class TimetableSlotController {
 		TimetableSlotRespoDTO timetableSlotDTO = timetableSlotService.getTimetableSlotDetailsById(slotId);
 		
 		return ResponseEntity.ok(timetableSlotDTO);
+	}
+	
+	@GetMapping("/{date}/{startTime}")
+	public ResponseEntity<?> getLectureData(@PathVariable String date, @PathVariable String startTime) {
+		
+		 LocalDate date1 = LocalDate.parse(date);
+		 
+		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+	        LocalTime time1 = LocalTime.parse(startTime, formatter);
+		
+		 
+		TimetableSlotRespoDTO timetableSlotDetails = timetableSlotService.getLectureDetails(date1, time1);
+		System.out.println("timetableSlotDetails= " +timetableSlotDetails);
+		if (timetableSlotDetails == null)
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		
+		return ResponseEntity.ok(timetableSlotDetails);
 	}
 	
 	

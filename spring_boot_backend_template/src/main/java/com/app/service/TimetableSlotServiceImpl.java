@@ -1,12 +1,16 @@
 package com.app.service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dto.AddTimetableSlotDTO;
-import com.app.dto.LectureRespDTO;
 import com.app.dto.TimetableSlotRespoDTO;
 import com.app.entities.ClassRoom;
 import com.app.entities.Department;
@@ -86,6 +90,28 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
 			TimetableSlotRespoDTO timetableSlotDto = mapper.map(slot, TimetableSlotRespoDTO.class);
 				
 				return timetableSlotDto;
+	}
+
+	@Override
+	public TimetableSlotRespoDTO getLectureDetails(LocalDate date1, LocalTime time1) {
+		List <TimetableSlot> listOfSlots= timeTableSlotRepo.findByDate(date1);
+//		System.out.println("listOfSlots= "+ listOfSlots);
+		TimetableSlot timetableSlot=null;
+		
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+//
+//        String timeStringArg = time1.format(formatter);
+		for(TimetableSlot t : listOfSlots)
+		{
+			LocalTime time = t.getStartTime();
+//			System.out.println("timetableSlot= "+ t);
+//			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss");
+//
+//	        String timeString = time.format(formatter1);
+			if(time.compareTo(time1)==0)
+				timetableSlot= t;
+		}
+		return mapper.map(timetableSlot, TimetableSlotRespoDTO.class);
 	}
 
 }
