@@ -54,5 +54,7 @@ public class TimetableSlot {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lecture_id")
     private Lecture lectureData;
+    
+   
 
 }

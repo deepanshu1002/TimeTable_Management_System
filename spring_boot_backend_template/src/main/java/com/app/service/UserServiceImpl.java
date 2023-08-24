@@ -56,7 +56,9 @@ public class UserServiceImpl implements UserService {
 
 	public AuthResp authenticateUser(AuthRequest request) {
 		Users user = userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword()).orElseThrow(()-> new ResourceNotFoundException("invalid user id"));
-		return mapper.map(user, AuthResp.class);
+		
+		return new AuthResp(user.getUserId(), user.getFirstName(), user.getLastName(),
+				                user.getEmail(), user.getDept().getDeptId(), user.getRole().getRoleId());
 	}
 
 	public String deleteNotValidUser(Long userId) {

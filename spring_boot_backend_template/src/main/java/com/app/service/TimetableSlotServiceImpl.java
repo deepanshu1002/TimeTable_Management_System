@@ -77,10 +77,13 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
 		user.addTimetableSlot(timetableSlot);
 		classroom.addTimetableSlot(timetableSlot);
 		
-		
+		timetableSlot.setLectureData(lecture);
 		TimetableSlot slot = timeTableSlotRepo.save(timetableSlot);
 		
-		return mapper.map(slot, TimetableSlotRespoDTO.class);
+		return new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), 
+                slot.getStartTime(), slot.getEndTime(),slot.getTeacher().getUserId(), 
+                slot.getSubject().getSubjectId(),slot.getClassroom().getClassroomId(),
+                slot.getDept().getDeptId(), slot.getLectureData().getId());
 	}
 
 	@Override
