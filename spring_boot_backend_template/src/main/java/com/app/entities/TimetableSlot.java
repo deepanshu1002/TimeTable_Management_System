@@ -17,7 +17,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"teacher","subject","classroom","dept","lecture data"})
 public class TimetableSlot {
 	
 	@Id	
@@ -56,5 +56,15 @@ public class TimetableSlot {
     private Lecture lectureData;
     
    
+
+	public TimetableSlot(Users teacher, Subject subject, ClassRoom classroom, Department dept) {
+		super();
+		this.teacher = teacher;
+		this.subject = subject;
+		this.classroom = classroom;
+		this.dept = dept;
+	}
+    
+    
 
 }

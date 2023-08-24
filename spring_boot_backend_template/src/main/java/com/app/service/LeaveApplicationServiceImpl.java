@@ -30,6 +30,7 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 	@Autowired
 	private UserRepository userRepo;
 
+	// get
 	@Override
 	public List<LeaveApplicationDTO> getAllLeaveApp() {
 		List<LeaveApplication> leaveList = leaveRep.findAll();
@@ -43,16 +44,17 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 		
 	}
 
+	// Post
 	@Override
 	public ApiResponseDto addLeaveAppDetails(LeaveApplicationDTO leaveAppDetail) {
 		Users user = userRepo.findById(leaveAppDetail.getUserId()).orElseThrow(null);
-		System.out.println(user);
 		LeaveApplication leaveApp = mapper.map(leaveAppDetail, LeaveApplication.class);
 		user.addLeaveApplication(leaveApp);
 		LeaveApplication leaveApp2 = leaveRep.save(leaveApp);
 		return new ApiResponseDto("Leave Application Submitted Successfull...");
 	}
 
+	// get pending
 	@Override
 	public List<LeaveApplicationDTO> getAllPendingLeaveApp() {
 
@@ -62,28 +64,25 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 
 		for (LeaveApplication la : leaveList) {
 			leaveDto.add(new LeaveApplicationDTO(la.getUser().getUserId(), la.getUser().getFirstName(),
-					la.getLeaveApplicationId(), la.getFromDate(), la.getToDate(), la.getStatus().toString(),
-					la.getReason()));
+					la.getFromDate(), la.getToDate(), la.getReason()));
 		}
 		return leaveDto;
 	}
 
+	// get admin or HOD or Principal
 	@Override
 	public ApiResponseDto getLeaveApp(Long leavApplicationId, String status) {
 		LeaveApplication leaveapp = leaveRep.findById(leavApplicationId).orElseThrow(null);
 		System.out.println(status);
-		if(status.equals("approved")) {
-		leaveapp.setStatus(Status.APPROVED);
-		return new ApiResponseDto("Leave Application Approved");
-		}
-		else if(status.equals("rejected")) {
-		leaveapp.setStatus(Status.REJECTED);
-		return new ApiResponseDto("Leave Application Rejected");
+		if (status.equals("approved")) {
+			leaveapp.setStatus(Status.APPROVED);
+			return new ApiResponseDto("Leave Application Approved");
+		} else if (status.equals("rejected")) {
+			leaveapp.setStatus(Status.REJECTED);
+			return new ApiResponseDto("Leave Application Rejected");
 		}
 		System.out.println(leaveapp);
 		return new ApiResponseDto("Leave Application Still Pending");
 	}
-	
-	
 
 }

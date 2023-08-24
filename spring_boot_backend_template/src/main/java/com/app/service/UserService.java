@@ -9,11 +9,11 @@ import com.app.dto.SignupResp;
 import com.app.entities.IsValidUser;
 
 public interface UserService {
-	public SignupResp validUser(Long userId);
+	public SignupResp validUser(Long userId,Long roleId);
 	public AuthResp authenticateUser(AuthRequest request);
 	public SignupResp registerUser(SignupRequest request);
 	public String deleteNotValidUser(Long userId);
 	public SignupResp addUserDetails(SignupRequest user);
 	public List<IsValidUser> getAllIsValidUser();
-
+	public void updateRoleId(Long userId,Long roleId);
 }

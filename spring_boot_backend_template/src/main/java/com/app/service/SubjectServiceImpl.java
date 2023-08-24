@@ -90,4 +90,5 @@ public class SubjectServiceImpl implements SubjectService {
 				sub.getTeacherId().getFirstName().concat(sub.getTeacherId().getLastName()), sub.getSubjectName());
 		return subjectDetails;
 	}
+	
 }

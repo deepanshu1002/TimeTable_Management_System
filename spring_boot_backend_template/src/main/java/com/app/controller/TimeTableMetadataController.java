@@ -26,12 +26,12 @@ public class TimeTableMetadataController {
 	private TimeTableMetadataService dataService;
 	
 	@PostMapping
-	public ResponseEntity<?> addFeedback(@RequestBody TimeTableMetadataDto data){
+	public ResponseEntity<?> addData(@RequestBody TimeTableMetadataDto data){
 		return ResponseEntity.status(HttpStatus.CREATED).body(dataService.addData(data));
 	}
 	
 	@GetMapping("/{dateString}/{deptId}")
-	public ResponseEntity<?> getFeedback(@PathVariable String dateString,@PathVariable Long deptId){
+	public ResponseEntity<?> getData(@PathVariable String dateString,@PathVariable Long deptId){
 		return ResponseEntity.status(HttpStatus.OK).body(dataService.getDataByDateAndDeptId(dateString,deptId));
 	}
 }
