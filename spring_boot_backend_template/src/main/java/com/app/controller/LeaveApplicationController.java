@@ -20,6 +20,7 @@ import com.app.service.LeaveApplicationService;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/leaveapp")
+@CrossOrigin("*")
 public class LeaveApplicationController {
 	@Autowired
 	private LeaveApplicationService leaveService;

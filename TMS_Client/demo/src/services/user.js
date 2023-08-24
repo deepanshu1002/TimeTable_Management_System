@@ -50,3 +50,21 @@ export async function leaveApplicationAPI(startDate,endDate,reason,status,userId
     return null
   }
 }
+
+export async function loginUserApi(email, password) {
+  const url = createUrl('/signIn')
+  const body = {
+    email,
+    password,
+  }
+
+  // wait till axios is making the api call and getting response from server
+  try {
+    const response = await axios.post(url, body)
+    log(response.data)
+    return response.data
+  } catch (ex) {
+    log(ex)
+    return null
+  }
+}

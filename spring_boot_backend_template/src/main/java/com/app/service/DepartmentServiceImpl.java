@@ -1,11 +1,13 @@
 package com.app.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.app.dto.ApiResponseDto;
 import com.app.dto.DepartmentDTO;
 import com.app.entities.Department;
 import com.app.repository.DepartmentRepository;
@@ -33,6 +35,17 @@ public class DepartmentServiceImpl implements DepartmentService {
 		Department departmentEntity = mapper.map(dept, Department.class);
 		Department persistentDept = departmentRepo.save(departmentEntity);
 		return mapper.map(persistentDept, DepartmentDTO.class);
+	}
+
+	@Override
+	public List <DepartmentDTO> getAllDepartmentDetails() {
+		List <DepartmentDTO> deptDeptList=new ArrayList<DepartmentDTO>();
+		List <Department> depts = departmentRepo.findAll();
+		for(Department dept: depts) {
+			DepartmentDTO deptDto= mapper.map(dept, DepartmentDTO.class);
+			deptDeptList.add(deptDto);
+		}
+		return deptDeptList;
 	}
 
 //will see if this is required

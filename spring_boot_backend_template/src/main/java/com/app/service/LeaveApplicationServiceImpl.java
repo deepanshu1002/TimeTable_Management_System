@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dto.ApiResponseDto;
+import com.app.dto.DepartmentDTO;
 import com.app.dto.LeaveApplicationDTO;
+import com.app.entities.Department;
 import com.app.entities.LeaveApplication;
 import com.app.entities.Status;
 import com.app.entities.Users;
@@ -32,8 +34,14 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 	@Override
 	public List<LeaveApplicationDTO> getAllLeaveApp() {
 		List<LeaveApplication> leaveList = leaveRep.findAll();
-		return leaveList.stream().map(leaveApplication -> mapper.map(leaveApplication, LeaveApplicationDTO.class))
-				.collect(Collectors.toList());
+		List <LeaveApplicationDTO> leaveAppList=new ArrayList<>();
+		for(LeaveApplication leaveApp: leaveList) {
+			LeaveApplicationDTO leaveDto= mapper.map(leaveApp, LeaveApplicationDTO.class);
+			leaveAppList.add(leaveDto);
+		}
+		
+		return leaveAppList;
+		
 	}
 
 	// Post
