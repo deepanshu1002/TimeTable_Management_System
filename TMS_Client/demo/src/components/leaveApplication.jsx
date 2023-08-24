@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 //import { leaveApplicationAPI as leaveApplicationAPI} from '../services/user'
 
 function LeaveApplication(){
-
+    
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
+    const [status, setStatus] = useState('')
     const [reason, setReason] = useState('')
 
     const navigate = useNavigate()
@@ -22,7 +23,8 @@ function LeaveApplication(){
         } else if (reason.length == ''){
             toast.error('Please Enter the Reason.');
         } else {
-            const response = await leaveApplicationAPI(startDate, endDate, reason)
+            const userId = sessionStorage.getItem('userId');
+            const response = await leaveApplicationAPI(userId, startDate, endDate, status, reason)
             if(response != null){
                 toast.success('Successfully submitted Leave application')
                 navigate('/leaveApplication')

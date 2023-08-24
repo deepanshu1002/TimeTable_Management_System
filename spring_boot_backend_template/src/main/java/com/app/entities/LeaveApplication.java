@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -36,8 +37,14 @@ public class LeaveApplication{
 	private LocalDate fromDate;
 	private LocalDate toDate;
 	@Enumerated(EnumType.STRING)
-	private Status status=Status.PENDING;
+	private Status status;
 	private String reason;
 	
-	
+	//Set Default status value to pending
+	@PrePersist
+	public void setDefaultStatus() {
+		if(status == null) {
+			status = Status.PENDING;
+		}
+	}
 }
