@@ -27,24 +27,24 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 	private ModelMapper mapper;
 	@Autowired
 	private UserRepository userRepo;
-
+	
+	//get
 	@Override
 	public List<LeaveApplicationDTO> getAllLeaveApp() {
 		List<LeaveApplication> leaveList = leaveRep.findAll();
 		return leaveList.stream().map(leaveApplication -> mapper.map(leaveApplication, LeaveApplicationDTO.class))
 				.collect(Collectors.toList());
 	}
-
+	//Post
 	@Override
 	public ApiResponseDto addLeaveAppDetails(LeaveApplicationDTO leaveAppDetail) {
 		Users user = userRepo.findById(leaveAppDetail.getUserId()).orElseThrow(null);
-		System.out.println(user);
 		LeaveApplication leaveApp = mapper.map(leaveAppDetail, LeaveApplication.class);
 		user.addLeaveApplication(leaveApp);
 		LeaveApplication leaveApp2 = leaveRep.save(leaveApp);
 		return new ApiResponseDto("Leave Application Submitted Successfull...");
 	}
-
+	//get pending
 	@Override
 	public List<LeaveApplicationDTO> getAllPendingLeaveApp() {
 
@@ -59,7 +59,7 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 		}
 		return leaveDto;
 	}
-
+	//get admin or HOD or Principal
 	@Override
 	public ApiResponseDto getLeaveApp(Long leavApplicationId, String status) {
 		LeaveApplication leaveapp = leaveRep.findById(leavApplicationId).orElseThrow(null);

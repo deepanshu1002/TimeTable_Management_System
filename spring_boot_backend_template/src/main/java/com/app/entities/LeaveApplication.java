@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,11 +31,12 @@ public class LeaveApplication{
 	@JoinColumn(name = "user_id")
 	private Users user;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long leaveApplicationId;
 	private LocalDate fromDate;
 	private LocalDate toDate;
 	@Enumerated(EnumType.STRING)
-	private Status status;
+	private Status status=Status.PENDING;
 	private String reason;
 	
 	
