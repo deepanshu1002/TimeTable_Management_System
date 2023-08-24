@@ -24,7 +24,7 @@ function LeaveApplication(){
             toast.error('Please Enter the Reason.');
         } else {
             const userId = sessionStorage.getItem('userId');
-            const userName = sessionStorage.getItem('userName');
+            const userName = sessionStorage.getItem('firstName');
             const response = await leaveApplicationAPI(startDate, endDate, reason, status, userId, userName )
             if(response != null){
                 toast.success('Successfully submitted Leave application')
