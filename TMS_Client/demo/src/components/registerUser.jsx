@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios';
 import { registerUserApi } from '../services/user'
-
+import '../App.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { createUrl, log } from '../utils/utils'
 
 function RegisterUser() {
