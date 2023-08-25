@@ -12,7 +12,6 @@ import LoginUser from './components/loginUser';
 import Student from './components/student';
 import Teacher from './components/teacher';
 import Admin from './components/admin';
-import LeaveApplicationList from './components/getLeaveApplication '
 
 import GetLeaveApplication from './components/getLeaveApplications'
 import LeaveApplication from './components/leaveApplication';
