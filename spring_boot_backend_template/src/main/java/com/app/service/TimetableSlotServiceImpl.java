@@ -3,6 +3,7 @@ package com.app.service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -25,87 +26,88 @@ import com.app.repository.SubjectRepository;
 import com.app.repository.TimeTableSlotRepository;
 import com.app.repository.UserRepository;
 
-
 @Service
 @Transactional
 public class TimetableSlotServiceImpl implements TimetableSlotService {
-	
-	
+
 	@Autowired
 	private DepartmentRepository deptRepo;
-	
+
 	@Autowired
 	private SubjectRepository subRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private ClassRoomRepository classroomRepo;
-	
-	
+
 	@Autowired
 	private TimeTableSlotRepository timeTableSlotRepo;
-	
+
 	@Autowired
 	private LectureRepository lectureRepo;
-	
+
 	@Autowired
 	private ModelMapper mapper;
 
 	@Override
 	public Object addNewTimetableSlot(AddTimetableSlotDTO dto) {
-		
-		Department dept = deptRepo.findById(dto.getDeptId()).
-				orElseThrow();
-		
-		Subject subject = subRepo.findById(dto.getSubjectId()).
-				orElseThrow();
-		
-		Users user = userRepo.findById(dto.getTeacherId()).
-				orElseThrow();
-		
-		ClassRoom classroom = classroomRepo.findById(dto.getClassroomId()).
-				orElseThrow();
-		
-		Lecture lecture =lectureRepo.findById(dto.getLectureDataId()).
-				orElseThrow();
+
+		Department dept = deptRepo.findById(dto.getDeptId()).orElseThrow();
+
+		Subject subject = subRepo.findById(dto.getSubjectId()).orElseThrow();
+
+		Users user = userRepo.findById(dto.getTeacherId()).orElseThrow();
+
+		ClassRoom classroom = classroomRepo.findById(dto.getClassroomId()).orElseThrow();
+
+		Lecture lecture = lectureRepo.findById(dto.getLectureDataId()).orElseThrow();
 		TimetableSlot timetableSlot = mapper.map(dto, TimetableSlot.class);
-		
+
 		dept.addTimetableSlot(timetableSlot);
 		subject.addTimetableSlot(timetableSlot);
 		user.addTimetableSlot(timetableSlot);
 		classroom.addTimetableSlot(timetableSlot);
-		
-		
+
 		TimetableSlot slot = timeTableSlotRepo.save(timetableSlot);
-		
+
 		return mapper.map(slot, TimetableSlotRespoDTO.class);
 	}
 
 	@Override
 	public TimetableSlotRespoDTO getTimetableSlotDetailsById(Long timetableSlotId) {
-			
-			TimetableSlot slot =timeTableSlotRepo.findById(timetableSlotId).orElseThrow();
-			TimetableSlotRespoDTO timetableSlotDto = mapper.map(slot, TimetableSlotRespoDTO.class);
-				
-				return timetableSlotDto;
+
+		TimetableSlot slot = timeTableSlotRepo.findById(timetableSlotId).orElseThrow();
+		TimetableSlotRespoDTO timetableSlotDto = mapper.map(slot, TimetableSlotRespoDTO.class);
+
+		return timetableSlotDto;
 	}
 
 	@Override
-	public TimetableSlotRespoDTO getLectureDetails(LocalDate date1, Long deptId) {
-		List <TimetableSlot> listOfSlots= timeTableSlotRepo.findByDate(date1);
-//		System.out.println("listOfSlots= "+ listOfSlots);
-		TimetableSlot timetableSlot=null;
-		
-		for(TimetableSlot t : listOfSlots)
-		{
-			Long id= t.getDept().getDeptId();
-//			
-			if(id == deptId)
-				timetableSlot= t;
+	public List<TimetableSlotRespoDTO> getLectureDetails(LocalDate date1, Long deptId) {
+		List<TimetableSlot> listOfSlots = timeTableSlotRepo.findByDateAndDeptDeptId(date1, deptId);
+		List<TimetableSlotRespoDTO> dtoList = new ArrayList<TimetableSlotRespoDTO>();
+
+		for (TimetableSlot slot : listOfSlots) {
+			dtoList.add(new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), slot.getStartTime(),
+					slot.getEndTime(), slot.getTeacher().getUserId(), slot.getTeacher().getFirstName(),
+					slot.getSubject().getSubjectId(), slot.getSubject().getSubjectName(),
+					slot.getClassroom().getClassroomId(), slot.getClassroom().getClassroomName(), deptId,
+					slot.getDept().getDeptName()));
 		}
-		return mapper.map(timetableSlot, TimetableSlotRespoDTO.class);
+
+//		TimetableSlot timetableSlot=null;
+//		
+//		for(TimetableSlot t : listOfSlots)
+//		{
+//			Long id= t.getDept().getDeptId();
+//		
+//			if(id == deptId)
+//				timetableSlot= t;
+//		}
+//		return mapper.map(timetableSlot, TimetableSlotRespoDTO.class);
+		return dtoList;
 	}
 
 }

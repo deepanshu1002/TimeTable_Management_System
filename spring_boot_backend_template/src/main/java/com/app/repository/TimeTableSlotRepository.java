@@ -11,6 +11,6 @@ import com.app.entities.TimetableSlot;
 public interface TimeTableSlotRepository extends JpaRepository<TimetableSlot, Long> {
 
 	List<TimetableSlot> findByDate(LocalDate date1);
-
+	List<TimetableSlot> findByDateAndDeptDeptId(LocalDate date1, Long deptId);
 	
 }

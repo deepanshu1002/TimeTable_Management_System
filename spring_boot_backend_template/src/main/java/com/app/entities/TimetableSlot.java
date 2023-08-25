@@ -35,7 +35,7 @@ public class TimetableSlot {
 	
 //    byte [] teacherPicture;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id")
     private Users teacher;
     

@@ -2,6 +2,7 @@ package com.app.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import com.app.dto.AddTimetableSlotDTO;
 import com.app.dto.TimetableSlotRespoDTO;
@@ -13,5 +14,5 @@ public interface TimetableSlotService {
 
 	public TimetableSlotRespoDTO getTimetableSlotDetailsById(Long timetableSlotId);
 
-	public TimetableSlotRespoDTO getLectureDetails(LocalDate date1, Long deptId);
+	public List<TimetableSlotRespoDTO> getLectureDetails(LocalDate date1, Long deptId);
 }
