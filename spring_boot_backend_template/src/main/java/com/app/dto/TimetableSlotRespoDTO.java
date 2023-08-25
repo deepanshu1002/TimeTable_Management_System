@@ -26,7 +26,6 @@ public class TimetableSlotRespoDTO {
 	private LocalTime endTime;
 
 //    byte [] teacherPicture;
-<<<<<<< HEAD
    
     private Long teacherId;
     
@@ -46,27 +45,6 @@ public class TimetableSlotRespoDTO {
     
     private Long lectureDataId;
 
-
-=======
-
-	private Long teacherId;
-
-	private String teacherName;
-
-	private Long subjectId;
-
-	private String subjectName;
-
-	private Long classroomId;
-
-	private String classroomName;
-
-	private Long deptId;
-
-	private String deptName;
-
-	private Long lectureDataId;
->>>>>>> 203ee87fe0ebb071f470070364d250c5e5657b4a
 
     
 	public TimetableSlotRespoDTO(Long timetableSlotId, LocalDate date, LocalTime startTime, LocalTime endTime,
@@ -88,8 +66,6 @@ public class TimetableSlotRespoDTO {
 		this.deptName = deptName;
 	}
 
-<<<<<<< HEAD
-=======
 	
 	public TimetableSlotRespoDTO(Long timetableSlotId, LocalDate date, LocalTime startTime, LocalTime endTime,
 			Long teacherId, String teacherName, Long subjectId, String subjectName, Long classroomId,
@@ -110,5 +86,4 @@ public class TimetableSlotRespoDTO {
 		this.deptName = deptName;
 	}
 
->>>>>>> 203ee87fe0ebb071f470070364d250c5e5657b4a
 }
