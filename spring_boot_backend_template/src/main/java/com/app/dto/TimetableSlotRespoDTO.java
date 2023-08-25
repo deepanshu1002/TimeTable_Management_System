@@ -14,6 +14,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class TimetableSlotRespoDTO {
 
 	private Long timetableSlotId;
@@ -25,27 +26,7 @@ public class TimetableSlotRespoDTO {
 	private LocalTime endTime;
 
 //    byte [] teacherPicture;
-<<<<<<< HEAD
-
-	private Long teacherId;
-
-	private String teacherName;
-
-	private Long subjectId;
-
-	private String subjectName;
-
-	private Long classroomId;
-
-	private String classroomName;
-
-	private Long deptId;
-
-	private String deptName;
-
-	private Long lectureDataId;
-=======
-    
+   
     private Long teacherId;
     
     private String teacherName;
@@ -64,7 +45,7 @@ public class TimetableSlotRespoDTO {
     
     private Long lectureDataId;
 
->>>>>>> a37e0c244d486f40306147ddc11bfdc68ea0c3ee
+
 
 	public TimetableSlotRespoDTO(Long timetableSlotId, LocalDate date, LocalTime startTime, LocalTime endTime,
 			Long teacherId, String teacherName, Long subjectId, String subjectName, Long classroomId,
@@ -84,12 +65,5 @@ public class TimetableSlotRespoDTO {
 		this.lectureDataId=lectureDataId;
 		this.deptName = deptName;
 	}
-<<<<<<< HEAD
 
-=======
-    
-
-    
-    
->>>>>>> a37e0c244d486f40306147ddc11bfdc68ea0c3ee
 }

@@ -67,23 +67,10 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
 		subject.addTimetableSlot(timetableSlot);
 		user.addTimetableSlot(timetableSlot);
 		classroom.addTimetableSlot(timetableSlot);
-<<<<<<< HEAD
-
-		TimetableSlot slot = timeTableSlotRepo.save(timetableSlot);
-
-		return mapper.map(slot, TimetableSlotRespoDTO.class);
 
 		timetableSlot.setLectureData(lecture);
 		TimetableSlot slot = timeTableSlotRepo.save(timetableSlot);
-
-		return new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), slot.getStartTime(), slot.getEndTime(),
-				slot.getTeacher().getUserId(), slot.getSubject().getSubjectId(), slot.getClassroom().getClassroomId(),
-				slot.getDept().getDeptId(), slot.getLectureData().getId());
-
-=======
 		
-		timetableSlot.setLectureData(lecture);
-		TimetableSlot slot = timeTableSlotRepo.save(timetableSlot);
 		
 		
 //		Long timetableSlotId, LocalDate date, LocalTime startTime, LocalTime endTime,
@@ -94,7 +81,7 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
                 slot.getStartTime(), slot.getEndTime(),slot.getTeacher().getUserId(),slot.getTeacher().getFirstName(), 
                 slot.getSubject().getSubjectId(),slot.getSubject().getSubjectName(),slot.getClassroom().getClassroomId(),slot.getClassroom().getClassroomName(),
                 slot.getDept().getDeptId(), slot.getLectureData().getId(),slot.getDept().getDeptName());
->>>>>>> a37e0c244d486f40306147ddc11bfdc68ea0c3ee
+
 	}
 
 	@Override
@@ -121,7 +108,8 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
 
 //		TimetableSlot timetableSlot=null;
 //		
-//		for(TimetableSlot t : listOfSlots)
+//		for(Timetablereturn new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), slot.getStartTime(), slot.getEndTime(),
+	
 //		{
 //			Long id= t.getDept().getDeptId();
 //		
