@@ -25,11 +25,7 @@ import com.app.service.DepartmentService;
 @RestController
 @RequestMapping("/department")
 @Validated
-<<<<<<< HEAD
 @CrossOrigin(origins = "*")
-=======
-@CrossOrigin("*")
->>>>>>> 334652656f79f0795f4938592c48f6dc085f81b9
 public class DepartmentController {
 	@Autowired
 	private DepartmentService departmentService;

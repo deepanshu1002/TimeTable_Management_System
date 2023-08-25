@@ -17,33 +17,32 @@ import lombok.ToString;
 public class TimetableSlotRespoDTO {
 
 	private Long timetableSlotId;
-	
+
 	private LocalDate date;
-	
-    private LocalTime startTime;
-	
-    private LocalTime endTime;
-	
+
+	private LocalTime startTime;
+
+	private LocalTime endTime;
+
 //    byte [] teacherPicture;
-    
-    private Long teacherId;
-    
-    private String teacherName;
-    
-    private Long subjectId;
-    
-    private String subjectName;
-  
-    private Long classroomId;
-    
-    private String classroomName;
-      
-    private Long deptId;
-    
-    private String deptName;
-    
-    private Long lectureDataId;
-<<<<<<< HEAD
+
+	private Long teacherId;
+
+	private String teacherName;
+
+	private Long subjectId;
+
+	private String subjectName;
+
+	private Long classroomId;
+
+	private String classroomName;
+
+	private Long deptId;
+
+	private String deptName;
+
+	private Long lectureDataId;
 
 	public TimetableSlotRespoDTO(Long timetableSlotId, LocalDate date, LocalTime startTime, LocalTime endTime,
 			Long teacherId, String teacherName, Long subjectId, String subjectName, Long classroomId,
@@ -62,9 +61,5 @@ public class TimetableSlotRespoDTO {
 		this.deptId = deptId;
 		this.deptName = deptName;
 	}
-    
-=======
->>>>>>> 334652656f79f0795f4938592c48f6dc085f81b9
-    
-    
+
 }
