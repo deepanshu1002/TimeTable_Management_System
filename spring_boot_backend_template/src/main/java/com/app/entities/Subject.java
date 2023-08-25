@@ -45,7 +45,7 @@ public class Subject {
 	@OneToMany(mappedBy = "sub", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List <Lecture> lectures = new ArrayList<>();
 	@ManyToOne
-	@JoinColumn(name="lab_id")
+	@JoinColumn(name="lab_id",nullable = true)
 	private Lab labVenue;
 	
 	@OneToMany(mappedBy =  "subject", cascade = CascadeType.ALL, orphanRemoval = true)

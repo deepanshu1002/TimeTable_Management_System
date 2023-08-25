@@ -32,7 +32,7 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Autowired
 	private ModelMapper mapper;
-	
+
 	@Autowired
 	private LabRepo labRepo;
 
@@ -40,7 +40,7 @@ public class SubjectServiceImpl implements SubjectService {
 	public SubjectDTO getSubjectDetails(Long subId) {
 		Subject sub = subjectRepo.findById(subId).orElseThrow(null);
 		SubjectDTO subDTO = new SubjectDTO(sub.getDept().getDeptId(), sub.getSubjectId(),
-				sub.getTeacherId().getUserId(), sub.getSubjectName(),sub.getLabVenue().getLabId());
+				sub.getTeacherId().getUserId(), sub.getSubjectName(), sub.getLabVenue().getLabId());
 		return subDTO;
 
 	}
@@ -50,14 +50,22 @@ public class SubjectServiceImpl implements SubjectService {
 
 		Users user = userRepo.findById(sub.getTeacherId()).orElseThrow(null);
 		if (user.getRole().getRoleId() == 2) {
-			Lab lab = labRepo.findById(sub.getLabId()).orElseThrow(()-> new ResourceNotFoundException("invalid labId"));
+//			Lab lab = labRepo.findById(sub.getLabId())
+//					.orElseThrow(() -> new ResourceNotFoundException("invalid labId"));
 
-			Department dept = departmentRepo.findById(sub.getDeptId()).orElseThrow(null);
+			Department dept = departmentRepo.findById(sub.getDeptId())
+					.orElseThrow(() -> new ResourceNotFoundException("invalid deptid"));
 			Subject subjectEntity = mapper.map(sub, Subject.class);
 			System.out.println(subjectEntity);
 			user.addSubject(subjectEntity);
 			dept.addSubject(subjectEntity);
-			lab.addSubject(subjectEntity);
+			//to add null values to subject with no lab
+			if (sub.getLabId() != null) {
+				Lab lab = labRepo.findById(sub.getLabId())
+						.orElseThrow(() -> new ResourceNotFoundException("invalid labId"));
+				lab.addSubject(subjectEntity);
+			}
+			// lab.addSubject(subjectEntity);
 			Subject persistentSub = subjectRepo.save(subjectEntity);
 			return new ApiResponseDto("Subject updated!");
 		} else
@@ -85,10 +93,10 @@ public class SubjectServiceImpl implements SubjectService {
 	public SubjectandDeptandTeacherDTO getSubjectandDeptandTeacherDetails(Long subId) {
 
 		Subject sub = subjectRepo.getSubjectandDepartmentandTeacher(subId);
-		//System.out.println(sub);
+		// System.out.println(sub);
 		SubjectandDeptandTeacherDTO subjectDetails = new SubjectandDeptandTeacherDTO(sub.getDept().getDeptName(), subId,
 				sub.getTeacherId().getFirstName().concat(sub.getTeacherId().getLastName()), sub.getSubjectName());
 		return subjectDetails;
 	}
-	
+
 }

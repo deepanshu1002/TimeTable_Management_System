@@ -1,6 +1,8 @@
 package com.app.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -43,6 +45,24 @@ public class SubjectMetadataServiceImpl implements SubjectMetadataService {
 		return mapper.map(persistantData, TimetableSubjectMetadataDTO.class);
 	}
 
+	@Override
+	public List<TimetableSubjectMetadataDTO> addSubjectMetadataWeeklyHrs(List<TimetableSubjectMetadataDTO> dtoList) {
+		List<TimetableSubjectMetadataDTO> savedDTOs = new ArrayList<>();
+		for (TimetableSubjectMetadataDTO dto : dtoList) {
+
+			Department dept = deptRepo.findById(dto.getDeptId())
+					.orElseThrow(() -> new ResourceNotFoundException("Invalid dept id"));
+			Subject subject = subjectRepo.findById(dto.getSubjectId())
+					.orElseThrow(() -> new ResourceNotFoundException("Invalid subject id"));
+			TimetableSubjectsMetadata data = mapper.map(dto, TimetableSubjectsMetadata.class);
+			data.setDept(dept);
+			data.setSubject(subject);
+			TimetableSubjectsMetadata persistantData = subjectMetadataRepo.save(data);
+			savedDTOs.add(mapper.map(persistantData, TimetableSubjectMetadataDTO.class));
+		}
+		return savedDTOs;
+	}
+
 	public SubjectMetadataResp getSubjectMetadata(Long deptId, Long subjectId, String startDate) {
 		TimetableSubjectsMetadata data = subjectMetadataRepo.findByDeptIdandSubjectIdandWeekStartDate(deptId, subjectId,
 				LocalDate.parse(startDate));
@@ -56,6 +76,26 @@ public class SubjectMetadataServiceImpl implements SubjectMetadataService {
 		dto.setWeeklyHrs(data.getWeeklyHrs());
 		dto.setStartDate(LocalDate.parse(startDate));
 		return dto;
+	}
+
+	@Override
+	public List<SubjectMetadataResp> getAllSubjectMetadata(Long deptId, String startdate) {
+
+		List<TimetableSubjectsMetadata> dataList = subjectMetadataRepo.findByDeptDeptIdAndStartDate(deptId,LocalDate.parse(startdate));
+		List<SubjectMetadataResp> dtoList = new ArrayList<>();
+
+		for (TimetableSubjectsMetadata data : dataList) {
+			SubjectMetadataResp dto = new SubjectMetadataResp();
+			dto.setId(data.getId());
+			dto.setDeptName(data.getDept().getDeptName());
+			dto.setSubjectName(data.getSubject().getSubjectName());
+			dto.setWeeklyHrs(data.getWeeklyHrs());
+			dto.setStartDate(LocalDate.parse(startdate));
+			dtoList.add(dto);
+		}
+
+		return dtoList;
+
 	}
 
 }
