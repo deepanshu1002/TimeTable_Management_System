@@ -13,6 +13,7 @@ import LoginUser from './components/loginUser';
 import Student from './components/student';
 import Teacher from './components/teacher';
 import Admin from './components/admin';
+import LeaveApplicationList from './components/getLeaveApplication '
 
 import GetLeaveApplication from './components/getLeaveApplications'
 import LeaveApplication from './components/leaveApplication';
@@ -37,11 +38,10 @@ return (
          <Route path='/register' element={<RegisterUser />} />
          <Route path='/validuser' element={<ManageUsers />} />  
          {/*Leave Application component */}
+         <Route path='/LeaveApplication' element={<LeaveApplication />} />
+         {/*GET Leave Application component */}
          <Route path='/GetLeaveApplication' element={<GetLeaveApplication/>} />
          {/* Class Room Component */}
-
-         <Route path='/leaveapplication' element={<LeaveApplication/>} />
-
          <Route path='/ClassRoom' element={<ClassRoom />} />
 
          <Route path='/student' element={<Student/>} />
