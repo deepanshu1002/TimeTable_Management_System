@@ -63,6 +63,25 @@ public class TimetableSlotRespoDTO {
 		this.lectureDataId=lectureDataId;
 		this.deptName = deptName;
 	}
+	
+	public TimetableSlotRespoDTO(Long timetableSlotId, LocalDate date, LocalTime startTime, LocalTime endTime,
+			Long teacherId, String teacherName, Long subjectId, String subjectName, Long classroomId,
+			String classroomName, Long deptId,String deptName) {
+		super();
+		this.timetableSlotId = timetableSlotId;
+		this.date = date;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.teacherId = teacherId;
+		this.teacherName = teacherName;
+		this.subjectId = subjectId;
+		this.subjectName = subjectName;
+		this.classroomId = classroomId;
+		this.classroomName = classroomName;
+		this.deptId = deptId;
+		
+		this.deptName = deptName;
+	}
     
 
     
