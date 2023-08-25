@@ -5,18 +5,22 @@ import { useEffect } from 'react'
 //used to register react-toastify
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import{Admin,AddDetails} from './components/admin'
+// import{AddDetails} from './components/admin'
 import RegisterUser from './components/registerUser'
 import ManageUsers from './components/ManageUser'
 import LoginUser from './components/loginUser';
 import Student from './components/student';
 import Teacher from './components/teacher';
+<<<<<<< HEAD
+=======
 import Admin from './components/admin';
 
 import GetLeaveApplication from './components/getLeaveApplications'
 import LeaveApplication from './components/leaveApplication';
 
 
+>>>>>>> 2c1aa109e65ff66c8b6746effb4a87af50321174
 import AddSubjectDetails from './components/subjectDetails';
 import AddLabVenue from './components/labDetails';
 import AddClassroom from './components/classRoomDetails';
@@ -34,6 +38,7 @@ return (
         <Routes>
         <Route path='/' element={<LoginUser/>} />
          {/* register component */}
+        <Route path='/adddetails' element={<AddDetails/>} />
          <Route path='/register' element={<RegisterUser />} />
          <Route path='/validuser' element={<ManageUsers />} />  
          {/*Leave Application component */}

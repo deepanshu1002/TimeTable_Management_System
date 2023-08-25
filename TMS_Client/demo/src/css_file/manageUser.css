@@ -1,0 +1,25 @@
+/* ManageUsers.css */
+.manage-users-container {
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .manage-users-container h1 {
+    margin-bottom: 20px;
+  }
+  
+  .table {
+    margin-top: 20px;
+  }
+  
+  .btn-primary {
+    margin-right: 5px;
+  }
+  
+  .btn-danger {
+    margin-left: 5px;
+  }
+  
