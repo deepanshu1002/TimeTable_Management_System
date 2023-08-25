@@ -25,7 +25,11 @@ import com.app.service.DepartmentService;
 @RestController
 @RequestMapping("/department")
 @Validated
+<<<<<<< HEAD
 @CrossOrigin(origins = "*")
+=======
+@CrossOrigin("*")
+>>>>>>> 334652656f79f0795f4938592c48f6dc085f81b9
 public class DepartmentController {
 	@Autowired
 	private DepartmentService departmentService;
@@ -34,6 +38,12 @@ public class DepartmentController {
 	public ResponseEntity<?> addNewDept(@RequestBody @Valid DepartmentDTO dto) {
 		System.out.println("in add new dept " + dto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(departmentService.addNewDepartment(dto));
+	}
+	
+	@GetMapping
+	public ResponseEntity<?> getAllDeptDetails() {
+//		System.out.println("in get dept dtls " + deptId);
+		return ResponseEntity.ok(departmentService.getAllDepartmentDetails());
 	}
 
 	@GetMapping("/{deptId}")

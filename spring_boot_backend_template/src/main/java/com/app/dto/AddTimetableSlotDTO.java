@@ -13,7 +13,6 @@ import lombok.ToString;
 @ToString
 public class AddTimetableSlotDTO {
 
-	private Long timetableSlotId;
 	private LocalDate date;
 	
     private LocalTime startTime;

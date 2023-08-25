@@ -1,6 +1,7 @@
 import { constants } from './constants'
 
 // this function would create a final url for an API
+//Example;
 // const registerUrl = createUrl('/user/register')
 // const registerUrl = 'http://localhost:3000' + '/user/register'
 // const registerUrl = 'http://localhost:3000/user/register'
