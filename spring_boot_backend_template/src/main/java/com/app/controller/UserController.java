@@ -37,14 +37,15 @@ public class UserController {
 		return new ResponseEntity<>(userService.authenticateUser(request), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{userId}")
+	@DeleteMapping("/deleteuser/{userId}")
 	public String deleteNotValidUser(@PathVariable Long userId) {
 		return userService.deleteNotValidUser(userId);
 	}
 
-	@GetMapping("/validuser/{userId}") 
-	public ResponseEntity<?> validUser(@PathVariable Long userId) {
-		return ResponseEntity.ok(userService.validUser(userId));
+	@GetMapping("/validuser/{userId}/{roleId}") 
+	public ResponseEntity<?> validUser(@PathVariable Long userId,@PathVariable Long roleId) {
+		System.out.println("yoyo");
+		return ResponseEntity.ok(userService.validUser(userId,roleId));
 	}
 
 	@PutMapping("/update")
@@ -52,9 +53,14 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUserDetails(user));
 	}
 
-	@GetMapping
+	@GetMapping("/validuser")
 	public List<IsValidUser> getAllIsValidUsers() {
 		return userService.getAllIsValidUser();
+	}
+	@PutMapping("/updateroleid/{userId}/{roleId}")
+	public void updateRoleID(@ PathVariable Long userId,@PathVariable Long roleId)
+	{
+		userService.updateRoleId(userId,roleId);
 	}
 
 }

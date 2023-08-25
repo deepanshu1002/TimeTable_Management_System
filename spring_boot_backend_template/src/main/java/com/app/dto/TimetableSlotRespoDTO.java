@@ -3,13 +3,17 @@ package com.app.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class TimetableSlotRespoDTO {
 
 	private Long timetableSlotId;
@@ -39,6 +43,7 @@ public class TimetableSlotRespoDTO {
     private String deptName;
     
     private Long lectureDataId;
+<<<<<<< HEAD
 
 	public TimetableSlotRespoDTO(Long timetableSlotId, LocalDate date, LocalTime startTime, LocalTime endTime,
 			Long teacherId, String teacherName, Long subjectId, String subjectName, Long classroomId,
@@ -58,6 +63,8 @@ public class TimetableSlotRespoDTO {
 		this.deptName = deptName;
 	}
     
+=======
+>>>>>>> 334652656f79f0795f4938592c48f6dc085f81b9
     
     
 }

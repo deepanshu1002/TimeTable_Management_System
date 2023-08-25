@@ -17,10 +17,8 @@ public class LeaveApplicationDTO {
 	
 	private Long userId;
 	private String userName;
-	private Long leaveApplicationId;
 	private LocalDate fromDate;
 	private LocalDate toDate;
-	private String status;
 	private String reason;
 	
 }
