@@ -37,9 +37,9 @@ return (
          <Route path='/register' element={<RegisterUser />} />
          <Route path='/validuser' element={<ManageUsers />} />  
          {/*Leave Application component */}
-         <Route path='/LeaveApplication' element={<LeaveApplication />} />
+         <Route path='/leaveapplication' element={<LeaveApplication/>} />
          {/*GET Leave Application component */}
-         <Route path='/GetLeaveApplication' element={<GetLeaveApplication/>} />
+         <Route path='/getLeaveApplication' element={<GetLeaveApplication/>} />
 
          <Route path='/student' element={<Student/>} />
 
