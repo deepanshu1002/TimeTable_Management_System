@@ -1,8 +1,6 @@
 package com.app.service;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,18 +68,22 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
 		user.addTimetableSlot(timetableSlot);
 		classroom.addTimetableSlot(timetableSlot);
 
+
 		timetableSlot.setLectureData(lecture);
 		TimetableSlot slot = timeTableSlotRepo.save(timetableSlot);
+
+
 
 //		Long timetableSlotId, LocalDate date, LocalTime startTime, LocalTime endTime,
 //		Long teacherId, String teacherName, Long subjectId, String subjectName, Long classroomId,
 //		String classroomName, Long deptId, String deptName
 //		
-		return new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), slot.getStartTime(), slot.getEndTime(),
-				slot.getTeacher().getUserId(), slot.getTeacher().getFirstName(), slot.getSubject().getSubjectId(),
-				slot.getSubject().getSubjectName(), slot.getClassroom().getClassroomId(),
-				slot.getClassroom().getClassroomName(), slot.getDept().getDeptId(), slot.getLectureData().getId(),
-				slot.getDept().getDeptName());
+
+		return new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), 
+                slot.getStartTime(), slot.getEndTime(),slot.getTeacher().getUserId(),slot.getTeacher().getFirstName(), 
+                slot.getSubject().getSubjectId(),slot.getSubject().getSubjectName(),slot.getClassroom().getClassroomId(),slot.getClassroom().getClassroomName(),
+                slot.getDept().getDeptId(), slot.getLectureData().getId(),slot.getDept().getDeptName());
+
 	}
 
 	@Override
