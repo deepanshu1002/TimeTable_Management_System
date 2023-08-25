@@ -1,6 +1,6 @@
 function Admin(){
     return(<>
-    <h1>welcome student</h1>
+    <h1>welcome admin</h1>
     </>)
 }
 

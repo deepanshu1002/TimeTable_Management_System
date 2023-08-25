@@ -2,7 +2,7 @@ function Teacher(){
 
         
     return(<>
-    <h1>welcome student</h1>
+    <h1>welcome teacher</h1>
     </>)
 }
 
