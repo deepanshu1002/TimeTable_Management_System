@@ -23,6 +23,7 @@ import AddClassroom from './components/classRoomDetails';
 import AddDepartment from './components/departmentDetails';
 import ViewTimetable from './components/timeTable'
 import AddLectureData from './components/addLectureData'
+import GetLectureDetails from './components/getLectureDetails'
 
 
 function App() {
@@ -57,6 +58,8 @@ return (
          <Route path='/timetable' element={<ViewTimetable/>} />
 
          <Route path='/addlecturedata' element={<AddLectureData/>} />
+
+         <Route path='/getlecturedetails' element={<GetLectureDetails/>} />
         </Routes>
       </div>
       <ToastContainer />

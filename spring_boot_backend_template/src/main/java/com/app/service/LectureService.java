@@ -1,12 +1,10 @@
 package com.app.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.app.dto.AddLectureDTO;
 import com.app.dto.LectureRespDTO;
-import com.app.entities.Lecture;
-
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 public interface LectureService {
 
@@ -18,5 +16,7 @@ public interface LectureService {
 	String deleteLectureDetails(Long lectureId);
 
 	LectureRespDTO getLectureDetailsById(Long lectureId);
+
+	List <LectureRespDTO> getAllLectureDetails();
 	
 }

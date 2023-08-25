@@ -1,6 +1,7 @@
 package com.app.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.dto.AddLectureDTO;
+import com.app.dto.DepartmentDTO;
 import com.app.dto.LectureRespDTO;
 import com.app.entities.Department;
 import com.app.entities.Lecture;
@@ -93,6 +95,20 @@ public class LectureServiceImpl implements LectureService{
 		lectureRepo.deleteById(lectureId);
 		
 		return ("emp details deleted !");
+	}
+
+
+
+
+	@Override
+	public List <LectureRespDTO> getAllLectureDetails() {
+			List <LectureRespDTO> lectureList=new ArrayList<>();
+			List <Lecture> lectures = lectureRepo.findAll();
+			for(Lecture lecture: lectures) {
+				LectureRespDTO lectDto= mapper.map(lecture, LectureRespDTO.class);
+				lectureList.add(lectDto);
+			}
+			return lectureList;
 	}
 
 }
