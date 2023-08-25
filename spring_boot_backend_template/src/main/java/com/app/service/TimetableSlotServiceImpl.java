@@ -69,21 +69,19 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
 		subject.addTimetableSlot(timetableSlot);
 		user.addTimetableSlot(timetableSlot);
 		classroom.addTimetableSlot(timetableSlot);
-<<<<<<< HEAD
-
-		TimetableSlot slot = timeTableSlotRepo.save(timetableSlot);
-
-		return mapper.map(slot, TimetableSlotRespoDTO.class);
-=======
 		
 		timetableSlot.setLectureData(lecture);
 		TimetableSlot slot = timeTableSlotRepo.save(timetableSlot);
 		
+		
+//		Long timetableSlotId, LocalDate date, LocalTime startTime, LocalTime endTime,
+//		Long teacherId, String teacherName, Long subjectId, String subjectName, Long classroomId,
+//		String classroomName, Long deptId, String deptName
+//		
 		return new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), 
-                slot.getStartTime(), slot.getEndTime(),slot.getTeacher().getUserId(), 
-                slot.getSubject().getSubjectId(),slot.getClassroom().getClassroomId(),
-                slot.getDept().getDeptId(), slot.getLectureData().getId());
->>>>>>> 334652656f79f0795f4938592c48f6dc085f81b9
+                slot.getStartTime(), slot.getEndTime(),slot.getTeacher().getUserId(),slot.getTeacher().getFirstName(), 
+                slot.getSubject().getSubjectId(),slot.getSubject().getSubjectName(),slot.getClassroom().getClassroomId(),slot.getClassroom().getClassroomName(),
+                slot.getDept().getDeptId(), slot.getLectureData().getId(),slot.getDept().getDeptName());
 	}
 
 	@Override
@@ -104,7 +102,7 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
 			dtoList.add(new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), slot.getStartTime(),
 					slot.getEndTime(), slot.getTeacher().getUserId(), slot.getTeacher().getFirstName(),
 					slot.getSubject().getSubjectId(), slot.getSubject().getSubjectName(),
-					slot.getClassroom().getClassroomId(), slot.getClassroom().getClassroomName(), deptId,
+					slot.getClassroom().getClassroomId(), slot.getClassroom().getClassroomName(), deptId,slot.getLectureData().getId(),
 					slot.getDept().getDeptName()));
 		}
 

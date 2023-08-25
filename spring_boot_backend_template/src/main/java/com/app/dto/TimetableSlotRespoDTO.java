@@ -43,11 +43,11 @@ public class TimetableSlotRespoDTO {
     private String deptName;
     
     private Long lectureDataId;
-<<<<<<< HEAD
+
 
 	public TimetableSlotRespoDTO(Long timetableSlotId, LocalDate date, LocalTime startTime, LocalTime endTime,
 			Long teacherId, String teacherName, Long subjectId, String subjectName, Long classroomId,
-			String classroomName, Long deptId, String deptName) {
+			String classroomName, Long deptId,Long lectureDataId, String deptName) {
 		super();
 		this.timetableSlotId = timetableSlotId;
 		this.date = date;
@@ -60,11 +60,11 @@ public class TimetableSlotRespoDTO {
 		this.classroomId = classroomId;
 		this.classroomName = classroomName;
 		this.deptId = deptId;
+		this.lectureDataId=lectureDataId;
 		this.deptName = deptName;
 	}
     
-=======
->>>>>>> 334652656f79f0795f4938592c48f6dc085f81b9
+
     
     
 }
