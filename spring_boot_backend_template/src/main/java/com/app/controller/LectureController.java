@@ -28,7 +28,7 @@ public class LectureController {
 	@Autowired
 	private LectureService lectureService;
 	
-	
+
 	@PostMapping
 	public ResponseEntity<?> addlectureData(@RequestBody AddLectureDTO dto) {
 		

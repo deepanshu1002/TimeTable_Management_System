@@ -41,11 +41,14 @@ function LeaveApplication(){
             const response = await leaveApplicationAPI(fromDate, toDate, reason, 'pending', userId, userName );
 
             if(response != null){
+
                 toast.success('Successfully submitted leave application')
                 navigate('/leaveApplication')
+
             } else {
                 toast.error('Error while submitting leave application, please try again')
             }
+
         }
     }
 

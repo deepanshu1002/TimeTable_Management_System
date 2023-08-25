@@ -8,13 +8,22 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import RegisterUser from './components/registerUser'
 import ManageUsers from './components/ManageUser'
-import LeaveApplication from './components/leaveApplication'
 import ClassRoom from './components/classRoom'
 import LoginUser from './components/loginUser';
 import Student from './components/student';
 import Teacher from './components/teacher';
 import Admin from './components/admin';
 import LeaveApplicationList from './components/getLeaveApplication '
+
+import GetLeaveApplication from './components/getLeaveApplications'
+import LeaveApplication from './components/leaveApplication';
+
+
+import AddSubjectDetails from './components/subjectDetails';
+import AddLabVenue from './components/labDetails';
+import AddClassroom from './components/classRoomDetails';
+import AddDepartment from './components/departmentDetails';
+import ViewTimetable from './components/timeTable'
 
 
 function App() {
@@ -30,8 +39,11 @@ return (
          {/*Leave Application component */}
          <Route path='/LeaveApplication' element={<LeaveApplication />} />
          {/*GET Leave Application component */}
-         <Route path='/LeaveApplicationList' element={<LeaveApplicationList />} />
+         <Route path='/GetLeaveApplication' element={<GetLeaveApplication/>} />
          {/* Class Room Component */}
+
+         <Route path='/leaveapplication' element={<LeaveApplication/>} />
+
          <Route path='/ClassRoom' element={<ClassRoom />} />
 
          <Route path='/student' element={<Student/>} />
@@ -39,6 +51,17 @@ return (
          <Route path='/teacher' element={<Teacher/>} />
 
          <Route path='/admin' element={<Admin/>} />
+         
+          <Route path='/managedepartment' element={<AddDepartment/>} />
+          
+         <Route path='/manageclassroom' element={<AddClassroom/>} />
+
+         <Route path='/managelab' element={<AddLabVenue/>} />
+
+         <Route path='/managesubject' element={<AddSubjectDetails/>} />
+
+         <Route path='/timetable' element={<ViewTimetable/>} />
+
         </Routes>
       </div>
       <ToastContainer />

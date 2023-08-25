@@ -8,10 +8,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import net.bytebuddy.utility.nullability.MaybeNull;
 
 @Getter
 @Setter
@@ -27,6 +29,6 @@ public class SubjectDTO {
 	private Long teacherId;
 	@NotBlank
 	private String subjectName;
-	@NotNull
+
 	private Long labId;
 }

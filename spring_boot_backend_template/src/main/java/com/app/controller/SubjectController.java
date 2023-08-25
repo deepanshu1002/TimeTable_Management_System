@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,12 +26,14 @@ import com.app.service.SubjectService;
 @RestController
 @RequestMapping("/subject")
 @Validated
+@CrossOrigin(origins = "*")
 public class SubjectController {
 	@Autowired
 	private SubjectService subjectService;
 
 	@PostMapping
 	public ResponseEntity<?> addNewSubject(@RequestBody @Valid SubjectDTO dto) {
+		System.out.println("inside subject bro   diddfsfdfsfjfjlj");
 		System.out.println("in add new subject " + dto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(subjectService.addNewSubject(dto));
 	}

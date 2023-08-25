@@ -8,7 +8,6 @@ export async function registerUserApi(
     password,
     mobileNo,
     userId,
-    roleId,
     deptId
   ) {
     const url = createUrl('/register')
@@ -19,7 +18,6 @@ export async function registerUserApi(
         email,
         mobileNo,
         password,
-        roleId,
         deptId
       }
   

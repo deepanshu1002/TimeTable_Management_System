@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import { createUrl } from '../utils/utils';
 const  DepartmentDetails = async() =>{
 
     const [deptId, setDeptId] = useState('')

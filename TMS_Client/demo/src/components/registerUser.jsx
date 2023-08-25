@@ -16,7 +16,6 @@ function RegisterUser() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [userId, setUserId] = useState('')
-  const [roleId, setRoleId] = useState('')
   const [deptId, setDeptId] = useState('')
 
   var [departments, setDepartments] = useState([]);
@@ -56,8 +55,6 @@ function RegisterUser() {
       toast.error('Password does not match')
     } else if (userId == '') {
       toast.error('please enter user Id')
-    } else if (roleId == '') {
-      toast.error('please enter role')
     } else if (deptId == '') {
       toast.error('Please enter department')
     }
@@ -70,7 +67,6 @@ function RegisterUser() {
         password,
         mobileNo,
         userId,
-        roleId,
         deptId
       )
      
@@ -126,16 +122,6 @@ function RegisterUser() {
                 className='form-control'
                 onChange={(e) => {
                   setUserId(e.target.value)
-                }}
-              />
-            </div>
-            <div className='mb-3'>
-              <label htmlFor=''>RoleId</label>
-              <input
-                type='number'
-                className='form-control'
-                onChange={(e) => {
-                  setRoleId(e.target.value)
                 }}
               />
             </div>
