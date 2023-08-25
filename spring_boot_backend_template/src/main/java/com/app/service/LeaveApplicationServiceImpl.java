@@ -64,7 +64,7 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 
 		for (LeaveApplication la : leaveList) {
 			leaveDto.add(new LeaveApplicationDTO(la.getUser().getUserId(), la.getUser().getFirstName(),
-					la.getFromDate(), la.getToDate(), la.getReason()));
+					la.getFromDate(), la.getToDate(), la.getReason(), la.getStatus().toString()));
 		}
 		return leaveDto;
 	}
