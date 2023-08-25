@@ -12,7 +12,6 @@ import ManageUsers from './components/ManageUser'
 import LoginUser from './components/loginUser';
 import Student from './components/student';
 import Teacher from './components/teacher';
-
 import GetLeaveApplication from './components/getLeaveApplications'
 import LeaveApplication from './components/leaveApplication';
 import AddSubjectDetails from './components/subjectDetails';
@@ -21,7 +20,11 @@ import AddClassroom from './components/classRoomDetails';
 import AddDepartment from './components/departmentDetails';
 import ViewTimetable from './components/timeTable'
 import AddLectureData from './components/addLectureData'
+
 import ManageLeaves from './components/manageLeaves'
+
+import GetLectureDetails from './components/getLectureDetails'
+
 
 
 function App() {
@@ -58,6 +61,8 @@ return (
          <Route path='/timetable' element={<ViewTimetable/>} />
 
          <Route path='/addlecturedata' element={<AddLectureData/>} />
+
+         <Route path='/getlecturedetails' element={<GetLectureDetails/>} />
         </Routes>
       </div>
       <ToastContainer />
