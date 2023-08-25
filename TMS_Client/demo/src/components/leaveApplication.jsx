@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from 'react-toastify';
 import { leaveApplicationAPI } from "../services/user";
 import { useNavigate } from "react-router-dom";
+import '../common.css'; 
 
 function LeaveApplication(){
     
@@ -54,7 +55,7 @@ function LeaveApplication(){
 
     return(
         <div>
-            <h1 style={{textAlign: 'center', margin: 10 }}> Leave Application </h1>
+            <h1 style={{textAlign: 'center', margin: 20 , fontFamily: 'Times New Roman, serif',  fontWeight: 'bold', color: 'black'}}> Leave Application </h1>
 
             <div className="row">
                 {/* column-1 */}
@@ -63,7 +64,7 @@ function LeaveApplication(){
                 <div className="col"> 
                     <div className="form">
                         <div className="mb-3">
-                            <label htmlFor="fromDate"> Start Date : </label>
+                            <label htmlFor="fromDate" className="text-font">Start Date:</label>
                             <input
                             type="date"
                             id="fromDate"
@@ -76,7 +77,7 @@ function LeaveApplication(){
                     <br></br>
 
                         <div className="mb-3">
-                            <label htmlFor="toDate"> End Date : </label>
+                            <label htmlFor="toDate"className="text-font"> End Date : </label>
                             <input
                             type="date"
                             id="toDate"
@@ -89,7 +90,7 @@ function LeaveApplication(){
                     <br></br>
 
                         <div className="mb-3">
-                            <label htmlFor="reason"> Reason : </label>
+                            <label htmlFor="reason" className="text-font" style={{color: 'red'}}> Reason : </label>
                             <textarea
                             id="reason"
                             className="form-control"
@@ -101,7 +102,7 @@ function LeaveApplication(){
                     <br></br>
 
                         <div className="mb-3">
-                            <button onClick={submitLeaveApplication} type="submit" className='btn btn-success'> Submit </button>
+                            <button onClick={submitLeaveApplication} type="submit" className='btn-success'> Submit </button>
                         </div>
                     </div>
                 </div>
