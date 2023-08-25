@@ -1,8 +1,8 @@
-// ManageUsers.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { createUrl } from '../utils/utils';
 import {toast} from 'react-toastify';
+import '../css_file/manageUser.css';
 
 function ManageUsers() {
   var [isValidUsers, setIsValidUsers] = useState([]);
