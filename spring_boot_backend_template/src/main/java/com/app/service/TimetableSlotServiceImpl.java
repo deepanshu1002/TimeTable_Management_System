@@ -67,16 +67,27 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
 		subject.addTimetableSlot(timetableSlot);
 		user.addTimetableSlot(timetableSlot);
 		classroom.addTimetableSlot(timetableSlot);
+<<<<<<< HEAD
 
 		timetableSlot.setLectureData(lecture);
 		TimetableSlot slot = timeTableSlotRepo.save(timetableSlot);
 		
 		
 		
+=======
+
+
+		timetableSlot.setLectureData(lecture);
+		TimetableSlot slot = timeTableSlotRepo.save(timetableSlot);
+
+
+
+>>>>>>> 203ee87fe0ebb071f470070364d250c5e5657b4a
 //		Long timetableSlotId, LocalDate date, LocalTime startTime, LocalTime endTime,
 //		Long teacherId, String teacherName, Long subjectId, String subjectName, Long classroomId,
 //		String classroomName, Long deptId, String deptName
 //		
+
 		return new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), 
                 slot.getStartTime(), slot.getEndTime(),slot.getTeacher().getUserId(),slot.getTeacher().getFirstName(), 
                 slot.getSubject().getSubjectId(),slot.getSubject().getSubjectName(),slot.getClassroom().getClassroomId(),slot.getClassroom().getClassroomName(),
@@ -98,12 +109,23 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
 		List<TimetableSlot> listOfSlots = timeTableSlotRepo.findByDateAndDeptDeptId(date1, deptId);
 		List<TimetableSlotRespoDTO> dtoList = new ArrayList<TimetableSlotRespoDTO>();
 
-		for (TimetableSlot slot : listOfSlots) {
-			dtoList.add(new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), slot.getStartTime(),
-					slot.getEndTime(), slot.getTeacher().getUserId(), slot.getTeacher().getFirstName(),
-					slot.getSubject().getSubjectId(), slot.getSubject().getSubjectName(),
-					slot.getClassroom().getClassroomId(), slot.getClassroom().getClassroomName(), deptId,slot.getLectureData().getId(),
-					slot.getDept().getDeptName()));
+		if (listOfSlots.get(0).getLectureData() == null) {
+			for (TimetableSlot slot : listOfSlots) {
+				dtoList.add(new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), slot.getStartTime(),
+						slot.getEndTime(), slot.getTeacher().getUserId(), slot.getTeacher().getFirstName(),
+						slot.getSubject().getSubjectId(), slot.getSubject().getSubjectName(),
+						slot.getClassroom().getClassroomId(), slot.getClassroom().getClassroomName(), deptId,
+						slot.getDept().getDeptName()));
+			}
+		} else {
+
+			for (TimetableSlot slot : listOfSlots) {
+				dtoList.add(new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), slot.getStartTime(),
+						slot.getEndTime(), slot.getTeacher().getUserId(), slot.getTeacher().getFirstName(),
+						slot.getSubject().getSubjectId(), slot.getSubject().getSubjectName(),
+						slot.getClassroom().getClassroomId(), slot.getClassroom().getClassroomName(), deptId,
+						slot.getLectureData().getId(), slot.getDept().getDeptName()));
+			}
 		}
 
 //		TimetableSlot timetableSlot=null;

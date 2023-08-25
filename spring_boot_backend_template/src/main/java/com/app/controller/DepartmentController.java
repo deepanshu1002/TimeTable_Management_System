@@ -26,6 +26,7 @@ import com.app.service.DepartmentService;
 @RequestMapping("/department")
 @Validated
 @CrossOrigin(origins = "*")
+
 public class DepartmentController {
 	@Autowired
 	private DepartmentService departmentService;
