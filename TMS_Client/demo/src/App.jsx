@@ -18,6 +18,7 @@ import AddSubjectDetails from './components/subjectDetails';
 import AddLabVenue from './components/labDetails';
 import AddClassroom from './components/classRoomDetails';
 import AddDepartment from './components/departmentDetails';
+import ViewTimetable from './components/timeTable'
 
 function App() {
 return (
@@ -47,6 +48,8 @@ return (
          <Route path='/managelab' element={<AddLabVenue/>} />
 
          <Route path='/managesubject' element={<AddSubjectDetails/>} />
+
+         <Route path='/timetable' element={<ViewTimetable/>} />
 
         </Routes>
       </div>
