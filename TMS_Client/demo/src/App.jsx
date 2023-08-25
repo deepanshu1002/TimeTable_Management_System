@@ -41,6 +41,9 @@ return (
          {/*GET Leave Application component */}
          <Route path='/GetLeaveApplication' element={<GetLeaveApplication/>} />
          {/* Class Room Component */}
+
+         <Route path='/leaveapplication' element={<LeaveApplication/>} />
+
          <Route path='/ClassRoom' element={<ClassRoom />} />
 
          <Route path='/student' element={<Student/>} />

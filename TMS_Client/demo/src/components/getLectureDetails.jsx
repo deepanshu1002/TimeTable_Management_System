@@ -14,7 +14,7 @@ function  GetLectureDetails(){
         axios.get(url)
           .then(response => {
             console.log(response.data);
-            setLeaveApplications(response.data);
+            //setLeaveApplications(response.data);
           })
           .catch(error => {
             console.log(error.response)
