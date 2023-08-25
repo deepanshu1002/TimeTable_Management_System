@@ -3,6 +3,7 @@ package com.app.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -33,4 +34,11 @@ public class IsValidUser {
 	  private String password;
 	  private Long roleId;
 	  private Long deptId;
+	  
+	  @PrePersist
+		public void setDefaultRoleId() {
+			if(roleId == null) {
+				roleId = 3L;
+			}
+		}
 }

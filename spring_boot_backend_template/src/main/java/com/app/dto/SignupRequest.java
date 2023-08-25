@@ -31,7 +31,7 @@ public class SignupRequest {
   private String mobileNo;
   @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})",message = "invalid password format")
   private String password;
-  private Long roleId;
+//  private Long roleId;
   private Long deptId;
   
 }

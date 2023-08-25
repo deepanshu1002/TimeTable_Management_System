@@ -9,15 +9,25 @@ import{Admin,AddDetails} from './components/admin'
 // import{AddDetails} from './components/admin'
 import RegisterUser from './components/registerUser'
 import ManageUsers from './components/ManageUser'
-import LeaveApplication from './components/leaveApplication'
-import ClassRoom from './components/classRoom'
 import LoginUser from './components/loginUser';
 import Student from './components/student';
 import Teacher from './components/teacher';
+<<<<<<< HEAD
+=======
+import Admin from './components/admin';
+
+import GetLeaveApplication from './components/getLeaveApplications'
+import LeaveApplication from './components/leaveApplication';
+
+
+>>>>>>> 2c1aa109e65ff66c8b6746effb4a87af50321174
 import AddSubjectDetails from './components/subjectDetails';
 import AddLabVenue from './components/labDetails';
 import AddClassroom from './components/classRoomDetails';
 import AddDepartment from './components/departmentDetails';
+import ViewTimetable from './components/timeTable'
+import AddLectureData from './components/addLectureData'
+
 
 function App() {
 return (
@@ -31,9 +41,9 @@ return (
          <Route path='/register' element={<RegisterUser />} />
          <Route path='/validuser' element={<ManageUsers />} />  
          {/*Leave Application component */}
-         <Route path='/LeaveApplication' element={<LeaveApplication />} />
-         {/* Class Room Component */}
-         <Route path='/ClassRoom' element={<ClassRoom />} />
+         <Route path='/leaveapplication' element={<LeaveApplication/>} />
+         {/*GET Leave Application component */}
+         <Route path='/getLeaveApplication' element={<GetLeaveApplication/>} />
 
          <Route path='/student' element={<Student/>} />
 
@@ -49,6 +59,9 @@ return (
 
          <Route path='/managesubject' element={<AddSubjectDetails/>} />
 
+         <Route path='/timetable' element={<ViewTimetable/>} />
+
+         <Route path='/addlecturedata' element={<AddLectureData/>} />
         </Routes>
       </div>
       <ToastContainer />
