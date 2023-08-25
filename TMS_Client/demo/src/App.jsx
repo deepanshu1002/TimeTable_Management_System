@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import RegisterUser from './components/registerUser'
 import ManageUsers from './components/ManageUser'
-import ClassRoom from './components/classRoom'
 import LoginUser from './components/loginUser';
 import Student from './components/student';
 import Teacher from './components/teacher';
@@ -41,8 +40,6 @@ return (
          <Route path='/LeaveApplication' element={<LeaveApplication />} />
          {/*GET Leave Application component */}
          <Route path='/GetLeaveApplication' element={<GetLeaveApplication/>} />
-         {/* Class Room Component */}
-         <Route path='/ClassRoom' element={<ClassRoom />} />
 
          <Route path='/student' element={<Student/>} />
 
