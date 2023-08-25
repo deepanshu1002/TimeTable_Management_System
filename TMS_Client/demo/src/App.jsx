@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import RegisterUser from './components/registerUser'
 import ManageUsers from './components/ManageUser'
-import ClassRoom from './components/classRoom'
 import LoginUser from './components/loginUser';
 import Student from './components/student';
 import Teacher from './components/teacher';
@@ -24,6 +23,7 @@ import AddLabVenue from './components/labDetails';
 import AddClassroom from './components/classRoomDetails';
 import AddDepartment from './components/departmentDetails';
 import ViewTimetable from './components/timeTable'
+import AddLectureData from './components/addLectureData'
 
 
 function App() {
@@ -37,14 +37,9 @@ return (
          <Route path='/register' element={<RegisterUser />} />
          <Route path='/validuser' element={<ManageUsers />} />  
          {/*Leave Application component */}
-         <Route path='/LeaveApplication' element={<LeaveApplication />} />
-         {/*GET Leave Application component */}
-         <Route path='/GetLeaveApplication' element={<GetLeaveApplication/>} />
-         {/* Class Room Component */}
-
          <Route path='/leaveapplication' element={<LeaveApplication/>} />
-
-         <Route path='/ClassRoom' element={<ClassRoom />} />
+         {/*GET Leave Application component */}
+         <Route path='/getLeaveApplication' element={<GetLeaveApplication/>} />
 
          <Route path='/student' element={<Student/>} />
 
@@ -62,6 +57,7 @@ return (
 
          <Route path='/timetable' element={<ViewTimetable/>} />
 
+         <Route path='/addlecturedata' element={<AddLectureData/>} />
         </Routes>
       </div>
       <ToastContainer />
