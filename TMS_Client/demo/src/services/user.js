@@ -33,11 +33,11 @@ export async function registerUserApi(
   }
 
 // you cant call await in react without function async
-export async function leaveApplicationAPI(startDate,endDate,reason){
-  const url = createUrl('/user/leaveApplication')
+export async function leaveApplicationAPI(fromDate, toDate, reason, status, userId, userName){
+  const url = createUrl('/leaveapp')
   //no need to write key and value if both are same
   const body = {
-    startDate, endDate, reason
+    fromDate, toDate, reason, status, userId, userName
   }
   try {
     const response = await axios.post(url, body)

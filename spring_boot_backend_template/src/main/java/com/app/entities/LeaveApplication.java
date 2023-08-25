@@ -34,6 +34,7 @@ public class LeaveApplication{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long leaveApplicationId;
+	private String userName;
 	private LocalDate fromDate;
 	private LocalDate toDate;
 	@Enumerated(EnumType.STRING)

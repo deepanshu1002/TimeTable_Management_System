@@ -18,7 +18,7 @@ import com.app.dto.LeaveApplicationDTO;
 import com.app.service.LeaveApplicationService;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RequestMapping("/leaveapp")
 public class LeaveApplicationController {
 	@Autowired

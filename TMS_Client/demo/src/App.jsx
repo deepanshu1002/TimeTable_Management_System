@@ -13,8 +13,16 @@ import LoginUser from './components/loginUser';
 import Student from './components/student';
 import Teacher from './components/teacher';
 import Admin from './components/admin';
+
 import GetLeaveApplication from './components/getLeaveApplications'
 import LeaveApplication from './components/leaveApplication';
+
+
+import AddSubjectDetails from './components/subjectDetails';
+import AddLabVenue from './components/labDetails';
+import AddClassroom from './components/classRoomDetails';
+import AddDepartment from './components/departmentDetails';
+import ViewTimetable from './components/timeTable'
 
 
 function App() {
@@ -40,6 +48,17 @@ return (
          <Route path='/teacher' element={<Teacher/>} />
 
          <Route path='/admin' element={<Admin/>} />
+         
+          <Route path='/managedepartment' element={<AddDepartment/>} />
+          
+         <Route path='/manageclassroom' element={<AddClassroom/>} />
+
+         <Route path='/managelab' element={<AddLabVenue/>} />
+
+         <Route path='/managesubject' element={<AddSubjectDetails/>} />
+
+         <Route path='/timetable' element={<ViewTimetable/>} />
+
         </Routes>
       </div>
       <ToastContainer />

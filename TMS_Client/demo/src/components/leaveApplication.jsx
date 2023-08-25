@@ -2,32 +2,49 @@ import { useState } from "react";
 import { toast } from 'react-toastify';
 import { leaveApplicationAPI } from "../services/user";
 import { useNavigate } from "react-router-dom";
-//import { leaveApplicationAPI as leaveApplicationAPI} from '../services/user'
 
 function LeaveApplication(){
     
-    const [startDate, setStartDate] = useState('')
-    const [endDate, setEndDate] = useState('')
-    const [status, setStatus] = useState('')
+    const [fromDates, setFromDate] = useState('')
+    const [toDates, setToDate] = useState('')
     const [reason, setReason] = useState('')
 
     const navigate = useNavigate()
 
     const submitLeaveApplication = async () => {
-        const startDateObj = new Date(startDate);
-        const endDateObj = new Date(endDate);
-        if (startDate == '' || endDate == '') {
+        const startDateObj = new Date(fromDates);
+        const endDateObj = new Date(toDates);
+
+        if (fromDates === '' || toDates === '') {
             toast.error('Please select both start and end dates.');
         } else if (startDateObj >= endDateObj) {
             toast.error('End date should be greater than the start date.');
-        } else if (reason.length == ''){
+        } else if (reason === ''){
             toast.error('Please Enter the Reason.');
         } else {
+
             const userId = sessionStorage.getItem('userId');
-            const response = await leaveApplicationAPI(userId, startDate, endDate, status, reason)
+            const userName = sessionStorage.getItem('firstName');
+
+            //to change date format to yyyy/mm/dd
+            const formatDate = (dateString) => {
+                const date = new Date(dateString);
+                const year = date.getFullYear();
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const day = date.getDate().toString().padStart(2, '0');
+                return `${year}-${month}-${day}`;
+              };
+
+              const fromDate = formatDate(fromDates);
+              const toDate = formatDate(toDates);
+
+            const response = await leaveApplicationAPI(fromDate, toDate, reason, 'pending', userId, userName );
+
             if(response != null){
-                toast.success('Successfully submitted Leave application')
-                navigate('/leaveapplication')
+
+                toast.success('Successfully submitted leave application')
+                navigate('/leaveApplication')
+
             } else {
                 toast.error('Error while submitting leave application, please try again')
             }
@@ -37,7 +54,7 @@ function LeaveApplication(){
 
     return(
         <div>
-            <h1 style={{textAlign: 'center',margin: 10 }}> Leave Application </h1>
+            <h1 style={{textAlign: 'center', margin: 10 }}> Leave Application </h1>
 
             <div className="row">
                 {/* column-1 */}
@@ -46,12 +63,12 @@ function LeaveApplication(){
                 <div className="col"> 
                     <div className="form">
                         <div className="mb-3">
-                            <label htmlFor="startDate"> Start Date : </label>
+                            <label htmlFor="fromDate"> Start Date : </label>
                             <input
                             type="date"
-                            id="startDate"
+                            id="fromDate"
                             className="form-control"
-                            onChange={(e)=>{setStartDate(e.target.value)}}
+                            onChange={(e)=>{setFromDate(e.target.value)}}
                             required
                             />
                         </div>
@@ -59,12 +76,12 @@ function LeaveApplication(){
                     <br></br>
 
                         <div className="mb-3">
-                            <label htmlFor="endDate"> End Date : </label>
+                            <label htmlFor="toDate"> End Date : </label>
                             <input
                             type="date"
-                            id="endDate"
+                            id="toDate"
                             className="form-control"
-                            onChange={(e)=>{setEndDate(e.target.value)}}
+                            onChange={(e)=>{setToDate(e.target.value)}}
                             required
                             />
                         </div>

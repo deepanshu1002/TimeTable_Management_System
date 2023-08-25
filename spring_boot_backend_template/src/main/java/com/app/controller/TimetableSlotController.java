@@ -3,10 +3,12 @@ package com.app.controller;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.AddTimetableSlotDTO;
 import com.app.dto.TimetableSlotRespoDTO;
+import com.app.entities.TimetableSlot;
 import com.app.service.TimetableSlotService;
 
 @RestController
 @RequestMapping("/timetableSlot")
+@CrossOrigin(origins = "*")
 public class TimetableSlotController {
 	
 	@Autowired
@@ -42,13 +46,13 @@ public class TimetableSlotController {
 	
 	@GetMapping("/{date}/{deptId}")
 	public ResponseEntity<?> getLectureData(@PathVariable String date, @PathVariable Long deptId) {
-		
+		System.out.println(date +""+deptId);
 		 LocalDate date1 = LocalDate.parse(date);
 		
 		 
-		TimetableSlotRespoDTO timetableSlotDetails = timetableSlotService.getLectureDetails(date1, deptId);
+		List<TimetableSlotRespoDTO> timetableSlotDetails = timetableSlotService.getLectureDetails(date1, deptId);
 		System.out.println("timetableSlotDetails= " +timetableSlotDetails);
-		if (timetableSlotDetails == null)
+		if (timetableSlotDetails.size()==0)
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		
 		return ResponseEntity.ok(timetableSlotDetails);
