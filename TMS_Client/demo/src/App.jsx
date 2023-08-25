@@ -14,6 +14,7 @@ import LoginUser from './components/loginUser';
 import Student from './components/student';
 import Teacher from './components/teacher';
 import Admin from './components/admin';
+import LeaveApplicationList from './components/getLeaveApplication '
 
 
 function App() {
@@ -28,6 +29,8 @@ return (
          <Route path='/validuser' element={<ManageUsers />} />  
          {/*Leave Application component */}
          <Route path='/LeaveApplication' element={<LeaveApplication />} />
+         {/*GET Leave Application component */}
+         <Route path='/LeaveApplicationList' element={<LeaveApplicationList />} />
          {/* Class Room Component */}
          <Route path='/ClassRoom' element={<ClassRoom />} />
 
