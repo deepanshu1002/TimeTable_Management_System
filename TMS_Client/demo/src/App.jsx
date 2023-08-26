@@ -27,7 +27,6 @@ import AddLectureData from './components/addLectureData'
 import ManageLeaves from './components/manageLeaves'
 
 import GetLectureDetails from './components/getLectureDetails'
-import FormTemplate from './components/formTemplate'
 
 
 function App() {
@@ -70,8 +69,6 @@ return (
          <Route path='/addlecturedata' element={<AddLectureData/>} />
 
          <Route path='/getlecturedetails' element={<GetLectureDetails/>} />
-
-         <Route path='/form' element={<FormTemplate/>} />
 
         </Routes>
       </div>
