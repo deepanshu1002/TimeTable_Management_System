@@ -28,6 +28,12 @@ public class LectureController {
 	@Autowired
 	private LectureService lectureService;
 	
+	@GetMapping
+	public ResponseEntity<?> getAllLectureDetails() {
+//		System.out.println("in get dept dtls " + deptId);
+		return ResponseEntity.ok(lectureService.getAllLectureDetails());
+	}
+	
 	
 	@PostMapping
 	public ResponseEntity<?> addlectureData(@RequestBody AddLectureDTO dto) {

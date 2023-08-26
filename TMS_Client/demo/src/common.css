@@ -1,0 +1,16 @@
+.text-font{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: blue;
+}
+
+.btn-success {
+    background-color: #28a745; /* Change the background color */
+    color: #fff; /* Change the text color */
+    border: none; /* Remove the border */
+    border-radius: 5px; /* Apply rounded corners */
+    padding: 10px 20px; /* Adjust padding for spacing */
+    cursor: pointer; /* Show a pointer cursor on hover */
+    width: 200px; /* Increase the button width */
+  }

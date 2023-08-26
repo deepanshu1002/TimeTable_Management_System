@@ -5,21 +5,29 @@ import { useEffect } from 'react'
 //used to register react-toastify
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import{Admin,AddDetails} from './components/admin'
+// import{AddDetails} from './components/admin'
 import RegisterUser from './components/registerUser'
 import ManageUsers from './components/ManageUser'
-import LeaveApplication from './components/leaveApplication'
-import ClassRoom from './components/classRoom'
 import LoginUser from './components/loginUser';
 import Student from './components/student';
 import Teacher from './components/teacher';
-import Admin from './components/admin';
+import GetLeaveApplication from './components/getLeaveApplications'
+import LeaveApplication from './components/leaveApplication';
 import AddSubjectDetails from './components/subjectDetails';
 import AddLabVenue from './components/labDetails';
 import AddClassroom from './components/classRoomDetails';
 import AddDepartment from './components/departmentDetails';
 import ViewTimetable from './components/timeTable'
+
 import TimeTableMetadata from './components/timetableMetadata'
+
+import AddLectureData from './components/addLectureData'
+
+import ManageLeaves from './components/manageLeaves'
+
+import GetLectureDetails from './components/getLectureDetails'
+
 
 function App() {
 return (
@@ -29,12 +37,14 @@ return (
         <Routes>
         <Route path='/' element={<LoginUser/>} />
          {/* register component */}
+         <Route path='/manageleaves' element={<ManageLeaves/>} />
+        <Route path='/adddetails' element={<AddDetails/>} />
          <Route path='/register' element={<RegisterUser />} />
          <Route path='/validuser' element={<ManageUsers />} />  
          {/*Leave Application component */}
-         <Route path='/LeaveApplication' element={<LeaveApplication />} />
-         {/* Class Room Component */}
-         <Route path='/ClassRoom' element={<ClassRoom />} />
+         <Route path='/leaveapplication' element={<LeaveApplication/>} />
+         {/*GET Leave Application component */}
+         <Route path='/getLeaveApplication' element={<GetLeaveApplication/>} />
 
          <Route path='/student' element={<Student/>} />
 
@@ -52,7 +62,13 @@ return (
 
          <Route path='/timetable' element={<ViewTimetable/>} />
 
+
          <Route path='/timetablemetadata' element={<TimeTableMetadata/>} />
+
+
+         <Route path='/addlecturedata' element={<AddLectureData/>} />
+
+         <Route path='/getlecturedetails' element={<GetLectureDetails/>} />
 
         </Routes>
       </div>

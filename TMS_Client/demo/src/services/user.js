@@ -8,7 +8,6 @@ export async function registerUserApi(
     password,
     mobileNo,
     userId,
-    roleId,
     deptId
   ) {
     const url = createUrl('/register')
@@ -19,7 +18,6 @@ export async function registerUserApi(
         email,
         mobileNo,
         password,
-        roleId,
         deptId
       }
   
@@ -50,6 +48,30 @@ export async function leaveApplicationAPI(fromDate, toDate, reason, status, user
     return null
   }
 }
+
+//get all leave application for HOD or Admin 
+export async function getAllLeaveApplicationsAPI() {
+  const url = createUrl('/leaveapp'); // Replace with the actual endpoint for fetching all leave applications
+
+  try {
+    const response = await axios.get(url);
+    // Check if the response status code indicates success (e.g., 200)
+    if (response.status === 200) {
+      // Log the data and return it
+      log(response.data);
+      return response.data;
+    } else {
+      // Handle non-successful response (e.g., return an error object)
+      return { error: `Failed to fetch leave applications: Status ${response.status}` };
+    }
+  } catch (ex) {
+    // Handle exceptions (e.g., network error)
+    log(ex);
+    return { error: 'Failed to fetch leave applications: Network error' };
+  }
+}
+
+
 
 export async function loginUserApi(email, password) {
   const url = createUrl('/signIn')

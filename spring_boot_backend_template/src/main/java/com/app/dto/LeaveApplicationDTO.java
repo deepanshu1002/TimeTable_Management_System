@@ -2,6 +2,7 @@ package com.app.dto;
 
 import java.time.LocalDate;
 
+import ch.qos.logback.core.status.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,5 @@ public class LeaveApplicationDTO {
 	private LocalDate fromDate;
 	private LocalDate toDate;
 	private String reason;
-	
+	private String status;
 }
