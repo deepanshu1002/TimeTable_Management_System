@@ -118,20 +118,27 @@ function ViewTimetable() {
             <div class="col-lg-12">
               <div class="section-title text-center">
                 <div class="title-text">
-                  <h2 style={{ color: "blue" }}>{deptName}</h2>
+                  <h2 style={{ color: "blue" }}>
+                    <b>{deptName}</b>
+                  </h2>
                 </div>
-                <p style={{ color: "darkviolet" }}>
+                <b style={{ color: "darkviolet" }}>
                   TimeTable for the week
                   <br />
                   {weekDate}
-                </p>
+                </b>
               </div>
             </div>
           </div>
 
           <div class="row">
             <div class="col-lg-12">
-              <ul class="nav custom-tab" id="myTab" role="tablist">
+              <ul
+                class="nav custom-tab"
+                id="myTab"
+                role="tablist"
+                style={{ backgroundColor: "Highlight" }}
+              >
                 <li class="nav-item">
                   <a
                     class="nav-link active show"
@@ -305,8 +312,10 @@ function ViewTimetable() {
                   role="tabpanel"
                 >
                   <div class="table-responsive">
-                    <table class="table">
-                      <thead>
+                    <table class="table" style={{ border: "1px solid black" }}>
+                      <thead
+                        style={{ backgroundColor: "blue", color: "white" }}
+                      >
                         <tr>
                           <th class="text-center" scope="col">
                             Time
@@ -325,8 +334,12 @@ function ViewTimetable() {
                             <tr class="inner-box">
                               <th scope="row">
                                 <div class="event-date">
-                                  <h5>{t.startTime}</h5>
-                                  <h5>{t.endTime}</h5>
+                                  <h5>
+                                    <b>{t.startTime}</b>
+                                  </h5>
+                                  <h5>
+                                    <b>{t.endTime}</b>
+                                  </h5>
                                 </div>
                               </th>
                               <td>
@@ -370,6 +383,7 @@ function ViewTimetable() {
                                   <a
                                     class="btn btn-primary"
                                     onClick={showSubjectData}
+                                    style={{ color: "whitesmoke" }}
                                   >
                                     Read More
                                   </a>

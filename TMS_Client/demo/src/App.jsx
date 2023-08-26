@@ -19,6 +19,7 @@ import AddLabVenue from './components/labDetails';
 import AddClassroom from './components/classRoomDetails';
 import AddDepartment from './components/departmentDetails';
 import ViewTimetable from './components/timeTable'
+import TimeTableMetadata from './components/timetableMetadata'
 
 function App() {
 return (
@@ -50,6 +51,8 @@ return (
          <Route path='/managesubject' element={<AddSubjectDetails/>} />
 
          <Route path='/timetable' element={<ViewTimetable/>} />
+
+         <Route path='/timetablemetadata' element={<TimeTableMetadata/>} />
 
         </Routes>
       </div>
