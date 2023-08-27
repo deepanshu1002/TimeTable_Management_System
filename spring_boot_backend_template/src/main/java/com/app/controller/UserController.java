@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.ApiResponseDto;
 import com.app.dto.AuthRequest;
 import com.app.dto.SignupRequest;
+import com.app.dto.UserDTO;
 import com.app.entities.IsValidUser;
 import com.app.service.UserService;
 
@@ -61,6 +63,21 @@ public class UserController {
 	public void updateRoleID(@ PathVariable Long userId,@PathVariable Long roleId)
 	{
 		userService.updateRoleId(userId,roleId);
+	}
+	@PutMapping("/editUser")
+	public ResponseEntity<ApiResponseDto> editUserDetails(@RequestBody @Valid UserDTO userDTO) 
+	{
+		System.out.println(userDTO);
+        ApiResponseDto response = userService.editUserDetails(userDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+	
+	@GetMapping("editUser/{userId}")
+	public ResponseEntity<?> getUserById(@PathVariable Long userId) {
+		
+		UserDTO user= userService.getUserById(userId);
+		
+		return ResponseEntity.ok(user);
 	}
 
 }

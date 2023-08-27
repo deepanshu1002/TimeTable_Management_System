@@ -28,6 +28,8 @@ import ManageLeaves from './components/manageLeaves'
 
 import GetLectureDetails from './components/getLectureDetails'
 
+import EditUser from './components/editUser'
+
 
 function App() {
 return (
@@ -69,6 +71,9 @@ return (
          <Route path='/addlecturedata' element={<AddLectureData/>} />
 
          <Route path='/getlecturedetails' element={<GetLectureDetails/>} />
+
+         <Route path='/editUser' element={<EditUser/>}/>
+         
 
         </Routes>
       </div>
