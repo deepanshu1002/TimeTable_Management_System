@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { loginUserApi } from '../services/user'
 import '../App.css';
+import { logout, login } from '../features/authSlice'
 
 import { log } from '../utils/utils'
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -38,6 +39,7 @@ function LoginUser() {
                 
                  const firstName= response.firstName
                  const lastName= response.lastName
+                 const eamil = response.email
                  const userId= response.userId
                  const deptId= response.deptId
                  const roleId= response.roleId
@@ -50,10 +52,11 @@ function LoginUser() {
                 sessionStorage['userId'] = userId
                 sessionStorage['deptId'] = deptId
                 sessionStorage['roleId'] = roleId
+                sessionStorage['email'] = email
                 // sessionStorage['profileImage'] = profileImage
               
                 // update global store's authSlice with status = true
-                // dispatch(login())
+                dispatch(login())
                 if(roleId == '1'){
                     navigate('/admin');
                 }
@@ -79,7 +82,7 @@ function LoginUser() {
 
     return (<>
 
-        <div style={{ paddingTop: "250px" }}>
+        <div style={{ paddingTop: "150px" }}>
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
             <br />
             <br />
@@ -93,6 +96,7 @@ function LoginUser() {
                                     <p className="text-muted">Sign In to your account</p>
                                     <div className="input-group mb-3">
                                         <span className="input-group-addon"><i class="fa fa-user"></i></span>
+                                        &nbsp;&nbsp;
                                         <input type="text" className="form-control" placeholder="Username"
                                             onChange={(e) => {
                                                 setEmail(e.target.value)
@@ -100,6 +104,7 @@ function LoginUser() {
                                     </div>
                                     <div className="input-group mb-4">
                                         <span className="input-group-addon"><i class="fa fa-lock"></i></span>
+                                        &nbsp;&nbsp;
                                         <input type="password" className="form-control" placeholder="Password"
                                             onChange={(e) => {
                                                 setPassword(e.target.value)
@@ -107,10 +112,11 @@ function LoginUser() {
                                     </div>
                                     <div className="row">
                                         <div className="col-6">
+                                        &nbsp;&nbsp;&nbsp;
                                             <button type="button" className="btn btn-primary px-4" onClick={loginUser}>Login</button>
                                         </div>
                                         <div className="col-6 text-right">
-                                            <button type="button" className="btn btn-link px-0">Forgot password?</button>
+                                            <button type="button" className="btn btn-link px-0" onClick={()=> navigate("/forgotpassword")}>Forgot password?</button>
                                         </div>
                                     </div>
                                 </div>
