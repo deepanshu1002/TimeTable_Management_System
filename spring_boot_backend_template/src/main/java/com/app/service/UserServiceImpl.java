@@ -100,4 +100,14 @@ public class UserServiceImpl implements UserService {
 				.orElseThrow(() -> new ResourceNotFoundException("invalid user id"));
 		user.setRoleId(roleId);
 	}
+
+	@Override
+	public String updatePassword(String email, String password) {
+		Users user = userRepo.findByEmail(email)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid user Id"));
+		
+		user.setPassword(password);
+		userRepo.save(user);
+		return ("password updated successfully");
+	}
 }

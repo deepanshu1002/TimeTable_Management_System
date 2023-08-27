@@ -1,35 +1,11 @@
 import React from 'react';
-import { useState, useEffect } from 'react'
 import '../css_file/forgotPassword.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createUrl , log} from '../utils/utils';
-
-import { toast } from 'react-toastify'
-import axios from 'axios';
-import { async } from '../services/department';
-
-
-
 
 
 function ForgotPassword() {
   
-    const [email, setEmail] = useState("")
-
-    const SendEmail=  async ()=>{
-        const url = createUrl('/forgotpassword')
-        const body = {
-          email
-        }
-        try {
-          const response = await axios.post(url, body)
-          log(response.data)
-          return response.data
-        }catch(ex){
-          log(ex)
-          return null
-        }
-      }
+    
 	return (
 		<div>
 			<div class="container padding-bottom-3x mb-2">
@@ -46,12 +22,11 @@ function ForgotPassword() {
                 <div class="card-body">
                     <div class="form-group">
                         <label for="email-for-pass">Enter your email address</label>
-                        <input class="form-control" type="email" id="email-for-pass"  onChange={(e)=>setEmail(e.target.value)} required=""/>
-                        <small class="form-text text-muted" >Type in the email address you used when you registered. Then we'll email a code to this address.</small>
+                        <input class="form-control" type="text" id="email-for-pass" required=""/><small class="form-text text-muted">Type in the email address you used when you registered. Then we'll email a code to this address.</small>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary" type="submit" onClick={()=>SendEmail()}>Get New Password</button>
+                    <button class="btn btn-primary" type="submit">Get New Password</button>
                 </div>
             </form>
         </div>

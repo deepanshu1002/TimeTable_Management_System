@@ -51,7 +51,7 @@ return (
     <div className=''>
     
     {loginStatus && <Navbar />}
-    <Sidebar></Sidebar> 
+    {loginStatus && <Sidebar />}
       <div className='container'>
         <Routes>
         <Route path='/' element={<LoginUser/>} />
