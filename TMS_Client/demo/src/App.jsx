@@ -27,12 +27,16 @@ import AddLectureData from './components/addLectureData'
 import ManageLeaves from './components/manageLeaves'
 
 import GetLectureDetails from './components/getLectureDetails'
+
 import ForgotPassword from './components/forgotPassword'
 import ForgotEmail from './testmail'
 import UpdatePassword from './components/updatePassword';
 import Navbar from './components/navbar'
 import { logout, login } from './features/authSlice'
 import Sidebar from './components/sidebar'
+
+import EditUser from './components/editUser'
+
 
 function App() {
 
@@ -89,9 +93,13 @@ return (
 
          <Route path='/getlecturedetails' element={<GetLectureDetails/>} />
 
+
          <Route path='/forgotpassword' element={<ForgotPassword/>} />
           <Route path='/email' element={<ForgotEmail/>}/>
           <Route path='/set-password*' element={<UpdatePassword/>}/>
+
+         <Route path='/editUser' element={<EditUser/>}/>
+         
         </Routes>
       </div>
       <ToastContainer />

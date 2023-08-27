@@ -2,10 +2,12 @@ package com.app.service;
 
 import java.util.List;
 
+import com.app.dto.ApiResponseDto;
 import com.app.dto.AuthRequest;
 import com.app.dto.AuthResp;
 import com.app.dto.SignupRequest;
 import com.app.dto.SignupResp;
+import com.app.dto.UserDTO;
 import com.app.entities.IsValidUser;
 
 public interface UserService {
@@ -17,4 +19,8 @@ public interface UserService {
 	public List<IsValidUser> getAllIsValidUser();
 	public void updateRoleId(Long userId,Long roleId);
 	public String updatePassword(String email, String password);
+	//edit user details
+	public ApiResponseDto editUserDetails(UserDTO user);
+	//get user by id
+	UserDTO getUserById(Long userId);
 }
