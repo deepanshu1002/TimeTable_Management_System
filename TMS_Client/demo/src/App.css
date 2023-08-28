@@ -230,3 +230,12 @@ body{
 .me-2 {
   margin-right: .5rem!important;
 }
+.app-container {
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  /* Adjust other styles as needed */
+}

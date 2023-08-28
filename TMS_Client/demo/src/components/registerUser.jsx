@@ -34,12 +34,14 @@ function RegisterUser() {
   }, []);
 
   const handleDepartmentChange = (event) => {
-    setSelectedDepartment(event.target.value);
+    const newSelectedDepartment= event.target.value
+    setSelectedDepartment(newSelectedDepartment);
     console.log(event.target.value)
     setDeptId(selectedDepartment)
   };
 
   const RegisterUser = async () => {
+    debugger
     if (firstName.length == '') {
       toast.error('Please enter first name')
     } else if (lastName.length == '') {

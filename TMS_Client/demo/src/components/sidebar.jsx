@@ -1,47 +1,99 @@
-import React from 'react';
-import '../css_file/sidebar.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from "react";
+import "../css_file/sidebar.css";
 
-
-function Sidebar() {
-  
+const SideNavBar = () => {
+	const [isExpanded, setExpendState] = useState(false);
+	const menuItems = [
+		{
+			text: "Dashboard",
+			icon: "icons/grid.svg",
+		},
+		{
+			text: "Admin Profile",
+			icon: "icons/user.svg",
+		},
+		{
+			text: "Messages",
+			icon: "icons/message.svg",
+		},
+		{
+			text: "Analytics",
+			icon: "icons/pie-chart.svg",
+		},
+		{
+			text: "File Manager",
+			icon: "icons/folder.svg",
+		},
+		{
+			text: "Orders",
+			icon: "icons/shopping-cart.svg",
+		},
+		{
+			text: "Saved Items",
+			icon: "icons/heart.svg",
+		},
+		{
+			text: "Settings",
+			icon: "icons/settings.svg",
+		},
+	];
 	return (
-		<div>
-			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
-<div className="container" >
-    <div className="row">
-        <div className="col-md-4 static">
-            <div className="profile-card">
-                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="user" className="profile-photo"/>
-            	<h5><a href="#/" className="text-white">Sarah Cruiz</a></h5>
-            	<a href="#/" className="text-white"><i className="fa fa-user"></i> 1,299 followers</a>
-            </div>
-            <ul className="nav-news-feed">
-              <li><i className="fa fa-list-alt icon1"></i><div><a href="#/">My Newsfeed</a></div></li>
-              <li><i className="fa fa-users icon2"></i><div><a href="#/">People Nearby</a></div></li>
-              <li><i className="fa fa-user icon3"></i><div><a href="#/">Friends</a></div></li>
-              <li><i className="fa fa-comments icon4"></i><div><a href="#/">Messages</a></div></li>
-              <li><i className="fa fa-picture-o icon5"></i><div><a href="#/">Images</a></div></li>
-              <li><i className="fa fa-video-camera icon6"></i><div><a href="#/">Videos</a></div></li>
-            </ul>
-            <div id="chat-block">
-              <div className="title">Chat online</div>
-              <ul className="online-users list-inline">
-                <li><a href="#/" title="Linda Lohan"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" className="img-responsive profile-photo"/><span className="online-dot"></span></a></li>
-                <li><a href="#/" title="Sophia Lee"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user" className="img-responsive profile-photo"/><span className="online-dot"></span></a></li>
-                <li><a href="#/" title="John Doe"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="user" className="img-responsive profile-photo"/><span className="online-dot"></span></a></li>
-                <li><a href="#/" title="Alexis Clark"><img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="user" className="img-responsive profile-photo"/><span className="online-dot"></span></a></li>
-                <li><a href="#/" title="James Carter"><img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="user" className="img-responsive profile-photo"/><span className="online-dot"></span></a></li>
-                <li><a href="#/" title="Robert Cook"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="user" className="img-responsive profile-photo"/><span className="online-dot"></span></a></li>
-                <li><a href="#/" title="Richard Bell"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="user" className="img-responsive profile-photo"/><span className="online-dot"></span></a></li>
-                <li><a href="#/" title="Anna Young"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" className="img-responsive profile-photo"/><span className="online-dot"></span></a></li>
-                <li><a href="#/" title="Julia Cox"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user" className="img-responsive profile-photo"/><span className="online-dot"></span></a></li>
-              </ul>
-            </div>
-        </div>
-	</div>
-</div>
+		<div
+			className={
+				isExpanded
+					? "side-nav-container"
+					: "side-nav-container side-nav-container-NX"
+			}
+		>
+			<div className="nav-upper" style={{marginTop:'70px'}}>
+				<div className="nav-heading">
+					{isExpanded && (
+						<div className="nav-brand" style={{marginTop:'22px'}}>
+							<img src="icons/Logo.svg" alt="" srcset="" />
+						</div>
+					)}
+					<button
+						className={
+							isExpanded ? "hamburger hamburger-in" : "hamburger hamburger-out"
+						}
+						onClick={() => setExpendState(!isExpanded)}
+					>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+				<div className="nav-menu">
+					{menuItems.map(({ text, icon }) => (
+						<a
+							className={isExpanded ? "menu-item" : "menu-item menu-item-NX"}
+							href="#"
+						>
+							<img className="menu-item-icon" src={icon} alt="" srcset="" />
+							{isExpanded && <p>{text}</p>}
+						</a>
+					))}
+				</div>
+			</div>
+			<div className="nav-footer">
+				{isExpanded && (
+					<div className="nav-details">
+						<img
+							className="nav-footer-avatar"
+							src="icons/admin-avatar.svg"
+							alt=""
+							srcset=""
+						/>
+						<div className="nav-footer-info">
+							<p className="nav-footer-user-name">M Showkat</p>
+							<p className="nav-footer-user-position">store admin</p>
+						</div>
+					</div>
+				)}
+				<img className="logout-icon" src="icons/logout.svg" alt="" srcset="" />
+			</div>
 		</div>
 	);
-}
-export default Sidebar;
+};
+
+export default SideNavBar;
