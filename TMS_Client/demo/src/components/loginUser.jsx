@@ -82,7 +82,7 @@ function LoginUser() {
 
     return (<>
 
-        <div style={{ paddingTop: "150px" }}>
+        <div style={{ paddingTop: "70px" }}>
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
             <br />
             <br />
