@@ -8,8 +8,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.app.entities.Role;
 import com.app.entities.Users;
 
-public interface UserRepository extends JpaRepository<Users,Long> {
-	Optional<Users> findByEmailAndPassword(String em,String pass);
+public interface UserRepository extends JpaRepository<Users, Long> {
+	Optional<Users> findByEmailAndPassword(String em, String pass);
+
 	List<Users> findByRole(Role role);
-		
+
+	Optional<Users> findByEmail(String email);
+
 }

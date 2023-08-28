@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios';
 import { registerUserApi } from '../services/user'
-import '../App.css';
+import "../TimetableMetadata.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { createUrl, log } from '../utils/utils'
 
@@ -33,12 +34,14 @@ function RegisterUser() {
   }, []);
 
   const handleDepartmentChange = (event) => {
-    setSelectedDepartment(event.target.value);
+    const newSelectedDepartment= event.target.value
+    setSelectedDepartment(newSelectedDepartment);
     console.log(event.target.value)
     setDeptId(selectedDepartment)
   };
 
   const RegisterUser = async () => {
+    debugger
     if (firstName.length == '') {
       toast.error('Please enter first name')
     } else if (lastName.length == '') {
@@ -67,7 +70,7 @@ function RegisterUser() {
         password,
         mobileNo,
         userId,
-        deptId
+        selectedDepartment
       )
      
       // parse the response
@@ -87,99 +90,121 @@ function RegisterUser() {
 
   return (
     <div>
-      <h1 style={{ textAlign: 'center', margin: 10 }}>Register User</h1>
+    <div className="row" style={{ fontWeight: "bold" }}>
+      <div className="col"></div>
+      <div
+        className="col-lg-6"
+        style={{
+          backgroundColor: "Highlight",
+          borderRadius: "20px",
+          padding: "30px",
+        }}
+      >
+        <div
+          className="mb-3"
+          style={{ backgroundColor: "blue", borderRadius: "10px" }}
+        >
+          <h2
+            style={{ textAlign: "center", margin: 10, color: "whitesmoke" }}
+          >
+            <b>Register User</b>
+          </h2>
+        </div>
 
-      <div className='row'>
-        <div className='col'></div>
-        <div className='col'>
-          <div className='form'>
-            <div className='mb-3'>
-              <label htmlFor=''>First Name</label>
+        <div className="mb-3">
+              <label htmlFor="">First Name</label>
               <input
-                type='text'
-                className='form-control'
+                type="text"
+                className="form-control"
                 onChange={(e) => {
-                  setFirstName(e.target.value)
+                  setFirstName(e.target.value);
                 }}
               />
             </div>
 
-            <div className='mb-3'>
-              <label htmlFor=''>Last Name</label>
+            <div className="mb-3">
+              <label htmlFor="">Last Name</label>
               <input
-                type='text'
-                className='form-control'
+                type="text"
+                className="form-control"
                 onChange={(e) => {
-                  setLastName(e.target.value)
+                  setLastName(e.target.value);
                 }}
               />
             </div>
 
-            <div className='mb-3'>
-              <label htmlFor=''>RollNo/UserId</label>
+            <div className="mb-3">
+              <label htmlFor="">Role No</label>
               <input
-                type='number'
-                className='form-control'
+                type="number"
+                className="form-control"
                 onChange={(e) => {
-                  setUserId(e.target.value)
+                  setUserId(e.target.value);
                 }}
               />
             </div>
 
-
-           <div className='mb-3'>
-              <label htmlFor=''>Department</label>
-            <select value={selectedDepartment} onChange={handleDepartmentChange}>
-              <option value="">Select a department</option>
-                  {departments.map(department => (
-                    <option key={department.deptName} value={department.deptId}>
-                      {department.deptName}
-                     </option>
+            <div className="form">
+            <div className="mb-3">
+              <label htmlFor="">Department :</label>
+              &nbsp;&nbsp;
+              <select
+                value={selectedDepartment}
+                onChange={handleDepartmentChange}
+              >
+                <option value="">Select a department</option>
+                {departments.map((department) => (
+                  <option key={department.deptName} value={department.deptId}>
+                    {department.deptName}
+                  </option>
                 ))}
-            </select>
-           </div>
+              </select>
+            </div>
 
 
-            <div className='mb-3'>
-              <label htmlFor=''>Email</label>
+           
+            <div className="mb-3">
+              <label htmlFor="">Email</label>
               <input
-                type='text'
-                className='form-control'
+                type="email"
+                className="form-control"
                 onChange={(e) => {
-                  setEmail(e.target.value)
+                  setEmail(e.target.value);
                 }}
               />
             </div>
 
-            <div className='mb-3'>
-              <label htmlFor=''>Mobile Number</label>
+           
+            <div className="mb-3">
+              <label htmlFor="">Mobile No</label>
               <input
-                type='tel'
-                className='form-control'
+                type="mobile"
+                className="form-control"
                 onChange={(e) => {
-                  setMobileNo(e.target.value)
+                  setMobileNo(e.target.value);
                 }}
               />
             </div>
 
-            <div className='mb-3'>
-              <label htmlFor=''>Password</label>
+          
+            <div className="mb-3">
+              <label htmlFor="">Password</label>
               <input
-                type='password'
-                className='form-control'
+                type="password"
+                className="form-control"
                 onChange={(e) => {
-                  setPassword(e.target.value)
+                  setPassword(e.target.value);
                 }}
               />
             </div>
 
-            <div className='mb-3'>
-              <label htmlFor=''>Confirm Password</label>
+            <div className="mb-3">
+              <label htmlFor="">Confirm Password</label>
               <input
-                type='password'
-                className='form-control'
+                type="password"
+                className="form-control"
                 onChange={(e) => {
-                  setConfirmPassword(e.target.value)
+                  setConfirmPassword(e.target.value);
                 }}
               />
             </div>
