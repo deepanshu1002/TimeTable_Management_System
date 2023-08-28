@@ -15,20 +15,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.dto.ApiResponseDto;
 import com.app.dto.AuthRequest;
 import com.app.dto.SignupRequest;
-import com.app.dto.userEmailPasswordDTO;
 import com.app.dto.UserDTO;
+import com.app.dto.userEmailPasswordDTO;
 import com.app.entities.IsValidUser;
 import com.app.service.ImageHandlingService;
 import com.app.service.UserService;
 
 @RestController
+@RequestMapping("/user")
 @CrossOrigin(origins = "*")
 public class UserController {
 	@Autowired
