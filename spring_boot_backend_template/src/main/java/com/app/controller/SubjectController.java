@@ -1,6 +1,6 @@
 package com.app.controller;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.AddFeedbackReqDTO;
-import com.app.dto.DepartmentDTO;
 import com.app.dto.SubjectDTO;
-import com.app.service.DepartmentService;
 import com.app.service.SubjectService;
 
 @RestController
@@ -55,4 +52,10 @@ public class SubjectController {
 		dto.setSubjectId(subId);
 		return ResponseEntity.status(HttpStatus.OK).body(subjectService.updateSubject(dto));
 	}
+	@GetMapping("/getall")
+	public List<String> getAllSubjectName()
+	{
+		return subjectService.getAllSubjectsName();
+	}
+	
 }

@@ -48,7 +48,7 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 	@Override
 	public ApiResponseDto addLeaveAppDetails(LeaveApplicationDTO leaveAppDetail) {
 		Users user = userRepo.findById(leaveAppDetail.getUserId()).orElseThrow(null);
-		LeaveApplication leaveApp = mapper.map(leaveAppDetail, LeaveApplication.class);
+		LeaveApplication leaveApp = mapper.map(leaveAppDetail, LeaveApplication.class);	
 		user.addLeaveApplication(leaveApp);
 		LeaveApplication leaveApp2 = leaveRep.save(leaveApp);
 		return new ApiResponseDto("Leave Application Submitted Successfull...");
@@ -63,7 +63,7 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 		List<LeaveApplicationDTO> leaveDto = new ArrayList<LeaveApplicationDTO>();
 
 		for (LeaveApplication la : leaveList) {
-			leaveDto.add(new LeaveApplicationDTO(la.getUser().getUserId(), la.getUser().getFirstName(),
+			leaveDto.add(new LeaveApplicationDTO(la.getLeaveApplicationId(),la.getUser().getUserId(), la.getUser().getFirstName(),
 					la.getFromDate(), la.getToDate(), la.getReason(), la.getStatus().toString()));
 		}
 		return leaveDto;

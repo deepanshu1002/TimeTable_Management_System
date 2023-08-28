@@ -3,6 +3,7 @@ import axios from 'axios';
 import { createUrl } from '../utils/utils';
 import { addSubjectApi } from '../services/subject'
 import { toast } from 'react-toastify'
+import '../css_file/rating.css'
 
 function AddSubjectDetails()
 {
@@ -10,6 +11,59 @@ function AddSubjectDetails()
     const [teacherId, setTeacherId] = useState('')
     const [subjectName, setSubjectName] = useState('')
     const [labId, setLabId] = useState('')
+    const [selectedDepartment, setSelectedDepartment] = useState('');
+    const [selectedLabVenue, setSelectedLabVenue] = useState('');
+    const [selectedTeacher, setSelectedTeacher] = useState('');
+    var [labVenues, setLabVenues] = useState([]);
+    var [teachers, setTeachers] = useState([]);
+    var [departments, setDepartments] = useState([]); 
+
+    useEffect(() => {
+      const url = createUrl('/department')
+      axios.get(url)
+        .then(response => {
+          setDepartments(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching departments:', error);
+        });
+         const url1 = createUrl(`/user/2`)
+        axios.get(url1)
+          .then(response => {
+            setTeachers(response.data);
+          })
+          .catch(error => {
+            console.error('Error fetching departments:', error);
+          });
+
+           const url2 = createUrl('/labvenue')
+          axios.get(url2)
+            .then(response => {
+              setLabVenues(response.data);
+            })
+            .catch(error => {
+              console.error('Error fetching departments:', error);
+            });
+    }, []);
+
+    const handleDepartmentChange = (event) => {
+      const newSelectedDepartment = event.target.value;
+      setSelectedDepartment(newSelectedDepartment);
+      console.log(event.target.value)
+      setDeptId(newSelectedDepartment )
+    };
+    const handleTeacherChange = (event) => {
+      const newSelectedTeacher = event.target.value;
+      setSelectedTeacher(newSelectedTeacher);
+      console.log(event.target.value)
+      setTeacherId(newSelectedTeacher)
+    };
+    const handleLabVenueChange = (event) => {
+      const newSelectedLabVenue = event.target.value;
+      setSelectedLabVenue(newSelectedLabVenue);
+      console.log(event.target.value)
+      setLabId(newSelectedLabVenue)
+    };
     var addSubject = async() =>
     {
            const response = await addSubjectApi(
@@ -26,65 +80,155 @@ function AddSubjectDetails()
     
     }
     return (
-        <div>
-          <h1 style={{ textAlign: 'center', margin: 10 }}>Add Subject</h1>
-    
-          <div className='row'>
-            <div className='col'></div>
-            <div className='col'>
-              <div className='form'>
-                <div className='mb-3'>
-                  <label htmlFor=''>Department Id</label>
-                  <input
-                    type='number'
-                    className='form-control'
-                    onChange={(e) => {
-                      setDeptId(e.target.value)
-                    }}
-                  />
-                </div>
-    
-                <div className='mb-3'>
-                  <label htmlFor=''>Teacher Id</label>
-                  <input
-                    type='number'
-                    className='form-control'
-                    onChange={(e) => {
-                      setTeacherId(e.target.value)
-                    }}
-                  />
-                </div>
-    
-                <div className='mb-3'>
-                  <label htmlFor=''>Subject Name</label>
-                  <input
-                    type='text'
-                    className='form-control'
-                    onChange={(e) => {
-                      setSubjectName(e.target.value)
-                    }}
-                  />
-                </div>
-                <div className='mb-3'>
-                  <label htmlFor=''>Lab Id</label>
-                  <input
-                    type='number'
-                    className='form-control'
-                    onChange={(e) => {
-                      setLabId(e.target.value)
-                    }}
-                  />
-                 
-    
-                  <button onClick={addSubject} className='btn btn-primary' style={{marginTop:'20px'}}>
-                    Add Subject
-                  </button>
-                </div>
+      <div>
+        <div className="row" style={{ fontWeight: "bold" }}>
+          <div
+            className="col-lg-6 m-auto" 
+            style={{
+              backgroundColor: "Highlight",
+              borderRadius: "20px",
+              padding: "30px",
+            }}
+          >
+            <div
+              className="mb-3"
+              style={{ backgroundColor: "blue", borderRadius: "10px" }}
+            >
+              <h2
+                style={{ textAlign: "center", margin: 10, color: "whitesmoke" }}
+              >
+                <b>Add Subject</b>
+              </h2>
+            </div>
+            <div className="form">         
+            </div>
+      <div className="row mb-5 align-items-center">
+  <div className="col-sm-3">
+    <label className="mb-0" style={{ color: "#343a40", fontSize: "18px" }}>
+      Department
+    </label>
+  </div>
+  <div className="col-sm-9">
+     <select
+      className="form-select form-select-lg"
+      value={selectedDepartment}
+      onChange={handleDepartmentChange}
+      style={{
+        backgroundColor: "#fff",
+        borderRadius: "8px",
+        padding: "10px",
+        border: "2px solid #ced4da",
+        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+        fontSize: "18px",
+        width: "100%",
+      }}
+    >
+      <option value="">Select a department</option>
+      {departments.map((department) => (
+        <option key={department.deptName} value={department.deptId}>
+          {department.deptName}
+        </option>
+      ))}
+    </select>
+  </div>
+</div>
+  
+<div className="row mb-5 align-items-center">
+  <div className="col-sm-3">
+    <label className="mb-0" style={{ color: "#343a40", fontSize: "18px" }}>
+      Professor
+    </label>
+  </div>
+  <div className="col-sm-9">
+    <select
+      className="form-select form-select-lg"
+      value={selectedTeacher} 
+      onChange={handleTeacherChange}
+      style={{
+        backgroundColor: "#fff",
+        borderRadius: "8px",
+        padding: "10px",
+        border: "2px solid #ced4da",
+        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+        fontSize: "18px",
+        width: "100%",
+      }}
+    >
+      <option value="">Select Professor</option>
+      {teachers.map((teacher) => (
+        <option key={teacher.firstName} value={teacher.userId}>
+          {teacher.firstName}
+        </option>
+      ))}
+    </select>
+  </div>
+</div>
+<div className="row mb-5 align-items-center">
+  <div className="col-sm-3">
+    <label className="mb-0" style={{ color: "#343a40", fontSize: "18px" }}>
+      Subject Name
+    </label>
+  </div>
+  <div className="col-sm-9">
+                <input className="form-select form-select-lg form-control"
+                 style={{
+                  backgroundColor: "#fff",
+                  borderRadius: "8px",
+                  padding: "10px",
+                  border: "2px solid #ced4da",
+                  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                  fontSize: "18px",
+                  width: "100%",
+                }}
+
+                  type="text"
+                  
+                  onChange={(e) => {
+                    setSubjectName(e.target.value);
+                  }}
+                />
+              </div>
+              </div>
+  
+              <div className="row mb-5 align-items-center">
+  <div className="col-sm-3">
+    <label className="mb-0" style={{ color: "#343a40", fontSize: "18px" }}>
+      Lab Venue
+    </label>
+  </div>
+  <div className="col-sm-9">
+    <select
+      className="form-select form-select-lg"
+      value={selectedLabVenue}
+      onChange={handleLabVenueChange}
+      style={{
+        backgroundColor: "#fff",
+        borderRadius: "8px",
+        padding: "10px",
+        border: "2px solid #ced4da",
+        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+        fontSize: "18px",
+        width: "100%",
+      }}
+    >
+      <option value="">Select Lab Venue</option>
+      {labVenues.map((lab) => (
+        <option key={lab.labVenue} value={lab.labId}>
+          {lab.labVenue}
+        </option>
+      ))}
+    </select>
+  </div>
+</div>
+  
+              <div className="mb-3" style={{ textAlign: "center" }}>
+                <button onClick={addSubject} className="btn btn-success">Add Subject</button>
+                
               </div>
             </div>
-            <div className='col'></div>
           </div>
+          <div className="col"></div>
         </div>
-      )
+      );
     }
     export default AddSubjectDetails;

@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -10,8 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.AuthRequest;
 import com.app.dto.AuthResp;
+import com.app.dto.DepartmentDTO;
 import com.app.dto.SignupRequest;
 import com.app.dto.SignupResp;
+import com.app.dto.TeacherDTO;
 import com.app.entities.Department;
 import com.app.entities.IsValidUser;
 import com.app.entities.Role;
@@ -41,7 +44,7 @@ public class UserServiceImpl implements UserService {
 		return mapper.map(user2, SignupResp.class);
 	}
 
-	public SignupResp validUser(Long userId,Long roleId) {
+	public SignupResp validUser(Long userId, Long roleId) {
 		IsValidUser validUser = isValidUser.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid userId"));
 		validUser.setRoleId(roleId);
@@ -60,11 +63,11 @@ public class UserServiceImpl implements UserService {
 
 	public AuthResp authenticateUser(AuthRequest request) {
 
-		Users user = userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword()).orElseThrow(()-> new ResourceNotFoundException("invalid user id"));
-		
-		return new AuthResp(user.getUserId(), user.getFirstName(), user.getLastName(),
-				                user.getEmail(), user.getDept().getDeptId(), user.getRole().getRoleId());
+		Users user = userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword())
+				.orElseThrow(() -> new ResourceNotFoundException("invalid user id"));
 
+		return new AuthResp(user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmail(),
+				user.getDept().getDeptId(), user.getRole().getRoleId());
 
 	}
 
@@ -99,5 +102,16 @@ public class UserServiceImpl implements UserService {
 		IsValidUser user = isValidUser.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("invalid user id"));
 		user.setRoleId(roleId);
+	}
+    
+	public List <TeacherDTO> getAllTeachers(Long roleId) {
+		Role role = roleRepo.findById(roleId).orElseThrow(()-> new ResourceNotFoundException("invalid role id"));
+		List <TeacherDTO> teacherList=new ArrayList<TeacherDTO>();
+		List <Users> teachers = userRepo.findByRole(role);
+		for(Users teacher: teachers) {
+			TeacherDTO teacherDto= mapper.map(teacher, TeacherDTO.class);
+			teacherList.add(teacherDto);
+		}
+		return teacherList;
 	}
 }
