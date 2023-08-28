@@ -104,6 +104,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public String updatePassword(String email, String password) {
+		Users user = userRepo.findByEmail(email)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid user Id"));
+		
+		user.setPassword(password);
+		userRepo.save(user);
+		return ("password updated successfully");
+	}
+
 	public ApiResponseDto editUserDetails(UserDTO user) {
 		Department dept = deptRepo.findById(user.getDeptId()).orElseThrow(() -> new ResourceNotFoundException("Invalid Department id!"));
 		Users userToEdit = userRepo.findById(user.getUserId())

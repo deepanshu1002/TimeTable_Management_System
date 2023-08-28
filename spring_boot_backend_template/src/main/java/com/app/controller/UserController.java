@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.dto.ApiResponseDto;
 import com.app.dto.AuthRequest;
 import com.app.dto.SignupRequest;
+import com.app.dto.userEmailPasswordDTO;
 import com.app.dto.UserDTO;
 import com.app.entities.IsValidUser;
 import com.app.service.ImageHandlingService;
@@ -66,10 +68,19 @@ public class UserController {
 		return userService.getAllIsValidUser();
 	}
 	@PutMapping("/updateroleid/{userId}/{roleId}")
-	public void updateRoleID(@ PathVariable Long userId,@PathVariable Long roleId)
+	public void updateRoleID(@PathVariable Long userId,@PathVariable Long roleId)
 	{
 		userService.updateRoleId(userId,roleId);
 	}
+
+	
+	@PutMapping("/set-password")
+	public void updatePassword(@RequestBody userEmailPasswordDTO dto)
+	{
+		System.out.println(dto);
+		userService.updatePassword(dto.getEmail(),dto.getPassword());
+	}
+	
 	@PutMapping("/editUser")
 	public ResponseEntity<ApiResponseDto> editUserDetails(@RequestBody @Valid UserDTO userDTO) 
 	{

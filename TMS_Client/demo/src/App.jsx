@@ -28,14 +28,35 @@ import ManageLeaves from './components/manageLeaves'
 
 import GetLectureDetails from './components/getLectureDetails'
 
+import ForgotPassword from './components/forgotPassword'
+import ForgotEmail from './testmail'
+import UpdatePassword from './components/updatePassword';
+import Navbar from './components/navbar'
+import { logout, login } from './features/authSlice'
+import Sidebar from './components/sidebar'
+
 import EditUser from './components/editUser'
 import ProfileEditUser from './components/profileImageEditUser'
 
 
 function App() {
+
+  const loginStatus = useSelector((state) => state.auth.status)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    // first read the current sessionStorage and see if user is logged in
+    if (sessionStorage['email'] && sessionStorage['email'].length > 0) {
+      // update the auth slice status to true
+      dispatch(login())
+    }
+  }, [])
+
 return (
-    <div className='container-fluid'>
+    <div className=''>
     
+    {loginStatus && <Navbar />}
+    {loginStatus && <Sidebar />}
       <div className='container'>
         <Routes>
         <Route path='/' element={<LoginUser/>} />
@@ -73,11 +94,15 @@ return (
 
          <Route path='/getlecturedetails' element={<GetLectureDetails/>} />
 
+
+         <Route path='/forgotpassword' element={<ForgotPassword/>} />
+          <Route path='/email' element={<ForgotEmail/>}/>
+          <Route path='/set-password*' element={<UpdatePassword/>}/>
+
          <Route path='/editUser' element={<EditUser/>}/>
 
          {/* <Route path='/profileEdit' element={<ProfileEditUser/>}/> */}
          
-
         </Routes>
       </div>
       <ToastContainer />

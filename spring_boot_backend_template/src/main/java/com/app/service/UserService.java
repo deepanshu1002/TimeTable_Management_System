@@ -18,6 +18,7 @@ public interface UserService {
 	public SignupResp addUserDetails(SignupRequest user);
 	public List<IsValidUser> getAllIsValidUser();
 	public void updateRoleId(Long userId,Long roleId);
+	public String updatePassword(String email, String password);
 	//edit user details
 	public ApiResponseDto editUserDetails(UserDTO user);
 	//get user by id
