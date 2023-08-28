@@ -37,6 +37,7 @@ public class Users {
 	private String mobileNo;
 	@Column(nullable = false)
 	private String password;
+	private String imagePath;
 	@ManyToOne
 	@JoinColumn(name = "role_id")
 	private Role role;

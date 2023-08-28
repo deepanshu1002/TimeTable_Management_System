@@ -29,6 +29,7 @@ import ManageLeaves from './components/manageLeaves'
 import GetLectureDetails from './components/getLectureDetails'
 
 import EditUser from './components/editUser'
+import ProfileEditUser from './components/profileImageEditUser'
 
 
 function App() {
@@ -73,6 +74,8 @@ return (
          <Route path='/getlecturedetails' element={<GetLectureDetails/>} />
 
          <Route path='/editUser' element={<EditUser/>}/>
+
+         {/* <Route path='/profileEdit' element={<ProfileEditUser/>}/> */}
          
 
         </Routes>

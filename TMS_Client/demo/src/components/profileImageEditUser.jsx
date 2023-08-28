@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import { createUrl, log } from "../utils/utils";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { editUserAPI } from "../services/user";
+import { editUserAPI, removeProfilePictureAPI, uploadProfilePictureAPI } from "../services/user";
 
-function EditUser({ userId }) {
+function ProfileEditUser({ userId }) {
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -20,6 +20,9 @@ function EditUser({ userId }) {
   const [departments, setDepartments] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const userId1 = sessionStorage.getItem("userId");
+  // Adding a state variables for profile picture
+  const [profilePicture, setProfilePicture] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     //disable button at launch
@@ -32,7 +35,7 @@ function EditUser({ userId }) {
         setDepartments(response.data);
       })
       .catch((error) => {
-        log("Error fetching departments:", error);
+        toast.error("Error fetching departments:", error);
       });
 
     // Fetch user data for a specific user (using userId)
@@ -54,15 +57,52 @@ function EditUser({ userId }) {
         //setSelectedDepartment(userData.deptId);
       })
       .catch((error) => {
-        log("Error fetching user data:", error);
+        toast.error("Error fetching user data:", error);
       });
   }, [userId]);
 
   const handleDepartmentChange = (e) => {
     // setSelectedDepartment(event.target.value);
     setUser({ ...user, deptId: e.target.value });
-    log(e.target.value);
+    console.log(e.target.value);
+    //setDeptId(selectedDepartment);
   };
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  // Function to handle profile picture upload
+  const handleProfilePictureUpload = async () => {
+    debugger
+    if (selectedFile) {
+      const response = await uploadProfilePictureAPI(userId1, selectedFile);
+
+      if (response) {
+        // Handle a successful upload, e.g., show a success message
+        toast.success('Profile picture uploaded successfully:', response);
+      } else {
+        // Handle errors, e.g., show an error message
+        toast.error('Error uploading profile picture');
+      }
+    }
+  };
+
+// Function to remove profile picture
+const removeProfilePicture = async () => {
+  try {
+    const response = await removeProfilePictureAPI(); // Replace with your API call to remove the picture
+    if (response) {
+      setProfilePicture(""); // Clear the profile picture URL
+      toast.success("Profile picture removed successfully");
+    } else {
+      toast.error("Error removing profile picture");
+    }
+  } catch (error) {
+    console.error("API error:", error);
+    toast.error("An error occurred while removing profile picture");
+  }
+};
   
   //button enable and disable
   function enableButton () {
@@ -106,7 +146,7 @@ function EditUser({ userId }) {
         toast.error("Error while updating user details, please try again");
       }
     } catch (error) {
-      log("API error:", error);
+      console.error("API error:", error);
       toast.error("An error occurred while updating user details");
     }
   };
@@ -120,12 +160,30 @@ function EditUser({ userId }) {
               <div className="card">
                 <div className="card-body">
                   <div className="d-flex flex-column align-items-center text-center">
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                      alt="Admin"
-                      className="rounded-circle p-1 bg-primary"
-                      width="110"
-                    />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="profilePictureInput"
+                    style={{ display: "none" }}
+                    onChange={handleFileChange}
+                  />
+                  <button onClick={handleProfilePictureUpload}>Upload Profile Picture</button>
+                  <img
+                    src={profilePicture || "https://bootdey.com/img/Content/avatar/avatar6.png"}
+                    alt="Admin"
+                    className="rounded-circle p-1 bg-primary"
+                    width="110"
+                    onClick={() => document.getElementById("profilePictureInput").click()}
+                    style={{ cursor: "pointer" }}
+                  />
+                  {profilePicture && (
+                    <button
+                      className="btn btn-danger mt-2"
+                      onClick={removeProfilePicture}
+                    >
+                      Remove Profile Picture
+                    </button>
+                  )}
                     <div className="mt-3">
                       <h4>
                         {user.firstName} {user.lastName}
@@ -383,4 +441,4 @@ function EditUser({ userId }) {
     </div>
   );
 }
-export default EditUser;
+export default ProfileEditUser;
