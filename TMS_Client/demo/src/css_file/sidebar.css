@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 body{
     background:#f4f3ef;    
 }
@@ -164,7 +164,6 @@ btn-menu {
     font-size: 14px;
     float: left;
 }
-=======
 /* NX = not expanded */
 
 .side-nav-container {
@@ -320,4 +319,4 @@ btn-menu {
 .logout-icon:hover {
 	background-color: var(--primary);
 }
->>>>>>> 3c55cd798def85d126df7cc76ea09021897e58a6
+

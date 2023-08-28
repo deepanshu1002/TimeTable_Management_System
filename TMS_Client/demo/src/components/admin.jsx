@@ -9,8 +9,21 @@ function AdminDashboard()
 {
   return (
     <div>
-      <h1 style={{ textAlign: 'center', margin: 10 }}>Admin Dashboard</h1>
-  
+      <div className='header'>
+     <h1 className='dashboard-heading' style={{
+  textAlign: 'center',
+  margin: '20px 0',
+  fontSize: '36px',
+  color: '#007bff', 
+  textTransform: 'uppercase',
+  letterSpacing: '2px',
+  fontWeight: 'bold',
+  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)'
+}}>
+  Welcome to the Admin Dashboard
+</h1>
+</div>
+
       <div className='row'>
         <div className='col'></div>
         <div className='col' style={{ display: 'flex', justifyContent: 'center' }}>

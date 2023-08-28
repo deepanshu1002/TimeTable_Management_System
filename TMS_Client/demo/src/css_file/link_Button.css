@@ -15,4 +15,25 @@
 
 .button-link:hover {
   background-color: #3868fb; /* Button background color on hover */
+  color:white;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff; /* Optional: Add a background color to the header */
+  z-index: 100; /* Ensure the header stays above other content */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+.dashboard-heading {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 28px;
+  color: #007bff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
