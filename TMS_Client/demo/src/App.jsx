@@ -35,8 +35,12 @@ import { logout, login } from './features/authSlice'
 import Sidebar from './components/sidebar'
 
 import EditUser from './components/editUser'
+
 import NavbarA from './components/navbarA';
 // import Navbar from './components/navbar'
+
+import ProfileEditUser from './components/profileImageEditUser'
+
 
 
 function App() {
@@ -103,11 +107,12 @@ function App() {
 
           <Route path='/editUser' element={<EditUser />} />
 
-          <Route path='/sidebar' element={<Sidebar />} />
+         {/* <Route path='/profileEdit' element={<ProfileEditUser/>}/> */}
+         
         </Routes>
       </div>
     </div>
-    {/* <ToastContainer /> */}
+    <ToastContainer />
   </>)
 }
 export default App

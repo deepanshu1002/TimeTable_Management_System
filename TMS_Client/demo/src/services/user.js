@@ -10,7 +10,7 @@ export async function registerUserApi(
     userId,
     deptId
   ) {
-    const url = createUrl('/register')
+    const url = createUrl('/user/register')
     const body = {
         userId,
         firstName,
@@ -33,7 +33,8 @@ export async function registerUserApi(
   }
 
   export async function loginUserApi(email, password) {
-    const url = createUrl('/signIn')
+    debugger
+    const url = createUrl('/user/signIn')
     const body = {
       email,
       password,
@@ -51,7 +52,7 @@ export async function registerUserApi(
   }
 
   export async function editUserAPI(user){
-    const url = createUrl('/editUser')
+    const url = createUrl('/user/editUser')
     const body = user
     debugger
     try {
@@ -61,6 +62,41 @@ export async function registerUserApi(
     }catch(ex){
       log(ex)
       return null
+    }
+  }
+  
+  // upload image API
+  export async function uploadProfilePictureAPI(userId, imageFile){
+    const url = createUrl(`/user/uploadImage/${userId}`)
+    // const formData = new FormData();
+    // formData.append('image', imageFile);
+
+    try {
+      log(imageFile)
+      const response = await axios.post(url, imageFile, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      log(response.data);
+      return response.data;
+    } catch (ex) {
+      log(ex);
+      return null;
+    }
+  }
+
+  // remove image API
+  export async function removeProfilePictureAPI(userId) {
+    const url = createUrl(`/user/image/${userId}`);
+  
+    try {
+      const response = await axios.delete(url);
+      log(response.data);
+      return response.data;
+    } catch (ex) {
+      log(ex);
+      return null;
     }
   }
 
