@@ -100,9 +100,9 @@
 import React from "react";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 // import "../../node_modules/bootstrap/dist/js/bootstrap.bundle"; // Make sure to include the Bootstrap JavaScript bundle
-import '../../node_modules/bootstrap/dist/js/bootstrap.bundle'
+import 'bootstrap/dist/js/bootstrap.bundle'
 
-function NavbarA() {
+function NavbarB() {
   return (
     <nav className="navbar navbar-expand-md navbar-light bg-primary fixed-top">
       <a className="navbar-brand" href="#" style={{fontStyle:"normal", marginLeft:'8px', fontSize:'30px', color:'white'}}>
@@ -124,7 +124,7 @@ function NavbarA() {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <a className="nav-link" href="#">
-              HomeA
+              HomeB
             </a>
           </li>
           <li className="nav-item">
@@ -174,4 +174,4 @@ function NavbarA() {
   );
 }
 
-export default NavbarA;
+export default NavbarB;

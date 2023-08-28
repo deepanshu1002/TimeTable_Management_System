@@ -64,7 +64,7 @@ function App() {
   return (<>
 
     <div className='row'>
-      <div className='app-container col-3'>
+      <div className='app-container '>
         {loginStatus && <NavbarA />}
         {/* {loginStatus && <Sidebar />} */}
       </div>
