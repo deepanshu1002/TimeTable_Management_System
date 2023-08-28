@@ -9,7 +9,7 @@ import LeaveApplication from './leaveApplication';
 function  ManageLeaves() {
     const [leaveApplications, setLeaveApplications] = useState([])
     useEffect(() => {
-        const url = createUrl('/leaveapp')  
+        const url = createUrl('/leaveapp/pending')  
         console.log(url)
         axios.get(url)
           .then(response => {
@@ -21,14 +21,28 @@ function  ManageLeaves() {
             console.error('Error fetching leave applications:', error);
           });
       }, []);
-
+      
+      const getLeaveApp=()=>
+      {
+        const url = createUrl('/leaveapp/pending')  
+        console.log(url)
+        axios.get(url)
+          .then(response => {
+            console.log(response.data);
+            setLeaveApplications(response.data);
+          })
+          .catch(error => {
+            console.log(error.response)
+            console.error('Error fetching leave applications:', error);
+          });
+      }
       const approve = (leavApplicationId, status) => {
         const url = createUrl(`/leaveapp/${leavApplicationId}/${status}`);
         axios
           .put(url)
           .then(() => {
-           // getIsValidUsers();
-            toast.success('User Approved') // Refresh the user list after successful approval
+            getLeaveApp();
+            toast.success('Application Approved') // Refresh the user list after successful approval
           })
           .catch((error) => {
             console.error('Error in approve:', error);
@@ -36,15 +50,16 @@ function  ManageLeaves() {
       };
     
       const reject = (leavApplicationId, status) => {
+        debugger;
         const url = createUrl(`/leaveapp/${leavApplicationId}/${status}`);
         axios.put(url).then(() => {
-          //getIsValidUsers(); // Refresh the user list after successful rejection
+          getLeaveApp(); // Refresh the user list after successful rejection
         });
       };
     
       return (
         <div className="manage-users-container">
-          <center><h1>Manage Leave Application</h1></center>
+          <center><h1     >Manage Leave Application</h1></center>
           <table className="table table-striped" style={{marginTop:'20px'}}>
             <thead>
               <tr>

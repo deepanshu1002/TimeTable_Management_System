@@ -30,7 +30,7 @@ public class LectureController {
 	
 	@GetMapping
 	public ResponseEntity<?> getAllLectureDetails() {
-//		System.out.println("in get dept dtls " + deptId);
+	//System.out.println("in get dept dtls " + deptId);
 		return ResponseEntity.ok(lectureService.getAllLectureDetails());
 	}
 	

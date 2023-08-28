@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.LabVenueDTO;
+import com.app.dto.LabVenuesDTO;
 import com.app.service.LabServiceImpl;
 
 @RestController
@@ -47,5 +50,11 @@ public class LabController {
 
 		return ResponseEntity.status(HttpStatus.OK).body(labService.getAlllabs(id));
 	}
+	
+	@GetMapping
+	public ResponseEntity<?> getAllLabDetails() {
+		return ResponseEntity.ok(labService.getAllLabDetails());
+	}
+
 
 }

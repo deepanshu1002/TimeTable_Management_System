@@ -53,10 +53,10 @@ public class UserController {
 		return userService.deleteNotValidUser(userId);
 	}
 
-	@GetMapping("/validuser/{userId}/{roleId}") 
-	public ResponseEntity<?> validUser(@PathVariable Long userId,@PathVariable Long roleId) {
+	@GetMapping("/validuser/{userId}/{roleId}")
+	public ResponseEntity<?> validUser(@PathVariable Long userId, @PathVariable Long roleId) {
 		System.out.println("yoyo");
-		return ResponseEntity.ok(userService.validUser(userId,roleId));
+		return ResponseEntity.ok(userService.validUser(userId, roleId));
 	}
 
 	@PutMapping("/update")
@@ -68,11 +68,19 @@ public class UserController {
 	public List<IsValidUser> getAllIsValidUsers() {
 		return userService.getAllIsValidUser();
 	}
+
 	@PutMapping("/updateroleid/{userId}/{roleId}")
-	public void updateRoleID(@PathVariable Long userId,@PathVariable Long roleId)
-	{
-		userService.updateRoleId(userId,roleId);
+	public void updateRoleID(@PathVariable Long userId, @PathVariable Long roleId) {
+		userService.updateRoleId(userId, roleId);
 	}
+
+//	@GetMapping("/{roleId}")
+//	public ResponseEntity<?> getAllTeachers(@PathVariable Long roleId) {
+//		return ResponseEntity.ok(userService.getAllTeachers(roleId));
+//	public void updateRoleID(@PathVariable Long userId,@PathVariable Long roleId)
+//	{
+//		userService.updateRoleId(userId,roleId);
+//	}
 
 	
 	@PutMapping("/set-password")

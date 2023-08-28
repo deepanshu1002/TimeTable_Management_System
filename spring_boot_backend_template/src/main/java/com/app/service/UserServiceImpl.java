@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -13,6 +14,7 @@ import com.app.dto.AuthRequest;
 import com.app.dto.AuthResp;
 import com.app.dto.SignupRequest;
 import com.app.dto.SignupResp;
+import com.app.dto.TeacherDTO;
 import com.app.dto.UserDTO;
 import com.app.entities.Department;
 import com.app.entities.IsValidUser;
@@ -103,18 +105,29 @@ public class UserServiceImpl implements UserService {
 		user.setRoleId(roleId);
 	}
 
+	public List<TeacherDTO> getAllTeachers(Long roleId) {
+		Role role = roleRepo.findById(roleId).orElseThrow(() -> new ResourceNotFoundException("invalid role id"));
+		List<TeacherDTO> teacherList = new ArrayList<TeacherDTO>();
+		List<Users> teachers = userRepo.findByRole(role);
+		for (Users teacher : teachers) {
+			TeacherDTO teacherDto = mapper.map(teacher, TeacherDTO.class);
+			teacherList.add(teacherDto);
+		}
+		return teacherList;
+	}
+
 	@Override
 	public String updatePassword(String email, String password) {
-		Users user = userRepo.findByEmail(email)
-				.orElseThrow(() -> new ResourceNotFoundException("Invalid user Id"));
-		
+		Users user = userRepo.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Invalid user Id"));
+
 		user.setPassword(password);
 		userRepo.save(user);
 		return ("password updated successfully");
 	}
 
 	public ApiResponseDto editUserDetails(UserDTO user) {
-		Department dept = deptRepo.findById(user.getDeptId()).orElseThrow(() -> new ResourceNotFoundException("Invalid Department id!"));
+		Department dept = deptRepo.findById(user.getDeptId())
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Department id!"));
 		Users userToEdit = userRepo.findById(user.getUserId())
 				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 		userToEdit.setFirstName(user.getFirstName());
@@ -123,11 +136,11 @@ public class UserServiceImpl implements UserService {
 		userToEdit.setMobileNo(user.getMobileNo());
 		userToEdit.setPassword(user.getPassword());
 		userToEdit.setDept(dept);
-		
+
 		Users updateUser = userRepo.save(userToEdit);
-		
+
 		UserDTO updateUserDTO = mapper.map(updateUser, UserDTO.class);
-		 
+
 		return new ApiResponseDto("User details updated successfully");
 	}
 
