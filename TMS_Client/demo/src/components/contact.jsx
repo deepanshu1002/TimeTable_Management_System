@@ -18,7 +18,7 @@ function contact() {
                   alt=""
                   class="img-circle"
                   src="http://127.0.0.1:3000/pics/Prathamesh.jpeg"
-                  style={{ height: "200px", width: "200px" }}
+                  style={{ height: "250px", width: "180px" }}
                 />
                 <h3 class="m-b-xs">
                   <strong>Prathamesh Patil</strong>
@@ -47,7 +47,7 @@ function contact() {
                   alt=""
                   class="img-circle"
                   src="http://127.0.0.1:3000/pics/Rohan.jpg"
-                  style={{ height: "200px", width: "200px" }}
+                  style={{ height: "250px", width: "220px" }}
                 />
                 <h3 class="m-b-xs">
                   <strong>Rohan Khidrapure</strong>
@@ -76,7 +76,7 @@ function contact() {
                   alt=""
                   class="img-circle"
                   src="http://127.0.0.1:3000/pics/Deepanshu.jpeg"
-                  style={{ height: "200px", width: "200px" }}
+                  style={{ height: "250px", width: "200px" }}
                 />
                 <h3 class="m-b-xs">
                   <strong>Deepanshu Jain</strong>
@@ -93,7 +93,7 @@ function contact() {
                     Deepanshu Jain
                   </a>
                   <br />
-                  <abbr title="Phone">P:</abbr> (+91) 9637972261
+                  <abbr title="Phone">P:</abbr> (+91) 9625919835
                 </address>
               </a>
             </div>
@@ -105,7 +105,7 @@ function contact() {
                   alt=""
                   class="img-circle"
                   src="http://127.0.0.1:3000/pics/Saurav.jpeg"
-                  style={{ height: "200px", width: "200px" }}
+                  style={{ height: "250px", width: "200px" }}
                 />
                 <h3 class="m-b-xs">
                   <strong>Saurav S. Sanap</strong>
@@ -122,7 +122,7 @@ function contact() {
                     Saurav Sanap
                   </a>
                   <br />
-                  <abbr title="Phone">P:</abbr> (+91) 9637972261
+                  <abbr title="Phone">P:</abbr> (+91) 9420381868
                 </address>
               </a>
             </div>
