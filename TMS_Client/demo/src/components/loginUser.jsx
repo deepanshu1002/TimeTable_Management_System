@@ -95,7 +95,7 @@ function LoginUser() {
                                     <h1>Login</h1>
                                     <p className="text-muted">Sign In to your account</p>
                                     <div className="input-group mb-3">
-                                        <span className="input-group-addon"><i class="fa fa-user"></i></span>
+                                        <span className="input-group-addon"><i className="fa fa-user"></i></span>
                                         &nbsp;&nbsp;
                                         <input type="text" className="form-control" placeholder="Username"
                                             onChange={(e) => {
@@ -103,7 +103,7 @@ function LoginUser() {
                                             }} />
                                     </div>
                                     <div className="input-group mb-4">
-                                        <span className="input-group-addon"><i class="fa fa-lock"></i></span>
+                                        <span className="input-group-addon"><i className="fa fa-lock"></i></span>
                                         &nbsp;&nbsp;
                                         <input type="password" className="form-control" placeholder="Password"
                                             onChange={(e) => {

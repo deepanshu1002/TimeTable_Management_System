@@ -85,13 +85,13 @@ function Navbar() {
           </li>
           &nbsp;&nbsp;
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <a className="nav-link" href="/aboutUs">
               About
             </a>
           </li>
           &nbsp;&nbsp;
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <a className="nav-link" href="/contact">
               Contact
             </a>
           </li>
@@ -130,7 +130,7 @@ function Navbar() {
         </ul>
       </div>
     </nav>
-    <div style={{ height: '150px' }}></div>
+    {/* <div style={{ height: '150px' }}></div> */}
   </>);
 }
 

@@ -199,7 +199,7 @@ const removeProfilePicture = async () => {
   };
 
   return (
-    <div>
+    <div style={{padding: "35px"}}>
       <div className="container" >
         <div className="main-body" >
           <div className="row" >
