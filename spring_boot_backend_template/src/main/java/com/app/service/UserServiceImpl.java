@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 	public AuthResp authenticateUser(AuthRequest request) {
 
 		Users user = userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword())
-				.orElseThrow(() -> new ResourceNotFoundException("invalid user id"));
+				.orElseThrow(() -> new ResourceNotFoundException("user not found"));
 
 		return new AuthResp(user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmail(),
 				user.getDept().getDeptId(), user.getRole().getRoleId());

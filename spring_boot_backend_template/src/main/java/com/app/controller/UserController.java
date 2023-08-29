@@ -51,6 +51,7 @@ public class UserController {
 
 	@PostMapping("/signIn")
 	public ResponseEntity<?> authenticateUser(@RequestBody @Valid AuthRequest request) {
+		System.out.println("request = "+request);
 		return new ResponseEntity<>(userService.authenticateUser(request), HttpStatus.OK);
 	}
 

@@ -58,7 +58,7 @@ function LoginUser() {
                 // update global store's authSlice with status = true
                 dispatch(login())
                 if(roleId == '1'){
-                    navigate('/admin');
+                    navigate('/admindashboard');
                 }
 
                 else if(roleId == '2'){
