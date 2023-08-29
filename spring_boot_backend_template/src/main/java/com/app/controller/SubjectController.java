@@ -57,5 +57,9 @@ public class SubjectController {
 	{
 		return subjectService.getAllSubjectsName();
 	}
+	@GetMapping("/get/{teacherId}")
+	public ResponseEntity<?> getAllSubject(@PathVariable Long teacherId) {
+		return ResponseEntity.status(HttpStatus.OK).body(subjectService.getAllSubjects(teacherId));
+	}
 	
 }

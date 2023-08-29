@@ -1,8 +1,11 @@
-function Teacher(){
+function Teacher() {
 
-        
-    return(<>
-    <h1>welcome teacher</h1>
+
+    return (<>
+        <center><h1>welcome teacher</h1>
+
+        </center>
+
     </>)
 }
 

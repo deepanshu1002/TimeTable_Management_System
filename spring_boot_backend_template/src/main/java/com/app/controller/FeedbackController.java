@@ -22,22 +22,29 @@ import com.app.service.FeedbackService;
 public class FeedbackController {
 	@Autowired
 	private FeedbackService feedbackService;
-	
+
 	@PostMapping
-	public ResponseEntity<?> addFeedback(@RequestBody AddFeedbackReqDTO feedback){
+	public ResponseEntity<?> addFeedback(@RequestBody AddFeedbackReqDTO feedback) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.addFeedback(feedback));
 	}
-	
+
 	@GetMapping("/{subName}")
 	public ResponseEntity<?> getFeedbackAvg(@PathVariable String subName) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.getFeedback(subName));
-		
+
 	}
-	
+
 	@GetMapping("/{dateString}/{subjectId}")
-	public ResponseEntity<?> getFeedback(@PathVariable String dateString,@PathVariable Long subjectId){
-		LocalDate date=LocalDate.parse(dateString);
-		return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.getFeedback(date,subjectId));
+	public ResponseEntity<?> getFeedback(@PathVariable String dateString, @PathVariable Long subjectId) {
+		LocalDate date = LocalDate.parse(dateString);
+		return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.getFeedback(date, subjectId));
 	}
-	
+
+	@GetMapping("/teacher/{dateString}/{subjectId}")
+	public ResponseEntity<?> getTeacherFeedback(@PathVariable String dateString,@PathVariable Long subjectId) {
+		
+		LocalDate date = LocalDate.parse(dateString);
+		return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.getTeacherFeedback(date, subjectId));
+	}
+
 }

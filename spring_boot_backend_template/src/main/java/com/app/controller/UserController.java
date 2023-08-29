@@ -74,13 +74,10 @@ public class UserController {
 		userService.updateRoleId(userId, roleId);
 	}
 
-//	@GetMapping("/{roleId}")
-//	public ResponseEntity<?> getAllTeachers(@PathVariable Long roleId) {
-//		return ResponseEntity.ok(userService.getAllTeachers(roleId));
-//	public void updateRoleID(@PathVariable Long userId,@PathVariable Long roleId)
-//	{
-//		userService.updateRoleId(userId,roleId);
-//	}
+	@GetMapping("/{roleId}")
+	public ResponseEntity<?> getAllTeachers(@PathVariable Long roleId) {
+		return ResponseEntity.ok(userService.getAllTeachers(roleId));
+	}
 
 	
 	@PutMapping("/set-password")

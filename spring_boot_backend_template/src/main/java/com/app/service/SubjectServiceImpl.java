@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -11,6 +12,7 @@ import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.ApiResponseDto;
 import com.app.dto.SubjectDTO;
 import com.app.dto.SubjectandDeptandTeacherDTO;
+import com.app.dto.SubjectsDTO;
 import com.app.entities.Department;
 import com.app.entities.Lab;
 import com.app.entities.Subject;
@@ -61,7 +63,7 @@ public class SubjectServiceImpl implements SubjectService {
 			System.out.println(subjectEntity);
 			user.addSubject(subjectEntity);
 			dept.addSubject(subjectEntity);
-			//to add null values to subject with no lab
+			// to add null values to subject with no lab
 			if (sub.getLabId() != null) {
 				Lab lab = labRepo.findById(sub.getLabId())
 						.orElseThrow(() -> new ResourceNotFoundException("invalid labId"));
@@ -100,11 +102,20 @@ public class SubjectServiceImpl implements SubjectService {
 				sub.getTeacherId().getFirstName().concat(sub.getTeacherId().getLastName()), sub.getSubjectName());
 		return subjectDetails;
 	}
-	
-	public List<String> getAllSubjectsName()
-	{
+
+	public List<String> getAllSubjectsName() {
 		return subjectRepo.getAllSubjectName();
-		
+
+	}
+
+	public List<SubjectsDTO> getAllSubjects(Long teacherId) {
+		List<Subject> subjects = subjectRepo.findByTeacherIdUserId(teacherId);
+		List<SubjectsDTO> subjectDtoList = new ArrayList<SubjectsDTO>();
+		for (Subject subject : subjects) {
+			SubjectsDTO Dto = mapper.map(subject, SubjectsDTO.class);
+			subjectDtoList.add(Dto);
+		}
+		return subjectDtoList;
 	}
 
 }
