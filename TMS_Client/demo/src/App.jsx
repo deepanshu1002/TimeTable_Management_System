@@ -45,6 +45,8 @@ import NavbarA from './components/navbarA';
 import ProfileEditUser from './components/profileImageEditUser'
 import CheckRatings from './components/checkRatings';
 import Rating from './components/newRatings';
+import AboutUs from './components/aboutUs'
+import Contact from './components/contact'
 
 
 
@@ -64,7 +66,7 @@ function App() {
   return (<>
 
     <div className='row'>
-      <div className='app-container col-3'>
+      <div className='app-container '>
         {loginStatus && <NavbarA />}
         {/* {loginStatus && <Sidebar />} */}
       </div>
@@ -113,7 +115,7 @@ function App() {
 
           <Route path='/editUser' element={<EditUser />} />
 
-          {/* <Route path='/profileEdit' element={<ProfileEditUser/>}/> */}
+          <Route path='/profileEdit' element={<ProfileEditUser/>}/>
 
           <Route path='/managedepartment' element={<AddDepartment />} />
 
@@ -137,6 +139,11 @@ function App() {
           <Route path="/rating/:subId" element={<Rating />} />
 
           {/* <Route path='/navbar' element={<Navbar/>} /> */}
+
+          <Route  path='/aboutUs' element={<AboutUs />} />
+
+          <Route path='/contact' element={<Contact/>} />
+          
         </Routes>
 
       </div>

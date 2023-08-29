@@ -73,11 +73,7 @@ export async function registerUserApi(
 
     try {
       log(imageFile)
-      const response = await axios.post(url, imageFile, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.post(url, imageFile);
       log(response.data);
       return response.data;
     } catch (ex) {
