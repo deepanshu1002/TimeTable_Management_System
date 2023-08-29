@@ -18,7 +18,8 @@ import com.app.service.FeedbackService;
 
 @RestController
 @RequestMapping("/feedback")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
+
 public class FeedbackController {
 	@Autowired
 	private FeedbackService feedbackService;

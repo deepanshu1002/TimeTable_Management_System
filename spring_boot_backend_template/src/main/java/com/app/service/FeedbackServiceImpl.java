@@ -2,9 +2,6 @@ package com.app.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +16,6 @@ import com.app.dto.ApiResponseDto;
 import com.app.dto.FeedbackDTO;
 import com.app.dto.FeedbacksDTO;
 import com.app.dto.GetFeedbackDTO;
-import com.app.entities.Department;
 import com.app.entities.Feedback;
 import com.app.entities.Subject;
 import com.app.entities.Users;

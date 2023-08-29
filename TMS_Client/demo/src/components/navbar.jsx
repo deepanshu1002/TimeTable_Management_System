@@ -17,12 +17,12 @@ function Navbar() {
   const dashboardForTeacher = [{prop:"Show all Leave Applications", link:"/getLeaveApplication"},
                                     {prop:"Apply Leave Application", link:"leaveapplication"}, 
                                     {prop:"ViewTimeTable",link:"" }]
-  const dashboardForStudent = [{prop:"Student", link:""},{prop:"Profile", link:""}, {prop:"ViewTimeTable", link:""}]
+  const dashboardForStudent = [{prop:"Student", link:""},{prop:"Profile", link:""}, {prop:"ViewTimeTable", link:"/timetable"}]
   const [dashboard, setDashboard] = useState([]);
 
   const homeForAdmin= ["/admindashboard"]
   const homeForTeacher=["/teacher"]
-  const homeForStudent =["/student"]
+  const homeForStudent =["/timetable"]
 
   const [home, setHome]= useState([]);
 

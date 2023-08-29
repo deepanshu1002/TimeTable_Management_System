@@ -103,6 +103,18 @@ public class SubjectServiceImpl implements SubjectService {
 		return subjectDetails;
 	}
 
+	@Override
+	public List<SubjectDTO> getAllSubject(Long deptId) {
+		List<SubjectDTO> subDTOs = new ArrayList<SubjectDTO>();
+		List<Subject> subjects = subjectRepo.findByDeptDeptId(deptId);
+		for (Subject sub : subjects) {
+			System.out.println(sub.getSubjectName());
+			subDTOs.add(new SubjectDTO(sub.getDept().getDeptId(), sub.getSubjectId(), sub.getTeacherId().getUserId(),
+					sub.getSubjectName(), sub.getLabVenue().getLabId()));
+		}
+		return subDTOs;
+	}
+
 	public List<String> getAllSubjectsName() {
 		return subjectRepo.getAllSubjectName();
 
@@ -116,6 +128,7 @@ public class SubjectServiceImpl implements SubjectService {
 			subjectDtoList.add(Dto);
 		}
 		return subjectDtoList;
+
 	}
 
 }

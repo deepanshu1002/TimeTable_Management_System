@@ -4,26 +4,21 @@ import { createUrl, log } from "../utils/utils";
 import "../Timetable.css";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { getTimetable } from "../services/timeTable.js";
-import "../Button.css";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
-function ViewTimetable() {
+function ViewTimetableAdmin() {
   const [timetableSlot, setTimetableSlot] = useState([]);
   const [deptName, setDeptName] = useState("");
   const [weekDate, setWeekDate] = useState("");
   const [opacity, setOpacity] = useState("1");
   const [formattedDate, setFormattedDate] = useState("");
   const [day, setDay] = useState("");
-  const [startDay, setStartDay] = useState();
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [display, setDisplay] = useState("none");
   const [lectureData, setLectureData] = useState([
-    {
-      lectureData: "no data",
-      topicsCovered: "no data",
-      tommorrowAgenda: "no data",
-    },
+    { lectureAgenda: "", topicsCovered: "", tomLecture: "" },
   ]);
   const [feedback, setFeedback] = useState("none");
   const [dayColor, setDayColor] = useState([
@@ -34,99 +29,58 @@ function ViewTimetable() {
     "black",
     "black",
   ]);
-  const [date, setDate] = useState("");
+  const [uri, setUri] = useState(useParams());
+  const [date, setDate] = useState(uri["date"]);
+  const [startDate, setStartDate] = useState(new Date(uri["date"]));
   const [selectedRowData, setSelectedRowData] = useState(null);
-  const [selectedRating, setSelectedRating] = useState(0);
-  const [lectureDataId, setLectureDataId] = useState("");
-  const [departmentId, setDepartmentId] = useState(sessionStorage['deptId']);
-
-  // useEffect(() => {
-  //   setDate();
-  //   loadSlots();
-  // }, []);
+  const [subjects, setSubjects] = useState([]);
+  const [selectedSubject, setSelectedSubject] = useState();
+  const [classrooms, setClassrooms] = useState([]);
+  const [selectedClassroom, setSelectedClassroom] = useState();
 
   useEffect(() => {
-    const startWeekDate = setDateToStartOfWeek();
-    setDate(startWeekDate);
-    setStartDay(new Date(startWeekDate));
-  }, []);
-
-  // useEffect(() => {
-  //   if (year !== "" && month !== "" && day !== "") {
-  //     const formattedDate = `${year}-${month}-${day}`;
-  //     log(formattedDate);
-  //     loadSlots(formattedDate);
-  //   }
-  // }, [year, month, day]);
-
-  useEffect(() => {
-    debugger;
-    log(date);
-    if (date !== "") loadSlots(date, departmentId); //set the id for student from session storage
-  }, [date]);
-
-  const showSubjectData = (rowData) => {
-    debugger;
-    setSelectedRowData(rowData);
-    setDisplay("block");
-    setOpacity("0.2");
-
-    const url = createUrl(
-      `/lecture/slotLectureData/${rowData["deptId"]}/${rowData["date"]}/${rowData["startTime"]}`
-    );
+    const url1 = createUrl(`/subject/getallsubjects/${uri["deptId"]}`);
     axios
-      .get(url)
+      .get(url1)
       .then((response) => {
-        const data = response.data;
-        log(data);
-        setLectureData([
-          {
-            // lectureData: data["lectureData"],
-            topicsCovered: data["topicsCovered"],
-            tommorrowAgenda: data["tommorrowAgenda"],
-          },
-        ]);
-        setLectureDataId(data["id"]);
+        log(response);
+        setSubjects(response.data);
       })
       .catch((error) => {
-        setLectureData([
-          {
-            lectureData: "no data",
-            topicsCovered: "no data",
-            tommorrowAgenda: "no data",
-          },
-        ]);
+        toast.error("Error fetching subjects data");
       });
-  };
 
-  const setDateToStartOfWeek = () => {
+    const url2 = createUrl(`/classroom`);
+    axios
+      .get(url2)
+      .then((response) => {
+        log(response);
+        setClassrooms(response.data);
+      })
+      .catch((error) => {
+        toast.error("Error fetching classrooms data");
+      });
+  }, []);
+
+  useEffect(() => {
     debugger;
-    const now = new Date();
-    const dayOfWeek = now.getDay(); // 0 (Sunday) to 6 (Saturday)
+    loadSlots(date, uri["deptId"]);
+    log(date);
+  }, [date]);
 
-    if (dayOfWeek !== 1) {
-      // Monday is 1
-      const daysToMonday = dayOfWeek === 0 ? 1 : 1 - dayOfWeek;
-      now.setDate(now.getDate() + daysToMonday);
-    }
-
-    const newYear = now.getFullYear();
-    const newMonth = String(now.getMonth() + 1).padStart(2, "0");
-    const newDay = String(now.getDate()).padStart(2, "0");
-
-    setYear(newYear);
-    setMonth(newMonth);
-    setDay(newDay);
-
-    const newFormattedDate = `${newYear}-${newMonth}-${newDay}`;
-    return newFormattedDate;
+  const editData = (rowData) => {
+    debugger;
+    setSelectedRowData(rowData); // Store the data of the clicked row
+    log("row data");
+    log(rowData);
+    setDisplay("block"); // Show the edit popup
+    setOpacity("0.3"); // Dim the background
   };
 
   const loadSlots = async (currentDate, deptId) => {
     debugger;
 
     const response = await getTimetable(currentDate, deptId); //set deptId as second parameter.
-    log(response);
     if (response["status"] === 200) {
       log(response.data);
       setDeptName(response.data[0].deptName);
@@ -137,14 +91,9 @@ function ViewTimetable() {
     }
   };
 
-  // const loadDays = async (noOfDays) => {
-  //   debugger;
-  //   let day = parseInt(startDay) + noOfDays;
-  //   setDay(day);
-  // };
   const loadDays = async (noOfDays) => {
     debugger;
-    let modifiedDate = new Date(startDay);
+    let modifiedDate = new Date(startDate);
     modifiedDate.setDate(modifiedDate.getDate() + noOfDays);
 
     // if (modifiedDate.getMonth() !== startDate.getMonth()) {
@@ -161,68 +110,39 @@ function ViewTimetable() {
     setDate(modifiedDate.toISOString().split("T")[0]); // Convert to YYYY-MM-DD format
   };
 
-  const sendFeedback = async () => {
-    debugger;
-    log(`row data = ${selectedRowData}`);
-    const currentDateTime = new Date();
-    const lectureEndTime = new Date(
-      `${selectedRowData.date} ${selectedRowData.endTime}`
-    );
-
-    if (currentDateTime < lectureEndTime) {
-      toast.error("Lecture time has not passed yet.");
-      return;
-    }
-
-    if (selectedRating === 0) {
-      toast.error("Please select a rating before submitting.");
-      return;
-    }
-
-    if (feedback.trim() === "") {
-      toast.error("Please enter your feedback before submitting.");
-      return;
-    }
-
-    const url = createUrl(`/feedback`);
-    const body = {
-      studentId: 3, //set the userid through sessionstrorage
-      subjectId: selectedRowData["subjectId"],
-      deptId: selectedRowData["deptId"],
-      date: selectedRowData["date"],
-      rating: selectedRating,
-      feedback: feedback,
-    };
-    axios
-      .post(url, body)
-      .then((response) => {
-        toast.success("Feedback submitted successfully");
-        setSelectedRating(1);
-        setFeedback("none");
-        setDisplay("none");
-        setOpacity("1");
-      })
-      .catch((error) => {
-        toast.error("Error sending feedback try again later");
-      });
+  const handleSubjectChange = (event) => {
+    setSelectedSubject(event.target.value);
   };
 
-  const downloadData = () => {
-    const url = createUrl(`/lecture/download/${lectureDataId}`);
-    axios
-      .get(url)
-      .then((response) => {
+  const handleClassroomChange = (event) => {
+    setSelectedClassroom(event.target.value);
+  };
+
+  const updateData = () => {
+    debugger;
+    const body = {
+      timetableSlotId: selectedRowData["timetableSlotId"],
+      teacherId: subjects.find((s) => {
         debugger;
-        const blob = new Blob([response.data], { type: "application/zip" }); // Set content-type to "application/zip"
-        const url = URL.createObjectURL(blob);
+        if (s.subjectId === parseInt(selectedSubject)) {
+          return s.teacherId;
+        }
+      }).teacherId,
+      subjectId: selectedSubject,
+      classroomId: selectedClassroom,
+    };
 
-        window.location.href = url; // Navigate to the generated URL
-        toast.success("Downloaded successfully");
-
-        URL.revokeObjectURL(url);
+    const url = createUrl(`/timetableSlot/update`);
+    axios
+      .put(url, body)
+      .then((response) => {
+        toast.success("Updated successfully");
+        setDisplay("none");
+        setOpacity("1");
+        loadSlots(selectedRowData['date'], uri["deptId"]);
       })
       .catch((error) => {
-        toast.error("No data found try again later");
+        toast.error("Error updating data");
       });
   };
 
@@ -439,14 +359,14 @@ function ViewTimetable() {
                           <th scope="col">Session</th>
                           <th scope="col">Venue</th>
                           <th class="text-center" scope="col">
-                            Feedback
+                            Edit
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         {timetableSlot.map((t) => {
                           return (
-                            <tr class="inner-box">
+                            <tr key={t.timetableSlotId} class="inner-box">
                               <th scope="row">
                                 <div class="event-date">
                                   <h5>
@@ -474,6 +394,9 @@ function ViewTimetable() {
                                     <div class="organizers">
                                       <a>Prof.{t.teacherName}</a>
                                     </div>
+                                    <div class="categories">
+                                      <a href="#/">Inspire</a>
+                                    </div>
                                   </div>
                                 </div>
                               </td>
@@ -495,11 +418,11 @@ function ViewTimetable() {
                                   <a
                                     class="btn btn-primary"
                                     onClick={() => {
-                                      showSubjectData(t);
+                                      editData(t);
                                     }}
                                     style={{ color: "whitesmoke" }}
                                   >
-                                    Read More
+                                    Edit
                                   </a>
                                 </div>
                               </td>
@@ -528,127 +451,57 @@ function ViewTimetable() {
                     color: "midnightblue",
                   }}
                 >
-                  LECTURE DATA
+                  EDIT DATA
                 </p>
-                {/* <b
-                  style={{
-                    textAlign: "center",
-                    fontSize: "15px",
-                    color: "blue",
-                  }}
-                >
-                  Lecture Agenda :{" "}
-                </b>{" "}
-                <p>{lectureData[0].lectureData}</p> */}
-                <div class="categories">
-                <button
-                  type="button"
-                  class="btn btn-blue btn-custom waves-effect waves-light m-b-5"
-                  onClick={downloadData}
-                >
-                  Download Data
-                </button>
-                  
-                </div>
-                <br/>
-                <b
-                  style={{
-                    textAlign: "center",
-                    fontSize: "15px",
-                    color: "blue",
-                  }}
-                >
-                  Topics Covered :{" "}
-                </b>{" "}
-                <p>{lectureData[0].topicsCovered}</p>
-                <b
-                  style={{
-                    textAlign: "center",
-                    fontSize: "15px",
-                    color: "blue",
-                  }}
-                >
-                  Next Lectures Topics :{" "}
-                </b>{" "}
-                <p>{lectureData[0].tommorrowAgenda}</p>
-                <div class="rate">
-                  <b>Lecture Rating :</b>
-                  <br></br>
-                  <input
-                    type="radio"
-                    id="star5"
-                    name="rate"
-                    value="5"
-                    onClick={() => setSelectedRating(5)}
-                  />
-                  <label for="star5" title="text">
-                    5 stars
-                  </label>
-                  <input
-                    type="radio"
-                    id="star4"
-                    name="rate"
-                    value="4"
-                    onClick={() => setSelectedRating(4)}
-                  />
-                  <label for="star4" title="text">
-                    4 stars
-                  </label>
-                  <input
-                    type="radio"
-                    id="star3"
-                    name="rate"
-                    value="3"
-                    onClick={() => setSelectedRating(3)}
-                  />
-                  <label for="star3" title="text">
-                    3 stars
-                  </label>
-                  <input
-                    type="radio"
-                    id="star2"
-                    name="rate"
-                    value="2"
-                    onClick={() => setSelectedRating(2)}
-                  />
-                  <label for="star2" title="text">
-                    2 stars
-                  </label>
-                  <input
-                    type="radio"
-                    id="star1"
-                    name="rate"
-                    value="1"
-                    onClick={() => setSelectedRating(1)}
-                  />
-                  <label for="star1" title="text">
-                    1 star
-                  </label>
-                </div>
-                <br></br>
-                <br></br>
-                <br></br>
-                <b>Lecture Feedback :</b>
-                <br />
-                <input
-                  type="text"
-                  id="feedbackId"
-                  name="feedbackTag"
-                  value={feedback}
-                  placeholder="Enter feedback"
-                  onChange={(e) => {
-                    setFeedback(e.target.value);
-                  }}
-                />
-                <br></br>
-                <br></br>
-                <button
-                  type="button"
-                  class="btn btn-blue btn-custom waves-effect waves-light m-b-5"
-                  onClick={sendFeedback}
-                >
-                  Submit
-                </button>
+
+                <center>
+                  <div className="mb-3">
+                    <label htmlFor="">
+                      <b>Subject :</b>
+                    </label>
+                    &nbsp;&nbsp;
+                    <select
+                      value={selectedSubject}
+                      onChange={handleSubjectChange}
+                    >
+                      <option value="">Select a subject</option>
+                      {subjects.map((s) => (
+                        <option key={s.subjectId} value={s.subjectId}>
+                          {s.subjectName}
+                        </option>
+                      ))}
+                    </select>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label htmlFor="">
+                      <b>Venue :</b>
+                    </label>
+                    &nbsp;&nbsp;
+                    <select
+                      value={selectedClassroom}
+                      onChange={handleClassroomChange}
+                    >
+                      <option value="">Select a Venue</option>
+                      {classrooms.map((s) => (
+                        <option key={s.classroomId} value={s.classroomId}>
+                          {s.classroomName}
+                        </option>
+                      ))}
+                    </select>
+                    <br />
+                    <button
+                      type="button"
+                      class="btn btn-blue btn-custom waves-effect waves-light m-b-5"
+                      onClick={updateData}
+                      style={{
+                        height: "30px",
+                        width: "80px",
+                        paddingTop: "3px",
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </center>
               </div>
             </div>
           </div>
@@ -657,4 +510,4 @@ function ViewTimetable() {
     </div>
   );
 }
-export default ViewTimetable;
+export default ViewTimetableAdmin;

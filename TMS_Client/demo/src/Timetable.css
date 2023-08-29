@@ -289,3 +289,11 @@
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
+
+.popup-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }

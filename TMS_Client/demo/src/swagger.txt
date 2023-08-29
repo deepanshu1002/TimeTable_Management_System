@@ -1,0 +1,18 @@
+//For timetable metadata post
+
+{
+  "deptId": 1,
+  "collegeStartTime": "09:00:00",
+  "collegeEndTime": "17:00:00",
+  "noOfBreaks": 2,
+  "breakStartTime1":"11:00:00" ,
+  "breakEndTime1": "11:30:00",
+  "breakStartTime2": "13:30:00",
+  "breakEndTime2": "14:00:00",
+  "breakStartTime3": "00:00:00",
+  "breakEndTime3": "00:00:00",
+  "noOfLabHrsDaily": 2,
+  "noOfLectursPerDay": 5,
+  "noOfDaysThisWeek": 6,
+  "startDate": "2023-08-21"
+}

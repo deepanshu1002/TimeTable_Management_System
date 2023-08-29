@@ -15,4 +15,8 @@ public interface TimetableSlotService {
 	public TimetableSlotRespoDTO getTimetableSlotDetailsById(Long timetableSlotId);
 
 	public List<TimetableSlotRespoDTO> getLectureDetails(LocalDate date1, Long deptId);
+	
+	TimetableSlotRespoDTO updateSubjectSlot(TimetableSlotRespoDTO slot);
+	
+	public List<TimetableSlotRespoDTO> getTeacherLectureDetails(LocalDate date1, Long deptId ,Long teacherId);
 }

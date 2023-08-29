@@ -56,10 +56,14 @@ public class TimeTableMetadataServiceImpl implements TimeTableMetadataService {
 	public TimeTableMetadataDto getDataByDateAndDeptId(String dateString, Long deptId) {
 		TimeTableMetadata metaData = metaDataRepo.getByWeekStartDateandDeptId(LocalDate.parse(dateString), deptId);
 		//TimeTableMetadata metaData = metaDataRepo.findByStartDateAndDeptDeptId(LocalDate.parse(dateString), deptId);
-		//System.out.println(metaData.getId());
 		TimeTableMetadataDto data = mapper.map(metaData, TimeTableMetadataDto.class);
 		data.setDeptId(metaData.getDept().getDeptId());
 		return data;
 	}
-
+	
+	
+	public Double getNoOfHrsWeekly(String dateString, Long deptId) {
+		TimeTableMetadata metaData = metaDataRepo.getByWeekStartDateandDeptId(LocalDate.parse(dateString), deptId);
+		return metaData.getNoOfHrsThisWeek();
+	}
 }

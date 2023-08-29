@@ -3,11 +3,11 @@ import { toast } from "react-toastify";
 import { createUrl, log } from "../utils/utils";
 import "../Timetable.css";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { getTimetable } from "../services/timeTable.js";
+import { getTeacherTimetable, getTimetable } from "../services/timeTable.js";
 import "../Button.css";
 import axios from "axios";
 
-function ViewTimetable() {
+function ViewTimetableTeacher() {
   const [timetableSlot, setTimetableSlot] = useState([]);
   const [deptName, setDeptName] = useState("");
   const [weekDate, setWeekDate] = useState("");
@@ -25,7 +25,7 @@ function ViewTimetable() {
       tommorrowAgenda: "no data",
     },
   ]);
-  const [feedback, setFeedback] = useState("none");
+
   const [dayColor, setDayColor] = useState([
     "tomato",
     "black",
@@ -36,14 +36,10 @@ function ViewTimetable() {
   ]);
   const [date, setDate] = useState("");
   const [selectedRowData, setSelectedRowData] = useState(null);
-  const [selectedRating, setSelectedRating] = useState(0);
+  const [file, setFile] = useState(null);
   const [lectureDataId, setLectureDataId] = useState("");
-  const [departmentId, setDepartmentId] = useState(sessionStorage['deptId']);
 
-  // useEffect(() => {
-  //   setDate();
-  //   loadSlots();
-  // }, []);
+ 
 
   useEffect(() => {
     const startWeekDate = setDateToStartOfWeek();
@@ -51,52 +47,21 @@ function ViewTimetable() {
     setStartDay(new Date(startWeekDate));
   }, []);
 
-  // useEffect(() => {
-  //   if (year !== "" && month !== "" && day !== "") {
-  //     const formattedDate = `${year}-${month}-${day}`;
-  //     log(formattedDate);
-  //     loadSlots(formattedDate);
-  //   }
-  // }, [year, month, day]);
-
   useEffect(() => {
     debugger;
     log(date);
-    if (date !== "") loadSlots(date, departmentId); //set the id for student from session storage
+    if (date !== "") loadSlots(date, 1, 3);
   }, [date]);
+
+  useEffect(() => {
+    handleUpload(lectureDataId)
+  }, [lectureDataId]);
 
   const showSubjectData = (rowData) => {
     debugger;
     setSelectedRowData(rowData);
     setDisplay("block");
     setOpacity("0.2");
-
-    const url = createUrl(
-      `/lecture/slotLectureData/${rowData["deptId"]}/${rowData["date"]}/${rowData["startTime"]}`
-    );
-    axios
-      .get(url)
-      .then((response) => {
-        const data = response.data;
-        log(data);
-        setLectureData([
-          {
-            // lectureData: data["lectureData"],
-            topicsCovered: data["topicsCovered"],
-            tommorrowAgenda: data["tommorrowAgenda"],
-          },
-        ]);
-        setLectureDataId(data["id"]);
-      })
-      .catch((error) => {
-        setLectureData([
-          {
-            lectureData: "no data",
-            topicsCovered: "no data",
-            tommorrowAgenda: "no data",
-          },
-        ]);
-      });
   };
 
   const setDateToStartOfWeek = () => {
@@ -122,42 +87,29 @@ function ViewTimetable() {
     return newFormattedDate;
   };
 
-  const loadSlots = async (currentDate, deptId) => {
+  const loadSlots = async (currentDate, deptId, teacherId) => {
     debugger;
 
-    const response = await getTimetable(currentDate, deptId); //set deptId as second parameter.
+    const response = await getTeacherTimetable(currentDate, deptId, teacherId); //set deptId as second parameter.
     log(response);
     if (response["status"] === 200) {
       log(response.data);
       setDeptName(response.data[0].deptName);
       setWeekDate(response.data[0].date);
       setTimetableSlot(response["data"]);
+    } else if (response["status"] === 204) {
+      setTimetableSlot([]);
+      toast.info("No Lecture scheduled");
     } else {
       toast.error("Error while calling timetable");
     }
   };
 
-  // const loadDays = async (noOfDays) => {
-  //   debugger;
-  //   let day = parseInt(startDay) + noOfDays;
-  //   setDay(day);
-  // };
+
   const loadDays = async (noOfDays) => {
     debugger;
     let modifiedDate = new Date(startDay);
     modifiedDate.setDate(modifiedDate.getDate() + noOfDays);
-
-    // if (modifiedDate.getMonth() !== startDate.getMonth()) {
-    //   modifiedDate.setDate(1);
-    //   modifiedDate.setMonth(startDate.getMonth() + 1);
-
-    //   if (modifiedDate.getYear() !== startDate.getYear()) {
-    //     modifiedDate.setDate(1);
-    //     modifiedDate.setMonth(0);
-    //     modifiedDate.setYear(startDate.getYear() + 1);
-    //   }
-    // }
-
     setDate(modifiedDate.toISOString().split("T")[0]); // Convert to YYYY-MM-DD format
   };
 
@@ -174,55 +126,73 @@ function ViewTimetable() {
       return;
     }
 
-    if (selectedRating === 0) {
-      toast.error("Please select a rating before submitting.");
+    if (
+      // lectureData[0].lectureData.trim() === "" ||
+      lectureData[0].tommorrowAgenda.trim() === "" ||
+      lectureData[0].topicsCovered.trim() === ""
+    ) {
+      toast.error("Fields cannot be blank");
       return;
     }
 
-    if (feedback.trim() === "") {
-      toast.error("Please enter your feedback before submitting.");
-      return;
-    }
-
-    const url = createUrl(`/feedback`);
+    const url = createUrl(`/lecture`);
     const body = {
-      studentId: 3, //set the userid through sessionstrorage
       subjectId: selectedRowData["subjectId"],
-      deptId: selectedRowData["deptId"],
+      startTime: selectedRowData["startTime"],
+      endTime: selectedRowData["endTime"],
+      deptartmentId: selectedRowData["deptId"],
       date: selectedRowData["date"],
-      rating: selectedRating,
-      feedback: feedback,
+      topicsCovered: lectureData[0].topicsCovered,
+      // lectureData: lectureData[0].lectureData,
+      tommorrowAgenda: lectureData[0].tommorrowAgenda,
     };
     axios
       .post(url, body)
       .then((response) => {
-        toast.success("Feedback submitted successfully");
-        setSelectedRating(1);
-        setFeedback("none");
+        toast.success("Lecture Data submitted successfully");
+        setLectureDataId(response.data['id'])
+        debugger
         setDisplay("none");
         setOpacity("1");
+        setLectureData([
+          {
+            lectureData: "no data",
+            topicsCovered: "no data",
+            tommorrowAgenda: "no data",
+          },
+        ]);
       })
       .catch((error) => {
         toast.error("Error sending feedback try again later");
       });
   };
 
-  const downloadData = () => {
-    const url = createUrl(`/lecture/download/${lectureDataId}`);
-    axios
-      .get(url)
-      .then((response) => {
-        debugger;
-        const blob = new Blob([response.data], { type: "application/zip" }); // Set content-type to "application/zip"
-        const url = URL.createObjectURL(blob);
+  const textChange = (event) => {
+    debugger;
+    const data = { ...lectureData[0] };
+    data[event.target.name] = event.target.value;
+    setLectureData([data]);
+  };
 
-        window.location.href = url; // Navigate to the generated URL
-        toast.success("Downloaded successfully");
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
 
-        URL.revokeObjectURL(url);
+  const handleUpload = (id) => {
+    debugger
+    if(id===""){
+      return
+    }
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const url = createUrl(`/lecture/lecturedata/${id}`);
+    axios.post(url, formData)
+      .then(response => {
+        toast.success("Upload successful")
       })
-      .catch((error) => {
-        toast.error("No data found try again later");
+      .catch(error => {
+        toast.error("error while uploading")
       });
   };
 
@@ -439,7 +409,7 @@ function ViewTimetable() {
                           <th scope="col">Session</th>
                           <th scope="col">Venue</th>
                           <th class="text-center" scope="col">
-                            Feedback
+                            Data
                           </th>
                         </tr>
                       </thead>
@@ -474,6 +444,9 @@ function ViewTimetable() {
                                     <div class="organizers">
                                       <a>Prof.{t.teacherName}</a>
                                     </div>
+                                    <div class="categories">
+                                      <a href="#/">Inspire</a>
+                                    </div>
                                   </div>
                                 </div>
                               </td>
@@ -499,8 +472,9 @@ function ViewTimetable() {
                                     }}
                                     style={{ color: "whitesmoke" }}
                                   >
-                                    Read More
+                                    Enter Data
                                   </a>
+                                  <br />
                                 </div>
                               </td>
                             </tr>
@@ -511,7 +485,11 @@ function ViewTimetable() {
                   </div>
                 </div>
               </div>
-              <div class="popup" id="popup" style={{ display: display }}>
+              <div
+                class="popup"
+                id="popup"
+                style={{ display: display, width: "1000px", height: "400px" }}
+              >
                 <span
                   class="popup-close-btn"
                   onClick={() => {
@@ -530,7 +508,7 @@ function ViewTimetable() {
                 >
                   LECTURE DATA
                 </p>
-                {/* <b
+                <b
                   style={{
                     textAlign: "center",
                     fontSize: "15px",
@@ -539,18 +517,15 @@ function ViewTimetable() {
                 >
                   Lecture Agenda :{" "}
                 </b>{" "}
-                <p>{lectureData[0].lectureData}</p> */}
-                <div class="categories">
-                <button
-                  type="button"
-                  class="btn btn-blue btn-custom waves-effect waves-light m-b-5"
-                  onClick={downloadData}
-                >
-                  Download Data
-                </button>
-                  
-                </div>
-                <br/>
+                {/* <textarea
+                  type="text"
+                  name="lectureData"
+                  value={lectureData[0].lectureData}
+                  className="form-control"
+                  onChange={textChange}
+                /> */}
+                <input type="file" onChange={handleFileChange} />
+                <br/><br/>
                 <b
                   style={{
                     textAlign: "center",
@@ -560,7 +535,13 @@ function ViewTimetable() {
                 >
                   Topics Covered :{" "}
                 </b>{" "}
-                <p>{lectureData[0].topicsCovered}</p>
+                <textarea
+                  type="text"
+                  name="topicsCovered"
+                  value={lectureData[0].topicsCovered}
+                  onChange={textChange}
+                  className="form-control"
+                />
                 <b
                   style={{
                     textAlign: "center",
@@ -570,78 +551,14 @@ function ViewTimetable() {
                 >
                   Next Lectures Topics :{" "}
                 </b>{" "}
-                <p>{lectureData[0].tommorrowAgenda}</p>
-                <div class="rate">
-                  <b>Lecture Rating :</b>
-                  <br></br>
-                  <input
-                    type="radio"
-                    id="star5"
-                    name="rate"
-                    value="5"
-                    onClick={() => setSelectedRating(5)}
-                  />
-                  <label for="star5" title="text">
-                    5 stars
-                  </label>
-                  <input
-                    type="radio"
-                    id="star4"
-                    name="rate"
-                    value="4"
-                    onClick={() => setSelectedRating(4)}
-                  />
-                  <label for="star4" title="text">
-                    4 stars
-                  </label>
-                  <input
-                    type="radio"
-                    id="star3"
-                    name="rate"
-                    value="3"
-                    onClick={() => setSelectedRating(3)}
-                  />
-                  <label for="star3" title="text">
-                    3 stars
-                  </label>
-                  <input
-                    type="radio"
-                    id="star2"
-                    name="rate"
-                    value="2"
-                    onClick={() => setSelectedRating(2)}
-                  />
-                  <label for="star2" title="text">
-                    2 stars
-                  </label>
-                  <input
-                    type="radio"
-                    id="star1"
-                    name="rate"
-                    value="1"
-                    onClick={() => setSelectedRating(1)}
-                  />
-                  <label for="star1" title="text">
-                    1 star
-                  </label>
-                </div>
-                <br></br>
-                <br></br>
-                <br></br>
-                <b>Lecture Feedback :</b>
-                <br />
-                <input
+                <textarea
                   type="text"
-                  id="feedbackId"
-                  name="feedbackTag"
-                  value={feedback}
-                  placeholder="Enter feedback"
-                  onChange={(e) => {
-                    setFeedback(e.target.value);
-                  }}
+                  name="tommorrowAgenda"
+                  value={lectureData[0].tommorrowAgenda}
+                  className="form-control"
+                  onChange={textChange}
                 />
-                <br></br>
-                <br></br>
+                <br />
                 <button
                   type="button"
                   class="btn btn-blue btn-custom waves-effect waves-light m-b-5"
@@ -649,6 +566,9 @@ function ViewTimetable() {
                 >
                   Submit
                 </button>
+                <br />
+                <br />
+                
               </div>
             </div>
           </div>
@@ -657,4 +577,4 @@ function ViewTimetable() {
     </div>
   );
 }
-export default ViewTimetable;
+export default ViewTimetableTeacher;

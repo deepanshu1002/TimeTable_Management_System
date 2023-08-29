@@ -12,6 +12,10 @@ public interface SubjectService {
 	SubjectandDeptandTeacherDTO getSubjectandDeptandTeacherDetails(Long subId);
 	ApiResponseDto addNewSubject(SubjectDTO sub);
 	ApiResponseDto updateSubject(SubjectDTO sub);
+
+	List<SubjectDTO> getAllSubject(Long deptId);
+
     public List<String> getAllSubjectsName();
     public List<SubjectsDTO>getAllSubjects(Long teacherId);
+
 }

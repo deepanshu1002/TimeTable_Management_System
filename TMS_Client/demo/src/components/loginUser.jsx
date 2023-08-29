@@ -66,7 +66,7 @@ function LoginUser() {
                 }
 
                 else{
-                    navigate('/student');
+                    navigate('/timetable');
                 }
                 
                 toast.success(`login successful`)
