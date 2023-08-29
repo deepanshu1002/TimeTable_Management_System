@@ -1,5 +1,8 @@
 package com.app.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,6 +100,18 @@ public class SubjectServiceImpl implements SubjectService {
 		SubjectandDeptandTeacherDTO subjectDetails = new SubjectandDeptandTeacherDTO(sub.getDept().getDeptName(), subId,
 				sub.getTeacherId().getFirstName().concat(sub.getTeacherId().getLastName()), sub.getSubjectName());
 		return subjectDetails;
+	}
+
+	@Override
+	public List<SubjectDTO> getAllSubject(Long deptId) {
+		List<SubjectDTO> subDTOs=new ArrayList<SubjectDTO>();
+		List<Subject> subjects=subjectRepo.findByDeptDeptId(deptId);
+		for (Subject sub : subjects) {
+			System.out.println(sub.getSubjectName());
+		subDTOs.add(new SubjectDTO(sub.getDept().getDeptId(), sub.getSubjectId(),
+				sub.getTeacherId().getUserId(), sub.getSubjectName(), sub.getLabVenue().getLabId()));
+		}
+		return subDTOs;
 	}
 
 }

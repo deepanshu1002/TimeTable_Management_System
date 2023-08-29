@@ -1,0 +1,60 @@
+.btn {
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: 0.2px;
+    opacity: 0.93;
+  }
+  
+  .btn-purple,
+  .btn-purple:hover,
+  .btn-purple:focus,
+  .btn-purple:active {
+    background-color: #48179b !important;
+    border: 1px solid #48179b !important;
+    color: #ffffff;
+  }
+  
+  
+  .btn-custom.btn-purple {
+   
+    color: #48179b !important;
+  }
+  
+  .btn-blue,
+  .btn-blue:hover,
+  .btn-blue:focus,
+  .btn-blue:active {
+    background-color: #3688cc !important;
+    border: 1px solid #3688cc !important;
+    color: #ffffff;
+  }
+  
+  
+  .btn-custom.btn-blue {
+   
+    color: #3688cc !important;
+  }
+  
+  
+  .btn-custom {
+    -moz-border-radius: 2px;
+    -moz-transition: all 400ms ease-in-out;
+    -o-transition: all 400ms ease-in-out;
+    -webkit-border-radius: 2px;
+    -webkit-transition: all 400ms ease-in-out;
+    background: transparent;
+    background-color: transparent !important;
+    border-radius: 2px;
+    border-width: 1px;
+    transition: all 400ms ease-in-out;
+  }
+  .btn-custom:hover {
+    color: #ffffff !important;
+  }
+  .btn-custom:focus {
+    color: #ffffff !important;
+  }
+  

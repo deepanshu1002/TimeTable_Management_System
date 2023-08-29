@@ -3,21 +3,31 @@ import "../TimetableMetadata.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createUrl } from "../utils/utils";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getTimetableData, timetableData } from "../services/timetableMetadata";
+import { toast } from "react-toastify";
+import SubjectWeeklyHours from "./subjectWeeklyHours";
 
 function TimeTableMetadata() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [mobileNo, setMobileNo] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [userId, setUserId] = useState("");
-  const [roleId, setRoleId] = useState("");
+  const [clgStartTime, setClgStartTime] = useState("");
+  const [clgEndTime, setClgEndTime] = useState("");
+  const [noOfLectursPerDay, setNoOfLectursPerDay] = useState("");
+  const [noOfDaysThisWeek, setNoOfDaysThisWeek] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [breakStartTime, setBreakStartTime] = useState([
+    "00:00",
+    "00:00",
+    "00:00",
+  ]);
+  const [breakEndTime, setBreakEndTime] = useState(["00:00", "00:00", "00:00"]);
+  const [noOfBreaks, setNoOfBreaks] = useState("");
+  const [noOfLabHrsDaily, setNoOfLabHrsDaily] = useState("");
   const [deptId, setDeptId] = useState("");
 
   var [departments, setDepartments] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const url = createUrl("/department");
@@ -27,14 +37,71 @@ function TimeTableMetadata() {
         setDepartments(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching departments:", error);
+       toast.error("Error fetching departments:", error);
       });
   }, []);
 
   const handleDepartmentChange = (event) => {
     setSelectedDepartment(event.target.value);
-    console.log(event.target.value);
     setDeptId(selectedDepartment);
+  };
+
+  const noOfBreaksCheck = (no) => {
+    if (no > 3) {
+      setNoOfBreaks("3");
+    }
+  };
+
+  const sendData = async () => {
+    const response = await timetableData(
+      selectedDepartment,
+      clgStartTime,
+      clgEndTime,
+      noOfBreaks,
+      breakStartTime[0],
+      breakEndTime[0],
+      breakStartTime[1],
+      breakEndTime[1],
+      breakStartTime[2],
+      breakEndTime[2],
+      noOfLabHrsDaily,
+      noOfLectursPerDay,
+      noOfDaysThisWeek,
+      startDate
+    );
+    if (response["status"] === 201) {
+      toast.success("Data entered successfully");
+      navigate(`/subjectweeklyhours/${selectedDepartment}/${startDate}`);
+    } else {
+      toast.error("Error while sending data");
+    }
+  };
+
+  const getData = async () => {
+    const response = await getTimetableData(startDate, selectedDepartment);
+    if (response["status"] === 200) {
+      const data = response["data"];
+      setSelectedDepartment(data["deptId"]);
+      setClgStartTime(data["collegeStartTime"]);
+      setClgEndTime(data["collegeEndTime"]);
+      setNoOfBreaks(data["noOfBreaks"]);
+      setBreakStartTime([
+        data["breakStartTime1"],
+        data["breakStartTime3"],
+        data["breakStartTime3"],
+      ]);
+      setBreakEndTime([
+        data["breakEndTime1"],
+        data["breakEndTime2"],
+        data["breakEndTime3"],
+      ]);
+      setNoOfLabHrsDaily(data["noOfLabHrsDaily"]);
+      setNoOfLectursPerDay(data["noOfLectursPerDay"]);
+      setNoOfDaysThisWeek(data["noOfDaysThisWeek"]);
+      setStartDate(data["startDate"]);
+    } else {
+      toast.error("Error while getting data");
+    }
   };
 
   return (
@@ -81,8 +148,9 @@ function TimeTableMetadata() {
               <input
                 type="time"
                 className="form-control"
+                value={clgStartTime}
                 onChange={(e) => {
-                  setFirstName(e.target.value);
+                  setClgStartTime(e.target.value);
                 }}
               />
             </div>
@@ -91,9 +159,11 @@ function TimeTableMetadata() {
               <label htmlFor="">College End Time</label>
               <input
                 type="time"
+                id="collegeEndTimeId"
+                value={clgEndTime}
                 className="form-control"
                 onChange={(e) => {
-                  setLastName(e.target.value);
+                  setClgEndTime(e.target.value);
                 }}
               />
             </div>
@@ -103,14 +173,17 @@ function TimeTableMetadata() {
               <input
                 max="3"
                 type="number"
+                id="noOfBreaksId"
+                value={noOfBreaks}
                 className="form-control"
                 onChange={(e) => {
-                  setUserId(e.target.value);
+                  setNoOfBreaks(e.target.value);
+                  noOfBreaksCheck(e.target.value);
                 }}
               />
             </div>
 
-            {Array.from({ length: userId }, (_, index) => (
+            {Array.from({ length: noOfBreaks }, (_, index) => (
               <div className="mb-3" key={index}>
                 <div className="row">
                   <div className="col">
@@ -118,10 +191,13 @@ function TimeTableMetadata() {
                       Break Start Time {index + 1}
                     </label>
                     <input
-                      type="number"
+                      type="time"
                       className="form-control"
+                      value={breakStartTime[index]}
                       onChange={(e) => {
-                        // Handle the input change for each break start time
+                        let copyArr = [...breakStartTime];
+                        copyArr[index] = e.target.value;
+                        setBreakStartTime(copyArr);
                       }}
                     />
                   </div>
@@ -130,10 +206,13 @@ function TimeTableMetadata() {
                       Break End Time {index + 1}
                     </label>
                     <input
-                      type="number"
+                      type="time"
                       className="form-control"
+                      value={breakEndTime[index]}
                       onChange={(e) => {
-                        // Handle the input change for each break end time
+                        let copyArr = [...breakEndTime];
+                        copyArr[index] = e.target.value;
+                        setBreakEndTime(copyArr);
                       }}
                     />
                   </div>
@@ -146,8 +225,9 @@ function TimeTableMetadata() {
               <input
                 type="number"
                 className="form-control"
+                value={noOfLabHrsDaily}
                 onChange={(e) => {
-                  setRoleId(e.target.value);
+                  setNoOfLabHrsDaily(e.target.value);
                 }}
               />
             </div>
@@ -155,10 +235,11 @@ function TimeTableMetadata() {
             <div className="mb-3">
               <label htmlFor="">No of Lectures per Day</label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
+                value={noOfLectursPerDay}
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  setNoOfLectursPerDay(e.target.value);
                 }}
               />
             </div>
@@ -166,10 +247,11 @@ function TimeTableMetadata() {
             <div className="mb-3">
               <label htmlFor="">No of Days this Week</label>
               <input
-                type="tel"
+                type="number"
                 className="form-control"
+                value={noOfDaysThisWeek}
                 onChange={(e) => {
-                  setMobileNo(e.target.value);
+                  setNoOfDaysThisWeek(e.target.value);
                 }}
               />
             </div>
@@ -177,18 +259,29 @@ function TimeTableMetadata() {
             <div className="mb-3">
               <label htmlFor="">Start Date</label>
               <input
-                type="password"
+                type="date"
                 className="form-control"
+                value={startDate}
                 onChange={(e) => {
-                  setPassword(e.target.value);
+                  setStartDate(e.target.value);
                 }}
               />
             </div>
 
             <div className="mb-3" style={{ textAlign: "center" }}>
-              <button className="btn btn-success">Submit</button>
+              <button className="btn btn-success" onClick={sendData}>
+                Submit
+              </button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <button className="btn btn-primary">Previous Data</button>
+              <button className="btn btn-primary" onClick={getData}>
+                Previous Data
+              </button>
+              <br />
+              <br />
+              <small style={{ color: "red" }}>
+                *select department and previous weeks start date to get previous
+                data
+              </small>
             </div>
           </div>
         </div>

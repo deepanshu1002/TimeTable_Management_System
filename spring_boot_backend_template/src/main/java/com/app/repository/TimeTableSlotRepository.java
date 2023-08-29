@@ -12,5 +12,6 @@ public interface TimeTableSlotRepository extends JpaRepository<TimetableSlot, Lo
 
 	List<TimetableSlot> findByDate(LocalDate date1);
 	List<TimetableSlot> findByDateAndDeptDeptId(LocalDate date1, Long deptId);
+	List<TimetableSlot> findByDateAndDeptDeptIdAndTeacherUserId(LocalDate date1, Long deptId,Long teacherId);
 	
 }

@@ -27,6 +27,12 @@ import AddLectureData from './components/addLectureData'
 import ManageLeaves from './components/manageLeaves'
 
 import GetLectureDetails from './components/getLectureDetails'
+import SubjectWeeklyHours from './components/subjectWeeklyHours'
+import ViewTimetableAdmin from './components/timeTableForAdmin'
+
+
+import ViewTimetableTeacher from './components/timeTableForTeacher'
+
 
 
 function App() {
@@ -34,6 +40,7 @@ return (
     <div className='container-fluid'>
     
       <div className='container'>
+      
         <Routes>
         <Route path='/' element={<LoginUser/>} />
          {/* register component */}
@@ -70,6 +77,15 @@ return (
 
          <Route path='/getlecturedetails' element={<GetLectureDetails/>} />
 
+         <Route path='/subjectweeklyhours/:deptId/:date' element={<SubjectWeeklyHours/>} />
+
+         <Route path='/timetableadmin/:deptId/:date' element={<ViewTimetableAdmin/>} />
+
+         <Route path='/timetableteacher/' element={<ViewTimetableTeacher/>} />
+         
+         
+         
+         
         </Routes>
       </div>
       <ToastContainer />

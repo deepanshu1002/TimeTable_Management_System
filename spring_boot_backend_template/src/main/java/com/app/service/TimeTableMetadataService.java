@@ -12,5 +12,8 @@ import com.app.dto.TimeTableMetadataDto;
 
 public interface TimeTableMetadataService {
 	ApiResponseDto addData(TimeTableMetadataDto data);
-	TimeTableMetadataDto getDataByDateAndDeptId(String dateString,Long deptId);
+
+	TimeTableMetadataDto getDataByDateAndDeptId(String dateString, Long deptId);
+
+	Double getNoOfHrsWeekly(String dateString, Long deptId);
 }

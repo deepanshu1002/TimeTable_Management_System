@@ -55,4 +55,9 @@ public class SubjectController {
 		dto.setSubjectId(subId);
 		return ResponseEntity.status(HttpStatus.OK).body(subjectService.updateSubject(dto));
 	}
+	
+	@GetMapping("getallsubjects/{deptId}")
+	public ResponseEntity<?> getAllSubjects(@PathVariable Long deptId) {
+		return ResponseEntity.ok(subjectService.getAllSubject(deptId));
+	}
 }

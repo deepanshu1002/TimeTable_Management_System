@@ -5,6 +5,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +14,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.AddTimetableSlotDTO;
+import com.app.dto.SubjectDTO;
 import com.app.dto.TimetableSlotRespoDTO;
 import com.app.entities.TimetableSlot;
 import com.app.service.TimetableSlotService;
@@ -58,6 +62,26 @@ public class TimetableSlotController {
 		return ResponseEntity.ok(timetableSlotDetails);
 	}
 	
+	@PutMapping("/update")
+	public ResponseEntity<?> updateSubjectSlotDetails(@RequestBody TimetableSlotRespoDTO slot) {
+	System.out.println("slot = "+slot);
+		return ResponseEntity.status(HttpStatus.OK).body(timetableSlotService.updateSubjectSlot(slot));
+	}
 	
+	@GetMapping("/{date}/{deptId}/{teacherId}")
+	public ResponseEntity<?> getLectureDataOfTeacher(@PathVariable String date, @PathVariable Long deptId,@PathVariable Long teacherId) {
+		System.out.println(date +""+deptId);
+		 LocalDate date1 = LocalDate.parse(date);
+		
+		List<TimetableSlotRespoDTO> timetableSlotDetails = timetableSlotService.getTeacherLectureDetails(date1, deptId,teacherId);
+		System.out.println("timetableSlotDetails= " +timetableSlotDetails);
+		if (timetableSlotDetails.size()==0) {
+			System.out.println("inside");
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		}
+			
+		
+		return ResponseEntity.ok(timetableSlotDetails);
+	}
 
 }

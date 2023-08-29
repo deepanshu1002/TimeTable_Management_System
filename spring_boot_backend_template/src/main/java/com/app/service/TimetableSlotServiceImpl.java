@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.AddTimetableSlotDTO;
 import com.app.dto.TimetableSlotRespoDTO;
 import com.app.entities.ClassRoom;
@@ -71,7 +72,6 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
 		timetableSlot.setLectureData(lecture);
 		TimetableSlot slot = timeTableSlotRepo.save(timetableSlot);
 
-
 //		Long timetableSlotId, LocalDate date, LocalTime startTime, LocalTime endTime,
 //		Long teacherId, String teacherName, Long subjectId, String subjectName, Long classroomId,
 //		String classroomName, Long deptId, String deptName
@@ -129,6 +129,57 @@ public class TimetableSlotServiceImpl implements TimetableSlotService {
 //				timetableSlot= t;
 //		}
 //		return mapper.map(timetableSlot, TimetableSlotRespoDTO.class);
+		return dtoList;
+	}
+
+	@Override
+	public TimetableSlotRespoDTO updateSubjectSlot(TimetableSlotRespoDTO slot) {
+		TimetableSlot slotEntity = timeTableSlotRepo.findById(slot.getTimetableSlotId())
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid slot id"));
+
+		Subject subject = subRepo.findById(slot.getSubjectId())
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid subject id"));
+
+		Users user = userRepo.findById(slot.getTeacherId())
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid user id"));
+
+		ClassRoom classroom = classroomRepo.findById(slot.getClassroomId())
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid classroom id"));
+
+		subject.addTimetableSlot(slotEntity);
+		user.addTimetableSlot(slotEntity);
+		classroom.addTimetableSlot(slotEntity);
+
+		return mapper.map(timeTableSlotRepo.save(slotEntity), TimetableSlotRespoDTO.class);
+	}
+
+	@Override
+	public List<TimetableSlotRespoDTO> getTeacherLectureDetails(LocalDate date1, Long deptId, Long teacherId) {
+		List<TimetableSlot> listOfSlots = timeTableSlotRepo.findByDateAndDeptDeptIdAndTeacherUserId(date1, deptId,
+				teacherId);
+		List<TimetableSlotRespoDTO> dtoList = new ArrayList<TimetableSlotRespoDTO>();
+
+		if (listOfSlots.size() == 0) {
+			return dtoList;
+		}
+		if (listOfSlots.get(0).getLectureData() == null) {
+			for (TimetableSlot slot : listOfSlots) {
+				dtoList.add(new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), slot.getStartTime(),
+						slot.getEndTime(), slot.getTeacher().getUserId(), slot.getTeacher().getFirstName(),
+						slot.getSubject().getSubjectId(), slot.getSubject().getSubjectName(),
+						slot.getClassroom().getClassroomId(), slot.getClassroom().getClassroomName(), deptId,
+						slot.getDept().getDeptName()));
+			}
+		} else {
+
+			for (TimetableSlot slot : listOfSlots) {
+				dtoList.add(new TimetableSlotRespoDTO(slot.getSlotId(), slot.getDate(), slot.getStartTime(),
+						slot.getEndTime(), slot.getTeacher().getUserId(), slot.getTeacher().getFirstName(),
+						slot.getSubject().getSubjectId(), slot.getSubject().getSubjectName(),
+						slot.getClassroom().getClassroomId(), slot.getClassroom().getClassroomName(), deptId,
+						slot.getLectureData().getId(), slot.getDept().getDeptName()));
+			}
+		}
 		return dtoList;
 	}
 
