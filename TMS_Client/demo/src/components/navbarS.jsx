@@ -102,7 +102,7 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 // import "../../node_modules/bootstrap/dist/js/bootstrap.bundle"; // Make sure to include the Bootstrap JavaScript bundle
 import 'bootstrap/dist/js/bootstrap.bundle'
 
-function NavbarC() {
+function NavbarS() {
   return (
     <nav className="navbar navbar-expand-md navbar-light bg-primary fixed-top">
       <a className="navbar-brand" href="#" style={{fontStyle:"normal", marginLeft:'8px', fontSize:'30px', color:'white'}}>
@@ -124,7 +124,7 @@ function NavbarC() {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <a className="nav-link" href="#">
-              HomeC
+              HomeS
             </a>
           </li>
           <li className="nav-item">
@@ -174,4 +174,4 @@ function NavbarC() {
   );
 }
 
-export default NavbarC;
+export default NavbarS;

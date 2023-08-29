@@ -45,6 +45,8 @@ import NavbarA from './components/navbarA';
 import ProfileEditUser from './components/profileImageEditUser'
 import CheckRatings from './components/checkRatings';
 import Rating from './components/newRatings';
+import NavbarT from './components/navbarT'
+import NavbarS from './components/navbarS'
 
 
 
@@ -62,12 +64,18 @@ function App() {
   }, [])
 
   return (<>
+  <div>
 
-    <div className='row'>
-      <div className='app-container '>
-        {loginStatus && <NavbarA />}
-        {/* {loginStatus && <Sidebar />} */}
-      </div>
+      <div>
+            <Routes>
+            <Route path='/admin' element={<NavbarA />} />
+            <Route path='/teacher' element={<NavbarT />} />
+            <Route path='/student' element={<NavbarS />} />
+            {/* Define other route paths */}
+          </Routes>
+        </div>
+
+
       <div className='main-content'>
         <Routes>
           <Route path='/' element={<LoginUser />} />
@@ -84,7 +92,7 @@ function App() {
 
           <Route path='/student' element={<Student />} />
 
-          <Route path='/teacher' element={<Teacher />} />
+          <Route path='/teacher' element={<Teacher />}></Route>
 
           <Route path='/admin' element={<Admin />} />
 
@@ -140,8 +148,8 @@ function App() {
         </Routes>
 
       </div>
-    </div>
     <ToastContainer />
+    </div>
   </>)
 }
 export default App
