@@ -33,9 +33,9 @@ function AdminDashboard() {
                 <div class="card border-hover-primary hover-scale">
                     <div class="card-body">
                         <div class="text-primary mb-5">
-                           <img src="http://127.0.0.1:3000/admin_specific_images/users.jpeg" style={{width:"150px",height:"150px"}} alt="" />
+                           <img src="http://127.0.0.1:3000/admin_specific_images/users.jpeg" style={{width:"250px",height:"250px"}} alt="" />
                            <br></br><br></br>
-                           <h6 class="font-weight-bold mb-3">Manage Users</h6>
+                           <h3 class="font-weight-bold mb-3">Manage Users</h3>
                         </div>
                     </div>
                 </div>
@@ -47,9 +47,9 @@ function AdminDashboard() {
                 <div class="card border-hover-primary hover-scale">
                     <div class="card-body">
                         <div class="text-primary mb-5">
-                        <img src="http://127.0.0.1:3000/admin_specific_images/leaves.jpeg" style={{width:"150px",height:"150px"}} alt="" />
+                        <img src="http://127.0.0.1:3000/admin_specific_images/leaves.jpeg" style={{width:"250px",height:"250px"}} alt="" />
                         <br></br><br></br>
-                        <h6 class="font-weight-bold mb-3">Manage Leaves</h6>
+                        <h3 class="font-weight-bold mb-3">Manage Leaves</h3>
                         </div>
                     </div>
                 </div>
@@ -60,9 +60,9 @@ function AdminDashboard() {
                 <div class="card border-hover-primary hover-scale">
                     <div class="card-body">
                         <div class="text-primary mb-5">
-                        <img src="http://127.0.0.1:3000/admin_specific_images/subjects.jpeg" style={{width:"150px",height:"150px"}} alt="" />
+                        <img src="http://127.0.0.1:3000/admin_specific_images/subjects.jpeg" style={{width:"250px",height:"250px"}} alt="" />
                         <br></br><br></br>
-                        <h6 class="font-weight-bold mb-3">Add Subject</h6>
+                        <h3 class="font-weight-bold mb-3">Add Subject</h3>
                         </div>
                         
                     </div>
@@ -74,9 +74,9 @@ function AdminDashboard() {
                 <div class="card border-hover-primary hover-scale">
                     <div class="card-body">
                         <div class="text-primary mb-5">
-                        <img src="http://127.0.0.1:3000/admin_specific_images/departments.jpeg" style={{width:"150px",height:"150px"}} alt="" />
+                        <img src="http://127.0.0.1:3000/admin_specific_images/departments.jpeg" style={{width:"250px",height:"250px"}} alt="" />
                         <br></br><br></br>
-                        <h6 class="font-weight-bold mb-3">Add Department</h6>
+                        <h3 class="font-weight-bold mb-3">Add Department</h3>
                         </div>
                        
                     </div>
@@ -88,9 +88,9 @@ function AdminDashboard() {
                 <div class="card border-hover-primary hover-scale">
                     <div class="card-body">
                         <div class="text-primary mb-5">
-                        <img src="http://127.0.0.1:3000/admin_specific_images/labs.jpeg" style={{width:"150px",height:"150px"}} alt="" />
+                        <img src="http://127.0.0.1:3000/admin_specific_images/labs.jpeg" style={{width:"250px",height:"250px"}} alt="" />
                         <br></br><br></br>
-                        <h6 class="font-weight-bold mb-3">Add Lab Venue</h6>
+                        <h3 class="font-weight-bold mb-3">Add Lab Venue</h3>
                         </div>
                        
                     </div>
@@ -102,9 +102,9 @@ function AdminDashboard() {
                 <div class="card border-hover-primary hover-scale">
                     <div class="card-body">
                         <div class="text-primary mb-5">
-                        <img src="http://127.0.0.1:3000/admin_specific_images/classrooms.jpeg" style={{width:"150px",height:"150px"}} alt="" />
+                        <img src="http://127.0.0.1:3000/admin_specific_images/classrooms.jpeg" style={{width:"250px",height:"250px"}} alt="" />
                         <br></br><br></br>
-                        <h6 class="font-weight-bold mb-3">Add Classroom</h6>
+                        <h3 class="font-weight-bold mb-3">Add Classroom</h3>
                         </div>
                         
                     </div>
@@ -116,9 +116,9 @@ function AdminDashboard() {
                 <div class="card border-hover-primary hover-scale">
                     <div class="card-body">
                         <div class="text-primary mb-5">
-                        <img src="http://127.0.0.1:3000/admin_specific_images/ratings.jpeg" style={{width:"150px",height:"150px"}} alt="" />
+                        <img src="http://127.0.0.1:3000/admin_specific_images/ratings.jpeg" style={{width:"250px",height:"250px"}} alt="" />
                         <br></br><br></br>
-                        <h6 class="font-weight-bold mb-3">Teacher Ratings</h6>
+                        <h3 class="font-weight-bold mb-3">Teacher Ratings</h3>
                         </div>
                        
                     </div>
@@ -130,9 +130,9 @@ function AdminDashboard() {
                 <div class="card border-hover-primary hover-scale">
                     <div class="card-body">
                         <div class="text-primary mb-5">
-                        <img src="http://127.0.0.1:3000/admin_specific_images/timetable.jpeg" style={{width:"150px",height:"150px"}} alt="" />
+                        <img src="http://127.0.0.1:3000/admin_specific_images/timetable.jpeg" style={{width:"250px",height:"250px"}} alt="" />
                         <br></br><br></br>
-                            <h6 class="font-weight-bold mb-3">View/Edit Timetable</h6>
+                            <h3 class="font-weight-bold mb-3">View/Edit Timetable</h3>
                         </div>
                        
                         
@@ -145,12 +145,10 @@ function AdminDashboard() {
                 <div class="card border-hover-primary hover-scale">
                     <div class="card-body">
                         <div class="text-primary mb-5">
-                        <img src="http://127.0.0.1:3000/admin_specific_images/gentimetable.jpg  " style={{width:"150px",height:"150px"}} alt="" />
+                        <img src="http://127.0.0.1:3000/admin_specific_images/gentimetable.jpg  " style={{width:"250px",height:"250px"}} alt="" />
                         <br></br><br></br>
-                            <h6 class="font-weight-bold mb-3">Generate Timetable</h6>
+                            <h3 class="font-weight-bold mb-3">Generate Timetable</h3>
                         </div>
-                       
-                       
                     </div>
                 </div>
                 </button>
