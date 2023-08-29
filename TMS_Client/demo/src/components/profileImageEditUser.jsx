@@ -15,14 +15,18 @@ function ProfileEditUser({ userId }) {
     password: "",
     deptId: "",
     userId: "",
+    imagePath: "",
   });
 
   const [departments, setDepartments] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const userId1 = sessionStorage.getItem("userId");
   // Adding a state variables for profile picture
-  const [profilePicture, setProfilePicture] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [displayOpacity, setDisplayOpacity] = useState("0.4");
+
+
 
   useEffect(() => {
     //disable button at launch
@@ -53,7 +57,11 @@ function ProfileEditUser({ userId }) {
           password: "",
           deptId: userData.deptId,
           userId: userData.userId,
+          imagePath: userData.imagePath,
         });
+        if (userData.imagePath != null){
+          getImage();
+        }
         //setSelectedDepartment(userData.deptId);
       })
       .catch((error) => {
@@ -73,20 +81,58 @@ function ProfileEditUser({ userId }) {
   };
 
   // Function to handle profile picture upload
-  const handleProfilePictureUpload = async () => {
-    debugger
-    if (selectedFile) {
-      const response = await uploadProfilePictureAPI(userId1, selectedFile);
+  // const handleProfilePictureUpload = async () => {
+  //   debugger
+  //   if (selectedFile) {
+  //     const response = await uploadProfilePictureAPI(userId1, selectedFile);
 
-      if (response) {
-        // Handle a successful upload, e.g., show a success message
-        toast.success('Profile picture uploaded successfully:', response);
-      } else {
-        // Handle errors, e.g., show an error message
-        toast.error('Error uploading profile picture');
-      }
+  //     if (response) {
+  //       // Handle a successful upload, e.g., show a success message
+  //       toast.success('Profile picture uploaded successfully:', response);
+  //     } else {
+  //       // Handle errors, e.g., show an error message
+  //       toast.error('Error uploading profile picture');
+  //     }
+  //   }
+  // };
+
+  const handleUpload = () => {
+    debugger
+    if(userId1===""){
+      return
     }
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+
+    const url = createUrl(`/user/uploadImage/${userId1}`);
+    axios.post(url, formData)
+      .then(response => {
+        toast.success("Upload successful")
+        getImage();
+      })
+      .catch(error => {
+        toast.error("error while uploading")
+      });
   };
+
+  const getImage = () =>{
+    const url = createUrl(`/user/getImage/${userId1}`);
+    axios.get(url, { responseType: 'arraybuffer' })
+        .then(response => {
+          const imageBase64 = btoa(
+            new Uint8Array(response.data).reduce(
+              (data, byte) => data + String.fromCharCode(byte),
+              ''
+            )
+          );
+          debugger
+          setProfilePicture(`data:image/jpeg;base64,${imageBase64}`);
+        })
+        .catch(error => {
+          debugger
+          toast.error('Error fetching image:', error);
+        });
+  }
 
 // Function to remove profile picture
 const removeProfilePicture = async () => {
@@ -108,6 +154,7 @@ const removeProfilePicture = async () => {
   function enableButton () {
     var buttonEnable = document.getElementById("saveButton");
     buttonEnable.removeAttribute("disabled")
+    setDisplayOpacity("1")
   }
   function disableButton () {
     var buttonDisable = document.getElementById("saveButton");
@@ -153,11 +200,11 @@ const removeProfilePicture = async () => {
 
   return (
     <div>
-      <div className="container">
-        <div className="main-body">
-          <div className="row">
-            <div className="col-lg-4">
-              <div className="card">
+      <div className="container" >
+        <div className="main-body" >
+          <div className="row" >
+            <div className="col-lg-4" >
+              <div className="card"style={{backgroundColor: "lightcyan"}}>
                 <div className="card-body">
                   <div className="d-flex flex-column align-items-center text-center">
                   <input
@@ -167,7 +214,6 @@ const removeProfilePicture = async () => {
                     style={{ display: "none" }}
                     onChange={handleFileChange}
                   />
-                  <button onClick={handleProfilePictureUpload}>Upload Profile Picture</button>
                   <img
                     src={profilePicture || "https://bootdey.com/img/Content/avatar/avatar6.png"}
                     alt="Admin"
@@ -176,14 +222,6 @@ const removeProfilePicture = async () => {
                     onClick={() => document.getElementById("profilePictureInput").click()}
                     style={{ cursor: "pointer" }}
                   />
-                  {profilePicture && (
-                    <button
-                      className="btn btn-danger mt-2"
-                      onClick={removeProfilePicture}
-                    >
-                      Remove Profile Picture
-                    </button>
-                  )}
                     <div className="mt-3">
                       <h4>
                         {user.firstName} {user.lastName}
@@ -191,6 +229,8 @@ const removeProfilePicture = async () => {
                       <p className="text-secondary mb-1"></p>
                       <p className="text-muted fontSize-sm"></p>
                       <button className="btn btn-info" onClick={enableButton}>Edit Profile</button>
+                      &nbsp;&nbsp;&nbsp;
+                      <button className="btn btn-warning" onClick={handleUpload}>Upload Profile Picture</button>
                     </div>
                   </div>
                   <hr className="my-4" />
@@ -217,6 +257,7 @@ const removeProfilePicture = async () => {
                       </h6>
                       <span className="text-secondary">{user.firstName}</span>
                     </li>
+                    <br/>
                     <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                       <h6 className="mb-0">
                         <svg
@@ -239,6 +280,7 @@ const removeProfilePicture = async () => {
                       </h6>
                       <span className="text-secondary">{user.lastName}</span>
                     </li>
+                    <br/>
                     <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                       <h6 className="mb-0">
                         <svg
@@ -262,6 +304,7 @@ const removeProfilePicture = async () => {
                       </h6>
                       <span className="text-secondary">{user.deptId}</span>
                     </li>
+                    <br/>
                     <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                       <h6 className="mb-0">
                         <svg
@@ -283,6 +326,7 @@ const removeProfilePicture = async () => {
                       </h6>
                       <span className="text-secondary">{user.email}</span>
                     </li>
+                    <br/>
                     <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                       <h6 className="mb-0">
                         <svg
@@ -317,8 +361,8 @@ const removeProfilePicture = async () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-8">
-              <div className="card">
+            <div style={{opacity: displayOpacity}} className="col-lg-8">
+              <div className="card" style={{backgroundColor: "lightcyan"}}>
                 <div className="card-body">
                   <div className="row mb-3">
                     <div className="col-sm-3">

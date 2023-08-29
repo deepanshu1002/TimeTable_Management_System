@@ -2,6 +2,9 @@ package com.app.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
@@ -40,25 +43,46 @@ public class ImageHandlingServiceImpl implements ImageHandlingService {
 		}
 	}
 
+//	@Override
+//	public ApiResponseDto uploadImage(Long userId, MultipartFile image) throws IOException {
+//		//get user id 
+//		Users user = userRepo.findById(userId)
+//				.orElseThrow(() -> new ResourceNotFoundException("Invalid User Id"));
+//		// user found --> PERSISTENT
+//		// store the image on server side folder
+//		System.out.println(image);
+//		String path = folderLocation.concat(image.getOriginalFilename());
+//		System.out.println(path);
+//		// Use FileUtils method : writeByte[] --> File
+//		FileUtils.writeByteArrayToFile(new File(path), image.getBytes());
+//		user.setImagePath(path);
+//		
+//		return new ApiResponseDto("Image file uploaded successfully for emp id " + userId);
+//	}
 	@Override
-	public ApiResponseDto uploadImage(Long userId, MultipartFile image) throws IOException {
-		//get user id 
-		Users user = userRepo.findById(userId)
+	public String uploadFile(MultipartFile file,Long id) throws IOException {
+		  // Generate a unique filename to avoid collisions
+        String uniqueFileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        System.out.println(uniqueFileName);
+        // Combine the directory and filename to create the full path
+        Path filePath = Paths.get(folderLocation, uniqueFileName);
+
+        // Save the file using the transferTo method
+        Files.copy(file.getInputStream(), filePath);
+        
+        Users user = userRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid User Id"));
-		// user found --> PERSISTENT
-		// store the image on server side folder
-		System.out.println(image);
-		String path = folderLocation.concat(image.getOriginalFilename());
-		System.out.println(path);
-		// Use FileUtils method : writeByte[] --> File
-		FileUtils.writeByteArrayToFile(new File(path), image.getBytes());
-		user.setImagePath(path);
-		
-		return new ApiResponseDto("Image file uploaded successfully for emp id " + userId);
+        user.setImagePath(filePath.toString());
+        
+        userRepo.save(user);
+        // Store the filePath.toString() in the database
+        // Code to save filePath.toString() to the database goes here
+
+        return uniqueFileName;
 	}
 
 	@Override
-	public byte[] downloadImage(Long userId) throws IOException {
+	public String downloadImage(Long userId) throws IOException {
 		//get user by id
 		Users user = userRepo.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid User id"));
@@ -66,7 +90,7 @@ public class ImageHandlingServiceImpl implements ImageHandlingService {
 		String path = user.getImagePath();
 		if (path != null) {
 			// path ---> File --> byte[]
-			return FileUtils.readFileToByteArray(new File(path));
+			return path;
 			//OR from DB : return emp.getImage();
 		} else 
 			throw new ApiException("Image not yet assigned !!!!");

@@ -29,36 +29,16 @@ import AddLectureData from './components/addLectureData'
 import ManageLeaves from './components/manageLeaves'
 
 import GetLectureDetails from './components/getLectureDetails'
-
-
 //import Navbar from './components/navbar'
 import Sidebar from './components/sidebar'
 //import TeacherRatings from './components/teacherRatings'
 import CheckRatings from './components/checkRatings'
-import ForgotPassword from './components/forgotPassword'
 import ForgotEmail from './testmail'
 import UpdatePassword from './components/updatePassword';
-import {login } from './features/authSlice'
-import EditUser from './components/editUser'
+import {logout,login } from './features/authSlice'
+import ForgotPassword from './components/forgotPassword'
 import NavbarA from './components/navbarA';
-// import Navbar from './components/navbar'
-// function App() {
-
-// return (
-//     <div className='container-fluid'>
-    
-//       <div className='container'>
-//         <Routes>
-//         <Route path='/' element={<LoginUser/>} />
-//          {/* register component */}
-//          <Route path='/manageleaves' element={<ManageLeaves/>} />
-//         <Route path='/admindashboard' element={<AdminDashboard/>} />
-//          <Route path='/register' element={<RegisterUser />} />
-//          <Route path='/validuser' element={<ManageUsers />} />  
-//          {/*Leave Application component */}
-//          <Route path='/leaveapplication' element={<LeaveApplication/>} />
-//          {/*GET Leave Application component */}
-//          <Route path='/getLeaveApplication' element={<GetLeaveApplication/>} />
+import ProfileEditUser from './components/profileImageEditUser'
 
 
 import Rating from './components/newRatings';
@@ -66,10 +46,8 @@ import CheckTeacherRatings from './components/checkTeacherRatings'
 import TeacherRatings from './components/teacherRatings'
 import TryAdmin from './components/adminDashboard';
 import AdminDashboard from './components/adminDashboard'
-
-
-
-
+import AboutUs from './components/aboutUs'
+import Contact from './components/contact'
 function App() {
 
   const loginStatus = useSelector((state) => state.auth.status)
@@ -86,11 +64,7 @@ function App() {
   return (<>
 
     <div className='row'>
-      <div className='app-container'>
-
-      {/* {loginStatus && <NavbarA />} */}
-      {/* {loginStatus && <SideNavBar/>} */}
-
+      <div className='app-container '>
         {loginStatus && <NavbarA />}
         {/* {loginStatus && <Sidebar />} */}
 
@@ -138,20 +112,13 @@ function App() {
 
           <Route path='/forgotpassword' element={<ForgotPassword />} />
           <Route path='/email' element={<ForgotEmail />} />
-          <Route path='/set-password*' element={<UpdatePassword />} />
-
-          <Route path='/editUser' element={<EditUser />} />
-
-
-         {/* <Route path='/profileEdit' element={<ProfileEditUser/>}/> */}
-         
+          <Route path='/set-password*' element={<UpdatePassword />} />       
 
           <Route path='/managedepartment' element={<AddDepartment/>} />
           
          <Route path='/manageclassroom' element={<AddClassroom/>} />
-
-          {/* <Route path='/profileEdit' element={<ProfileEditUser/>}/> */}
-
+         
+          <Route path='/profileEdit' element={<ProfileEditUser/>}/>
 
           <Route path='/managedepartment' element={<AddDepartment />} />
 
@@ -180,11 +147,15 @@ function App() {
 
 
          {/* <Route path='/navbar' element={<Navbar/>} /> */}
+          {/* <Route path='/navbar' element={<Navbar/>} /> */}
+
+          <Route  path='/aboutUs' element={<AboutUs />} />
+
+          <Route path='/contact' element={<Contact/>} />
+
          </Routes>
 
          </div>
-
-
       </div>
    
     <ToastContainer />

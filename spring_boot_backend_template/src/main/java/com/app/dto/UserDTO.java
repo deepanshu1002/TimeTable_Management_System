@@ -20,4 +20,5 @@ public class UserDTO {
 	private String mobileNo;
 	private String password;
 	private Long deptId;
+	private String imagePath;
 }
