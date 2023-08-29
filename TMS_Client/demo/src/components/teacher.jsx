@@ -2,7 +2,7 @@ function Teacher() {
 
 
     return (<>
-        <center><h1>welcome teacher</h1>
+        <center><h1 style={{marginTop:'80px'}}>welcome teacher</h1>
 
         </center>
 

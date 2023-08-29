@@ -38,16 +38,12 @@ import { logout, login } from './features/authSlice'
 import Sidebar from './components/sidebar'
 
 import EditUser from './components/editUser'
-
-import NavbarA from './components/navbarA';
 // import Navbar from './components/navbar'
 
 import ProfileEditUser from './components/profileImageEditUser'
 import CheckRatings from './components/checkRatings';
 import Rating from './components/newRatings';
-import NavbarT from './components/navbarT'
-import NavbarS from './components/navbarS'
-
+import Navbar from './components/navbar'
 
 
 function App() {
@@ -64,21 +60,12 @@ function App() {
   }, [])
 
   return (<>
-  <div>
-
       <div>
-            <Routes>
-            <Route path='/admin' element={<NavbarA />} />
-            <Route path='/teacher' element={<NavbarT />} />
-            <Route path='/student' element={<NavbarS />} />
-            {/* Define other route paths */}
-          </Routes>
-        </div>
-
-
-      <div className='main-content'>
+      {loginStatus && <Navbar />}
+    
+      <div>
         <Routes>
-          <Route path='/' element={<LoginUser />} />
+          <Route path='/' element={ !loginStatus && <LoginUser />} />
           {/* register component */}
           <Route path='/manageleaves' element={<ManageLeaves />} />
           <Route path='/admindashboard' element={<AdminDashboard />} />
@@ -117,7 +104,7 @@ function App() {
 
           <Route path='/forgotpassword' element={<ForgotPassword />} />
           <Route path='/email' element={<ForgotEmail />} />
-          <Route path='/set-password*' element={<UpdatePassword />} />
+          {/* <Route path='/set-password' element={<UpdatePassword />} /> */}
 
           <Route path='/editUser' element={<EditUser />} />
 
@@ -144,6 +131,7 @@ function App() {
           <Route path='/ratings' element={<CheckRatings />} />
           <Route path="/rating/:subId" element={<Rating />} />
 
+          <Route path='/updatepassword/:email' element={<UpdatePassword/>} />
           {/* <Route path='/navbar' element={<Navbar/>} /> */}
         </Routes>
 

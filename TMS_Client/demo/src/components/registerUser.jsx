@@ -77,6 +77,7 @@ function RegisterUser() {
       if (response != null) {
         toast.success('Successfully registered a new user')
 
+        
       //   // go back to login
         // navigate('/')
       } else {
@@ -93,7 +94,7 @@ function RegisterUser() {
     <div className="row" style={{ fontWeight: "bold" }}>
       <div className="col"></div>
       <div
-        className="col-lg-6"
+        className="col-lg-4"
         style={{
           backgroundColor: "Highlight",
           borderRadius: "20px",

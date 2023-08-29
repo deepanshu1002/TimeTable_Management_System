@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios';
 import { registerUserApi } from '../services/user'
@@ -7,52 +7,50 @@ import "../TimetableMetadata.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { createUrl, log } from '../utils/utils'
+import '../css_file/forgotPassword.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function UpdatePassword() {
   debugger
-  const location = useLocation()
-  const email = location.search.slice(7)
+ 
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [code, setCode] = useState('')
+  const { email } = useParams();
+  const navigate = useNavigate()
 
-
-  const updatePass = async () => {
+  const verify = async () => {
+    debugger
    
-   if (password.length == '') {
+    if (password.length == '') {
       toast.error('Please enter password')
     } else if (confirmPassword.length == '') {
       toast.error('Please confirm password')
     } else if (password !== confirmPassword) {
       toast.error('Password does not match')
-    } 
-   
+    } else if (code == '') {
+      toast.error('please enter code')
+    }
     else {
-        const response = ""
-      // call register api
-      
-      const SendEmail=  async ()=>{
-        const url = createUrl('/set-password')
-        try {
-          response = await axios.put(url, {email,password})
-          log(response.data)
-          return response.data
-        }catch(ex){
-          log(ex)
-          return null
-        }
-      }
+        // call register api
+        debugger
+        // console.log(email)
+        const url = createUrl("/forgotpassword");
+        const body = {email, code, password};
+        // wait till axios is making the api call and getting response from server
 
-      SendEmail()
-      // parse the response
-      if (response != null) {
-        toast.success('Successfully updated a new user')
+        axios.put(url, body)
+            .then((response) => {
+                debugger
+                log(response.data);
+                toast.success("Successfully updated password");
+                navigate('/')
 
-      //   // go back to login
-        // navigate('/')
-      } else {
-        toast.error('Error while updating password')
-      }
-
+            })
+            .catch((error) => {
+                debugger
+                toast.error("error")
+            });
     }
   }
 
@@ -60,59 +58,51 @@ function UpdatePassword() {
 
   return (
     <div>
-    <div className="row" style={{ fontWeight: "bold" }}>
-      <div className="col">{email}</div>
-      <div
-        className="col-lg-6"
-        style={{
-          backgroundColor: "Highlight",
-          borderRadius: "20px",
-          padding: "30px",
-        }}
-      >
-        <div
-          className="mb-3"
-          style={{ backgroundColor: "blue", borderRadius: "10px" }}
-        >
-          <h2
-            style={{ textAlign: "center", margin: 10, color: "whitesmoke" }}
-          >
-            <b>Update Password</b>
-          </h2>
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+                <div class="d-table-cell align-middle">
+
+                    <div class="text-center mt-4">
+                        <h1 class="h2">Reset password</h1>
+                        <p class="lead">
+                           Verify Code and Update Password
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="m-sm-4">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Verification Code</label>
+                                        <input class="form-control form-control-lg" type="number" name="email" placeholder="Enter Verification Code"
+                                         onChange={(e)=>setCode(e.target.value)} />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input class="form-control form-control-lg" type="password" name="email" placeholder="Enter Password"
+                                         onChange={(e)=>setPassword(e.target.value)} />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Confirm Password</label>
+                                        <input class="form-control form-control-lg" type="password" name="email" placeholder="Re-Enter Password"
+                                         onChange={(e)=>setConfirmPassword(e.target.value)} />
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <a class="btn btn-lg btn-primary" onClick={verify}>Reset password</a>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-
-            <div className="mb-3">
-              <label htmlFor="">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                name='password'
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="">Confirm Password</label>
-              <input
-                type="password"
-                className="form-control"
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value);
-                }}
-              />
-            </div>
-
-            <div className='mb-3'>
-              <button onClick={updatePass} className='btn btn-success'>
-               Update Password
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className='col'></div>
-      </div>
+    </div>
+</div>
   )
 }
 
