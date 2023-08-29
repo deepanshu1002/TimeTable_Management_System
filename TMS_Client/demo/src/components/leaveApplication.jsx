@@ -54,7 +54,7 @@ function LeaveApplication(){
     }
 
     return(
-        <div>
+        <div style={{padding:'100px'}}>
             <div className="row" style={{ fontWeight: "bold" }}>
             <div className="col"></div>
             <div
