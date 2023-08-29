@@ -12,13 +12,15 @@ function Navbar() {
   const dispatch = useDispatch()
 
   const [roleId, setRoleId] = useState(sessionStorage['roleId'])
-  const dashboardForAdmin = [{prop:"admin",link:"/admindashboard"}, {prop:"ViewTimeTable", link:"/admindashboard"}, 
-                                  {prop:"ManageUser",link:"/manageuser" }]
-  const dashboardForTeacher = [{prop:"Profile", link:"/editUser"},{prop:"ViewRating", link:""}, {prop:"ViewTimeTable",link:"" }]
+  // const dashboardForAdmin = [{prop:"admin",link:"/admindashboard"}, {prop:"ViewTimeTable", link:"/admindashboard"}, 
+  //                                 {prop:"ManageUser",link:"/manageuser" }]
+  const dashboardForTeacher = [{prop:"Show all Leave Applications", link:"/getLeaveApplication"},
+                                    {prop:"Apply Leave Application", link:"leaveapplication"}, 
+                                    {prop:"ViewTimeTable",link:"" }]
   const dashboardForStudent = [{prop:"Student", link:""},{prop:"Profile", link:""}, {prop:"ViewTimeTable", link:""}]
   const [dashboard, setDashboard] = useState([]);
 
-  const homeForAdmin= ["/admin"]
+  const homeForAdmin= ["/admindashboard"]
   const homeForTeacher=["/teacher"]
   const homeForStudent =["/student"]
 
@@ -26,7 +28,7 @@ function Navbar() {
 
   useEffect(() => {
     if (roleId === '1') {
-      setDashboard(dashboardForAdmin)
+      // setDashboard(dashboardForAdmin)
       setHome(homeForAdmin)
     }
     else if (roleId === '2') {
@@ -107,7 +109,7 @@ function Navbar() {
               {sessionStorage['firstName']}
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="/editUser">
+              <a className="dropdown-item" href="/profileEdit">
                 Profile
               </a>
               {dashboard.map((d) => {

@@ -12,4 +12,6 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 	//List<Feedback> findByDateAndSubjectId(LocalDate date,Long subjectId);
 	List<Feedback> findByDate(LocalDate date);
 	List<Feedback> findBySubjectId(Subject subjectId);
+	List<Feedback> findBySubjectIdSubjectIdAndDate(Long subjectId,LocalDate date);
+	
 }

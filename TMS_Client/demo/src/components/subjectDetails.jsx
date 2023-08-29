@@ -170,7 +170,7 @@ function AddSubjectDetails()
     </label>
   </div>
   <div className="col-sm-9">
-                <input className="form-select form-select-lg form-control"
+                <input className="form-control"
                  style={{
                   backgroundColor: "#fff",
                   borderRadius: "8px",

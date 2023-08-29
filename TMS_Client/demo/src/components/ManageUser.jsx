@@ -62,7 +62,7 @@ function ManageUsers() {
 
   return (
     <div className="manage-users-container">
-      <h1>Manage Users</h1>
+      <center><h1>Manage Users</h1></center>
       <table className="table table-striped">
         <thead>
           <tr>

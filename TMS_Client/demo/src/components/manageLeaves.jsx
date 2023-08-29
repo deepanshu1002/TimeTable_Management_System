@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios';
 import { createUrl } from '../utils/utils';
-import LeaveApplication from './leaveApplication';
 
 
 function  ManageLeaves() {
@@ -59,7 +57,7 @@ function  ManageLeaves() {
     
       return (
         <div className="manage-users-container">
-          <center><h1     >Manage Leave Application</h1></center>
+          <center><h1>Manage Leave Application</h1></center>
           <table className="table table-striped" style={{marginTop:'20px'}}>
             <thead>
               <tr>

@@ -12,5 +12,6 @@ public interface FeedbackService {
 	ApiResponseDto addFeedback(AddFeedbackReqDTO feedback);
 	List<GetFeedbackDTO> getFeedback(LocalDate date,Long subjectId);
 	public FeedbackDTO getFeedback(String subjectName);
+	public FeedbackDTO getTeacherFeedback(LocalDate date,Long subjectId);
 	
 }

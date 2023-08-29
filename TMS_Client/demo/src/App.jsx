@@ -6,8 +6,6 @@ import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import { Admin, AdminDashboard } from './components/admin'
-
 // import{AddDetails} from './components/admin'
 import RegisterUser from './components/registerUser'
 import ManageUsers from './components/ManageUser'
@@ -29,22 +27,28 @@ import AddLectureData from './components/addLectureData'
 import ManageLeaves from './components/manageLeaves'
 
 import GetLectureDetails from './components/getLectureDetails'
-
-
-import ForgotPassword from './components/forgotPassword'
+//import Navbar from './components/navbar'
+//import TeacherRatings from './components/teacherRatings'
+import CheckRatings from './components/checkRatings'
 import ForgotEmail from './testmail'
 import UpdatePassword from './components/updatePassword';
-import { logout, login } from './features/authSlice'
-import Sidebar from './components/sidebar'
-
-import EditUser from './components/editUser'
 // import Navbar from './components/navbar'
-
+import {logout,login } from './features/authSlice'
+import ForgotPassword from './components/forgotPassword'
 import ProfileEditUser from './components/profileImageEditUser'
-import CheckRatings from './components/checkRatings';
+
+
 import Rating from './components/newRatings';
+
 import Navbar from './components/navbar'
 
+
+import CheckTeacherRatings from './components/checkTeacherRatings'
+import TeacherRatings from './components/teacherRatings'
+import TryAdmin from './components/adminDashboard';
+import AdminDashboard from './components/adminDashboard'
+import AboutUs from './components/aboutUs'
+import Contact from './components/contact'
 
 function App() {
 
@@ -57,32 +61,30 @@ function App() {
       // update the auth slice status to true
       dispatch(login())
     }
-  }, [])
+  },[]);
 
   return (<>
+
       <div>
       {loginStatus && <Navbar />}
     
       <div>
+
+      <div className='main-content'>
         <Routes>
           <Route path='/' element={ !loginStatus && <LoginUser />} />
           {/* register component */}
           <Route path='/manageleaves' element={<ManageLeaves />} />
-          <Route path='/admindashboard' element={<AdminDashboard />} />
+          <Route path='/admindashboard' element={<AdminDashboard/>} />
           <Route path='/register' element={<RegisterUser />} />
           <Route path='/validuser' element={<ManageUsers />} />
           {/*Leave Application component */}
           <Route path='/leaveapplication' element={<LeaveApplication />} />
           {/*GET Leave Application component */}
           <Route path='/getLeaveApplication' element={<GetLeaveApplication />} />
-
-
           <Route path='/student' element={<Student />} />
 
           <Route path='/teacher' element={<Teacher />}></Route>
-
-          <Route path='/admin' element={<Admin />} />
-
           <Route path='/managedepartment' element={<AddDepartment />} />
 
           <Route path='/manageclassroom' element={<AddClassroom />} />
@@ -103,12 +105,16 @@ function App() {
 
 
           <Route path='/forgotpassword' element={<ForgotPassword />} />
-          <Route path='/email' element={<ForgotEmail />} />
+          {/* <Route path='/email' element={<ForgotEmail />} /> */}
+
           {/* <Route path='/set-password' element={<UpdatePassword />} /> */}
+     
 
-          <Route path='/editUser' element={<EditUser />} />
-
-          {/* <Route path='/profileEdit' element={<ProfileEditUser/>}/> */}
+          <Route path='/managedepartment' element={<AddDepartment/>} />
+          
+         <Route path='/manageclassroom' element={<AddClassroom/>} />
+         
+          <Route path='/profileEdit' element={<ProfileEditUser/>}/>
 
           <Route path='/managedepartment' element={<AddDepartment />} />
 
@@ -127,14 +133,25 @@ function App() {
           <Route path='/addlecturedata' element={<AddLectureData />} />
 
           <Route path='/getlecturedetails' element={<GetLectureDetails />} />
-          <Route path='/sidebar' element={<Sidebar />} />
           <Route path='/ratings' element={<CheckRatings />} />
+          <Route path='/tryadmin' element={<TryAdmin/>} />
           <Route path="/rating/:subId" element={<Rating />} />
-
+          <Route path="/checkteacherrating" element={<CheckTeacherRatings/>} />
+         <Route path="/teacherratings/:subjectId/:date" element={<TeacherRatings/>} />
           <Route path='/updatepassword/:email' element={<UpdatePassword/>} />
-          {/* <Route path='/navbar' element={<Navbar/>} /> */}
-        </Routes>
 
+
+
+         {/* <Route path='/navbar' element={<Navbar/>} /> */}
+          {/* <Route path='/navbar' element={<Navbar/>} /> */}
+
+          <Route  path='/aboutUs' element={<AboutUs />} />
+
+          <Route path='/contact' element={<Contact/>} />
+
+         </Routes>
+
+         </div>
       </div>
     <ToastContainer />
     </div>
