@@ -38,6 +38,7 @@ function ViewTimetable() {
   const [selectedRowData, setSelectedRowData] = useState(null);
   const [selectedRating, setSelectedRating] = useState(0);
   const [lectureDataId, setLectureDataId] = useState("");
+  const [departmentId, setDepartmentId] = useState(sessionStorage['deptId']);
 
   // useEffect(() => {
   //   setDate();
@@ -61,7 +62,7 @@ function ViewTimetable() {
   useEffect(() => {
     debugger;
     log(date);
-    if (date !== "") loadSlots(date, 1); //set the id for student from session storage
+    if (date !== "") loadSlots(date, departmentId); //set the id for student from session storage
   }, [date]);
 
   const showSubjectData = (rowData) => {

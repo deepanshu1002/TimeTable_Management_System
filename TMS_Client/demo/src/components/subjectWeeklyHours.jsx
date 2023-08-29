@@ -19,7 +19,7 @@ function SubjectWeeklyHours() {
   const [totalHrs, setTotalHrs] = useState();
   const [departmentName, setDepartmentName] = useState();
   const [generateBtnDisplay, setGenerateBtnDisplay] = useState("none");
-  const [viewBtnDisplay, setViewBtnDisplay] = useState("block");
+  const [viewBtnDisplay, setViewBtnDisplay] = useState("none");
 
     const navigate=useNavigate();
 

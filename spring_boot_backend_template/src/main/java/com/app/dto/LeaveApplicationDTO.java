@@ -16,8 +16,10 @@ import lombok.ToString;
 @ToString
 public class LeaveApplicationDTO {
 	
+	
+	private Long leaveApplicationId;
 	private Long userId;
-	private String userName;
+    private String userName;
 	private LocalDate fromDate;
 	private LocalDate toDate;
 	private String reason;

@@ -25,31 +25,66 @@ function AddDepartment()
     }
     return (
       <div>
-        <h1 style={{ textAlign: 'center', margin: 10 }}>Add Department</h1>
+        <div className="row" style={{ fontWeight: "bold" }}>
+          <div className="col"></div>
+          <div
+            className="col-lg-6"
+            style={{
+              backgroundColor: "Highlight",
+              borderRadius: "20px",
+              padding: "30px",
+            }}
+          >
+            <div
+              className="mb-3"
+              style={{ backgroundColor: "blue", borderRadius: "10px" }}
+            >
+              <h2
+                style={{ textAlign: "center", margin: 10, color: "whitesmoke" }}
+              >
+                <b>Add Department</b>
+              </h2>
+            </div>
+            <div className="form">         
   
-        <div className='row'>
-          <div className='col'></div>
-          <div className='col'>
-            <div className='form'>
-            <div className='mb-3'>
-                <label htmlFor=''>Department Name</label>
-                <input
-                  type='text'
-                  className='form-control'
+            <div className="row mb-5 align-items-center">
+  <div className="col-sm-3">
+    <label className="mb-0" style={{ color: "#343a40", fontSize: "18px" }}>
+      Department Name
+    </label>
+  </div>
+  <div className="col-sm-9">
+                <input className="form-control"
+                 style={{
+                  backgroundColor: "#fff",
+                  borderRadius: "8px",
+                  padding: "10px",
+                  border: "2px solid #ced4da",
+                  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                  fontSize: "18px",
+                  width: "100%",
+                }}
+
+                  type="text"
+                  
                   onChange={(e) => {
-                    setDeptName(e.target.value)
+                    setDeptName(e.target.value);
                   }}
                 />
-                 <button onClick={addDepartment} className='btn btn-primary' style={{marginTop:'20px'}}>
-                    Add Department
-                  </button>
-              </div>         
+              </div>
+              </div>
+  
+
+              
+              <div className="mb-3" style={{ textAlign: "center" }}>
+                <button onClick={addDepartment} className="btn btn-success">Add Department</button>
+                
+              </div>
             </div>
           </div>
-          <div className='col'></div>
+          <div className="col"></div>
         </div>
       </div>
-    )
-    
+    );
 }
 export default AddDepartment;

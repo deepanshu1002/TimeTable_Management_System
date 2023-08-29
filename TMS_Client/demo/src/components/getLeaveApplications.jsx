@@ -24,7 +24,7 @@ function  GetLeaveApplication() {
       }, []);
 
       return (
-        <div className="manage-users-container">
+        <div className="manage-users-container" style={{padding:'100px'}}>
           <center><h1>Manage Leave Application</h1></center>
           <button style={{marginTop:'50px', marginLeft:'930px'}}type="button" 
           className="btn btn-primary"  onClick={()=>navigate("/leaveapplication")}>Add LeaveApplication</button>

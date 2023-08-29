@@ -12,6 +12,7 @@ import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.ApiResponseDto;
 import com.app.dto.SubjectDTO;
 import com.app.dto.SubjectandDeptandTeacherDTO;
+import com.app.dto.SubjectsDTO;
 import com.app.entities.Department;
 import com.app.entities.Lab;
 import com.app.entities.Subject;
@@ -62,7 +63,7 @@ public class SubjectServiceImpl implements SubjectService {
 			System.out.println(subjectEntity);
 			user.addSubject(subjectEntity);
 			dept.addSubject(subjectEntity);
-			//to add null values to subject with no lab
+			// to add null values to subject with no lab
 			if (sub.getLabId() != null) {
 				Lab lab = labRepo.findById(sub.getLabId())
 						.orElseThrow(() -> new ResourceNotFoundException("invalid labId"));
@@ -104,14 +105,30 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public List<SubjectDTO> getAllSubject(Long deptId) {
-		List<SubjectDTO> subDTOs=new ArrayList<SubjectDTO>();
-		List<Subject> subjects=subjectRepo.findByDeptDeptId(deptId);
+		List<SubjectDTO> subDTOs = new ArrayList<SubjectDTO>();
+		List<Subject> subjects = subjectRepo.findByDeptDeptId(deptId);
 		for (Subject sub : subjects) {
 			System.out.println(sub.getSubjectName());
-		subDTOs.add(new SubjectDTO(sub.getDept().getDeptId(), sub.getSubjectId(),
-				sub.getTeacherId().getUserId(), sub.getSubjectName(), sub.getLabVenue().getLabId()));
+			subDTOs.add(new SubjectDTO(sub.getDept().getDeptId(), sub.getSubjectId(), sub.getTeacherId().getUserId(),
+					sub.getSubjectName(), sub.getLabVenue().getLabId()));
 		}
 		return subDTOs;
+	}
+
+	public List<String> getAllSubjectsName() {
+		return subjectRepo.getAllSubjectName();
+
+	}
+
+	public List<SubjectsDTO> getAllSubjects(Long teacherId) {
+		List<Subject> subjects = subjectRepo.findByTeacherIdUserId(teacherId);
+		List<SubjectsDTO> subjectDtoList = new ArrayList<SubjectsDTO>();
+		for (Subject subject : subjects) {
+			SubjectsDTO Dto = mapper.map(subject, SubjectsDTO.class);
+			subjectDtoList.add(Dto);
+		}
+		return subjectDtoList;
+
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,14 +9,13 @@ import javax.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResourceAccessException;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.DepartmentDTO;
 import com.app.dto.LabVenueDTO;
+import com.app.dto.LabVenuesDTO;
 import com.app.entities.Department;
 import com.app.entities.Lab;
-import com.app.entities.Subject;
 import com.app.repository.DepartmentRepository;
 import com.app.repository.LabRepo;
 import com.app.repository.SubjectRepository;
@@ -59,10 +59,18 @@ public class LabServiceImpl implements LabService {
 	@Override
 	public List<LabVenueDTO> getAlllabs(Long id) {
 		List<Lab> labList = labRepo.findByDeptDeptId(id);
-		return labList.stream() 
-				.map(lab -> mapper.map(lab, LabVenueDTO.class))
-				.collect(Collectors.toList());
+		return labList.stream().map(lab -> mapper.map(lab, LabVenueDTO.class)).collect(Collectors.toList());
 
+	}
+	
+	public List <LabVenuesDTO> getAllLabDetails() {
+		List <LabVenuesDTO> labVenueList=new ArrayList<LabVenuesDTO>();
+		List <Lab> labs = labRepo.findAll();
+		for(Lab lab: labs) {
+			LabVenuesDTO labDTO= mapper.map(lab, LabVenuesDTO.class);
+			labVenueList.add(labDTO);
+		}
+		return labVenueList;
 	}
 
 }

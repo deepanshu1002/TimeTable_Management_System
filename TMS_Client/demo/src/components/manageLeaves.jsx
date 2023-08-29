@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios';
 import { createUrl } from '../utils/utils';
-import LeaveApplication from './leaveApplication';
 
 
 function  ManageLeaves() {
     const [leaveApplications, setLeaveApplications] = useState([])
     useEffect(() => {
-        const url = createUrl('/leaveapp')  
+        const url = createUrl('/leaveapp/pending')  
         console.log(url)
         axios.get(url)
           .then(response => {
@@ -21,14 +19,28 @@ function  ManageLeaves() {
             console.error('Error fetching leave applications:', error);
           });
       }, []);
-
+      
+      const getLeaveApp=()=>
+      {
+        const url = createUrl('/leaveapp/pending')  
+        console.log(url)
+        axios.get(url)
+          .then(response => {
+            console.log(response.data);
+            setLeaveApplications(response.data);
+          })
+          .catch(error => {
+            console.log(error.response)
+            console.error('Error fetching leave applications:', error);
+          });
+      }
       const approve = (leavApplicationId, status) => {
         const url = createUrl(`/leaveapp/${leavApplicationId}/${status}`);
         axios
           .put(url)
           .then(() => {
-           // getIsValidUsers();
-            toast.success('User Approved') // Refresh the user list after successful approval
+            getLeaveApp();
+            toast.success('Application Approved') // Refresh the user list after successful approval
           })
           .catch((error) => {
             console.error('Error in approve:', error);
@@ -36,9 +48,10 @@ function  ManageLeaves() {
       };
     
       const reject = (leavApplicationId, status) => {
+        debugger;
         const url = createUrl(`/leaveapp/${leavApplicationId}/${status}`);
         axios.put(url).then(() => {
-          //getIsValidUsers(); // Refresh the user list after successful rejection
+          getLeaveApp(); // Refresh the user list after successful rejection
         });
       };
     

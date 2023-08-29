@@ -54,12 +54,25 @@ function LeaveApplication(){
     }
 
     return(
-        <div>
-            <h1 style={{textAlign: 'center', margin: 20 , fontFamily: 'Times New Roman, serif',  fontWeight: 'bold', color: 'black'}}> Leave Application </h1>
-
-            <div className="row">
-                {/* column-1 */}
-                <div className="col"></div>
+        <div style={{padding:'100px'}}>
+            <div className="row" style={{ fontWeight: "bold" }}>
+            <div className="col"></div>
+            <div
+                className="col-lg-6"
+                style={{
+                    backgroundColor: "Highlight",
+                    borderRadius: "20px",
+                    padding: "30px",
+            }}>
+                    <div
+                    className="mb-3"
+                    style={{ backgroundColor: "blue", borderRadius: "10px" }}>
+                        <h2
+                        style={{ textAlign: "center", margin: 10, color: "whitesmoke" }}>
+                        <b>Leave Application</b>
+                        </h2>
+                    </div>
+       
                 {/* column-2 */}
                 <div className="col"> 
                     <div className="form">
@@ -70,8 +83,7 @@ function LeaveApplication(){
                             id="fromDate"
                             className="form-control"
                             onChange={(e)=>{setFromDate(e.target.value)}}
-                            required
-                            />
+                            required/>
                         </div>
 
                     <br></br>
@@ -83,8 +95,7 @@ function LeaveApplication(){
                             id="toDate"
                             className="form-control"
                             onChange={(e)=>{setToDate(e.target.value)}}
-                            required
-                            />
+                            required/>
                         </div>
 
                     <br></br>
@@ -95,19 +106,20 @@ function LeaveApplication(){
                             id="reason"
                             className="form-control"
                             onChange={(e)=>{setReason(e.target.value)}}
-                            required
-                            />
+                            required/>
                         </div>
 
                     <br></br>
 
-                        <div className="mb-3">
-                            <button onClick={submitLeaveApplication} type="submit" className='btn-success'> Submit </button>
+                        <div className="mb-3" style={{ textAlign: "center" }}>
+                            <button onClick={submitLeaveApplication} type="submit" className='btn-success'>Submit</button>
                         </div>
                     </div>
                 </div>
+
+                </div>
                 {/* column-3 */}
-                <div className="col"></div>
+                <div className="col"></div>       
             </div> 
         </div>
     )
