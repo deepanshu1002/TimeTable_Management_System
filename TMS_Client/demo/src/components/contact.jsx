@@ -75,7 +75,7 @@ function contact() {
                 <img
                   alt=""
                   class="img-circle"
-                  src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                  src="http://127.0.0.1:3000/pics/Deepanshu.jpeg"
                   style={{ height: "200px", width: "200px" }}
                 />
                 <h3 class="m-b-xs">
