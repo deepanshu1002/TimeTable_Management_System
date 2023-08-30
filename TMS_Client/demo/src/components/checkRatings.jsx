@@ -36,7 +36,7 @@ useEffect(() => {
 
   return (
     <div>
-  <div className="row" style={{ fontWeight: "bold" }}>
+  <div className="row" style={{ fontWeight: "bold", marginTop:'80px'}}>
     <div className="col"></div>
     <div
       className="col-lg-6"
@@ -57,8 +57,7 @@ useEffect(() => {
           style={{
             textAlign: "center",
             margin: "10px 0",
-            color: "whitesmoke",
-            fontSize: "24px",
+            color: "whitesmoke"
           }}
         >
           <b>Subject Ratings</b>
@@ -99,13 +98,13 @@ useEffect(() => {
         <button
           onClick={() => checkRatings(subId)}
           className="btn btn-success"
-          style={{
-            backgroundColor: "green",
-            color: "white",
-            borderRadius: "8px",
-            padding: "10px 20px",
-            fontSize: "16px",
-          }}
+          // style={{
+          //   backgroundColor: "green",
+          //   color: "white",
+          //   borderRadius: "8px",
+          //   padding: "10px 20px",
+          //   fontSize: "16px",
+          // }}
         >
           Ratings
         </button>

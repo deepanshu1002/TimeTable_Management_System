@@ -56,9 +56,22 @@ function  ManageLeaves() {
       };
     
       return (
-        <div className="manage-users-container">
-          <center><h1>Manage Leave Application</h1></center>
-          <table className="table table-striped" style={{marginTop:'20px'}}>
+        <div className="manage-users-container" style={{marginTop:'75px'}}>
+         <center><h1
+          className="dashboard-heading"
+          style={{
+            textAlign: "center",
+            marginTop: "10px",
+            fontSize: "36px",
+            color: "#007bff",
+            textTransform: "uppercase",
+            letterSpacing: "2px",
+            fontWeight: "bold",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+          }}
+        >
+          Manage Leaves
+        </h1></center>          <table className="table table-striped" style={{marginTop:'20px'}}>
             <thead>
               <tr>
                 <th>From Date</th>

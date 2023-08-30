@@ -81,7 +81,7 @@ function AddSubjectDetails()
     }
     return (
       <div>
-        <div className="row" style={{ fontWeight: "bold" }}>
+        <div className="row" style={{ fontWeight: "bold" ,marginTop:'80px'}}>
           <div
             className="col-lg-6 m-auto" 
             style={{
