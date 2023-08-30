@@ -8,19 +8,21 @@ function ManageUsers() {
   var [isValidUsers, setIsValidUsers] = useState([]);
 
   useEffect(() => {
-    const url = createUrl(`/validuser`);
+    debugger
+    const url = createUrl(`/user/validuser`);
     axios
       .get(url)
       .then((response) => {
+        debugger
         setIsValidUsers(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching users:', error);
+        toast.error('Error fetching users:', error);
       });
   }, []);
 
   const getIsValidUsers = () => {
-    const url = createUrl(`/validuser`);
+    const url = createUrl(`/user/validuser`);
     axios
       .get(url)
       .then((response) => {
@@ -32,7 +34,7 @@ function ManageUsers() {
   };
 
   const approve = (userId, newRoleId) => {
-    const url = createUrl(`/validuser/${userId}/${newRoleId}`);
+    const url = createUrl(`/user/validuser/${userId}/${newRoleId}`);
     axios
       .get(url)
       .then(() => {
@@ -45,7 +47,7 @@ function ManageUsers() {
   };
 
   const reject = (userId) => {
-    const url = createUrl(`/deleteuser/${userId}`);
+    const url = createUrl(`/user/deleteuser/${userId}`);
     axios.delete(url).then(() => {
       getIsValidUsers(); // Refresh the user list after successful rejection
     });
