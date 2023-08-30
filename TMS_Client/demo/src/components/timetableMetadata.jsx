@@ -111,37 +111,72 @@ function TimeTableMetadata() {
         <div
           className="col-lg-6"
           style={{
-            backgroundColor: "Highlight",
+            backgroundColor: "lightcyan",
             borderRadius: "20px",
             padding: "30px",
+            marginTop:'40px'
           }}
         >
           <div
-            className="mb-3"
-            style={{ backgroundColor: "blue", borderRadius: "10px" }}
-          >
-            <h2
-              style={{ textAlign: "center", margin: 10, color: "whitesmoke" }}
-            >
-              <b>Timetable Data</b>
-            </h2>
+            className="mb-3">
+            <div
+  style={{
+    backgroundColor: "white",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.1)",
+    textAlign: "center",
+  }}
+>
+  <h2
+    className="dashboard-heading"
+    style={{
+      fontSize: "36px",
+      color: "#007bff",
+      textTransform: "uppercase",
+      letterSpacing: "2px",
+      fontWeight: "bold",
+      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+      fontFamily: 'Montserrat, sans-serif',
+      margin: "0",
+    }}
+  >
+    Timetable Data
+  </h2>
+</div>
+
           </div>
           <div className="form">
-            <div className="mb-3">
-              <label htmlFor="">Department :</label>
-              &nbsp;&nbsp;
-              <select
-                value={selectedDepartment}
-                onChange={handleDepartmentChange}
-              >
-                <option value="">Select a department</option>
-                {departments.map((department) => (
-                  <option key={department.deptName} value={department.deptId}>
-                    {department.deptName}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <div className="row mb-5 align-items-center">
+  <div className="col-sm-3">
+    <label className="mb-0" style={{ color: "#343a40", fontSize: "18px" }}>
+      Department
+    </label>
+  </div>
+  <div className="col-sm-9">
+     <select
+      className="form-select form-select-lg"
+      value={selectedDepartment}
+      onChange={handleDepartmentChange}
+      style={{
+        backgroundColor: "#fff",
+        borderRadius: "8px",
+        padding: "10px",
+        border: "2px solid #ced4da",
+        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+        fontSize: "18px",
+        width: "100%",
+      }}
+    >
+      <option value="">Select a department</option>
+      {departments.map((department) => (
+        <option key={department.deptName} value={department.deptId}>
+          {department.deptName}
+        </option>
+      ))}
+    </select>
+  </div>
+</div>
 
             <div className="mb-3">
               <label htmlFor="">College Start Time</label>
@@ -269,11 +304,25 @@ function TimeTableMetadata() {
             </div>
 
             <div className="mb-3" style={{ textAlign: "center" }}>
-              <button className="btn btn-success" onClick={sendData}>
+              <button style={{
+            backgroundColor: "green",
+            color: "white",
+            borderRadius: "8px",
+            padding: "10px 20px",
+            fontSize: "16px",
+            width:'200px'
+          }}  className="btn btn-success" onClick={sendData}>
                 Submit
               </button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <button className="btn btn-primary" onClick={getData}>
+              <button style={{
+            backgroundColor: "blue",
+            color: "white",
+            borderRadius: "8px",
+            padding: "10px 20px",
+            fontSize: "16px",
+            width:'200px'
+          }}  className="btn btn-primary" onClick={getData}>
                 Previous Data
               </button>
               <br />
