@@ -30,20 +30,38 @@ function AddDepartment()
           <div
             className="col-lg-6"
             style={{
-              backgroundColor: "Highlight",
+              backgroundColor: "lightcyan",
               borderRadius: "20px",
               padding: "30px",
             }}
           >
             <div
-              className="mb-3"
-              style={{ backgroundColor: "blue", borderRadius: "10px" }}
-            >
-              <h2
-                style={{ textAlign: "center", margin: 10, color: "whitesmoke" }}
-              >
-                <b>Add Department</b>
-              </h2>
+              className="mb-3">
+              <div
+  style={{
+    backgroundColor: "white",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.1)",
+    textAlign: "center",
+  }}
+>
+  <h2
+    className="dashboard-heading"
+    style={{
+      fontSize: "36px",
+      color: "#007bff",
+      textTransform: "uppercase",
+      letterSpacing: "2px",
+      fontWeight: "bold",
+      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+      fontFamily: 'Montserrat, sans-serif',
+      margin: "0",
+    }}
+  >
+    Add Department
+  </h2>
+</div>
             </div>
             <div className="form">         
   
@@ -77,7 +95,14 @@ function AddDepartment()
 
               
               <div className="mb-3" style={{ textAlign: "center" }}>
-                <button onClick={addDepartment} className="btn btn-success">Add Department</button>
+                <button style={{
+            backgroundColor: "green",
+            color: "white",
+            borderRadius: "8px",
+            padding: "10px 20px",
+            fontSize: "16px",
+            width:'200px'
+          }} onClick={addDepartment} className="btn btn-success">Add Department</button>
                 
               </div>
             </div>

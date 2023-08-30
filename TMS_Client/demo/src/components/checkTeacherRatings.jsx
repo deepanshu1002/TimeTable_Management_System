@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { createUrl } from "../utils/utils";
-import { toast } from "react-toastify";
 import { Navigate,Route, Routes, useNavigate } from 'react-router-dom';
 
 
@@ -48,28 +47,38 @@ function CheckTeacherRatings()
     <div
       className="col-lg-6"
       style={{
-        backgroundColor: "Highlight",
+        backgroundColor: "lightcyan",
         borderRadius: "20px",
         padding: "30px",
       }}
     >
       <div
-        className="mb-3"
-        style={{
-          backgroundColor: "blue",
-          borderRadius: "10px",
-        }}
-      >
-        <h2
-          style={{
-            textAlign: "center",
-            margin: "10px 0",
-            color: "whitesmoke",
-            fontSize: "24px",
-          }}
-        >
-          <b>Teacher Ratings</b>
-        </h2>
+        className="mb-3">
+         <div
+  style={{
+    backgroundColor: "white",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.1)",
+    textAlign: "center",
+  }}
+>
+  <h2
+    className="dashboard-heading"
+    style={{
+      fontSize: "36px",
+      color: "#007bff",
+      textTransform: "uppercase",
+      letterSpacing: "2px",
+      fontWeight: "bold",
+      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+      fontFamily: 'Montserrat, sans-serif',
+      margin: "0",
+    }}
+  >
+    Teacher Ratings
+  </h2>
+</div>
       </div>
       <div className="row mb-6 align-items-center">
   <div className="col-sm-3">
@@ -130,7 +139,7 @@ function CheckTeacherRatings()
               </div>
               </div>
   
-              <div className="row mb-5 align-items-center"></div>
+              <div className="row mb-2 align-items-center"></div>
 
       <div className="mb-3" style={{ textAlign: "center" }}>
         <button
@@ -142,6 +151,7 @@ function CheckTeacherRatings()
             borderRadius: "8px",
             padding: "10px 20px",
             fontSize: "16px",
+            width:"200px"
           }}
         >
          Check Ratings
