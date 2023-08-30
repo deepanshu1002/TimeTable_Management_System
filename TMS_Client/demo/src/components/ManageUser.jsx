@@ -63,33 +63,44 @@ function ManageUsers() {
   };
 
   return (
-    <div className="manage-users-container" style={{marginTop:'75px'}}>
-      <center><h1
-          className="dashboard-heading"
-          style={{
-            textAlign: "center",
-            marginTop: "10px",
-            fontSize: "36px",
-            color: "#007bff",
-            textTransform: "uppercase",
-            letterSpacing: "2px",
-            fontWeight: "bold",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
-          }}
-        >
-          Manage Users
-        </h1></center>
+    <div className="manage-users-container" style={{marginTop:'75px', backgroundColor:"lightcyan"}}>
+       <div
+  style={{
+    backgroundColor: "white",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.1)",
+    textAlign: "center",
+  }}
+>
+  <h2
+    className="dashboard-heading"
+    style={{
+      fontSize: "36px",
+      color: "#007bff",
+      textTransform: "uppercase",
+      letterSpacing: "2px",
+      fontWeight: "bold",
+      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+      fontFamily: 'Montserrat, sans-serif',
+      margin: "0",
+    }}
+  >
+    Manager Users
+  </h2>
+</div>
+
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>User Id</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Mobile No.</th>
-            <th>Dept Id</th>
-            <th>Role Id</th>
-            <th>Actions</th>
+            <th style={{backgroundColor:"lightblue"}}>User Id</th>
+            <th style={{backgroundColor:"lightblue"}}>Firstname</th>
+            <th style={{backgroundColor:"lightblue"}}>Lastname</th>
+            <th style={{backgroundColor:"lightblue"}}>Email</th>
+            <th style={{backgroundColor:"lightblue"}}>Mobile No.</th>
+            <th style={{backgroundColor:"lightblue"}}>Dept Id</th>
+            <th style={{backgroundColor:"lightblue"}}>Role Id</th>
+            <th style={{backgroundColor:"lightblue"}}>Actions</th>
           </tr>
         </thead>
         <tbody>
