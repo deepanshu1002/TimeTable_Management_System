@@ -34,10 +34,10 @@ function RegisterUser() {
   }, []);
 
   const handleDepartmentChange = (event) => {
-    const newSelectedDepartment= event.target.value
+    const newSelectedDepartment = event.target.value;
     setSelectedDepartment(newSelectedDepartment);
     console.log(event.target.value)
-    setDeptId(selectedDepartment)
+    setDeptId(newSelectedDepartment )
   };
 
   const RegisterUser = async () => {
@@ -145,25 +145,35 @@ function RegisterUser() {
               />
             </div>
 
-            <div className="form">
-            <div className="mb-3">
-              <label htmlFor="">Department :</label>
-              &nbsp;&nbsp;
-              <select
-                value={selectedDepartment}
-                onChange={handleDepartmentChange}
-              >
-                <option value="">Select a department</option>
-                {departments.map((department) => (
-                  <option key={department.deptName} value={department.deptId}>
-                    {department.deptName}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-
-           
+ <div className="mb-3" >
+ <label className="mb-3" style={{ color: "#343a40", fontSize: "18px" }}>
+      Department
+    </label>
+  <div className="col-sm-3">
+  </div>
+  <div className="mb-3">
+     <select
+      className="form-select form-select-lg"
+      value={selectedDepartment}
+      onChange={handleDepartmentChange}
+      style={{
+        backgroundColor: "#fff",
+        borderRadius: "6px",
+        padding: "10px",
+        border: "2px solid #ced4da",
+        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+        fontSize: "18px",
+        width: "550px",
+      }}
+    >
+      <option value="">Select a department</option>
+      {departments.map((department) => (
+        <option key={department.deptName} value={department.deptId}>
+          {department.deptName}
+        </option>
+      ))}
+    </select>
+  </div>   
             <div className="mb-3">
               <label htmlFor="">Email</label>
               <input
