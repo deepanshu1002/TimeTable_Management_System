@@ -56,29 +56,40 @@ function  ManageLeaves() {
       };
     
       return (
-        <div className="manage-users-container" style={{marginTop:'75px'}}>
-         <center><h1
-          className="dashboard-heading"
-          style={{
-            textAlign: "center",
-            marginTop: "10px",
-            fontSize: "36px",
-            color: "#007bff",
-            textTransform: "uppercase",
-            letterSpacing: "2px",
-            fontWeight: "bold",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
-          }}
-        >
-          Manage Leaves
-        </h1></center>          <table className="table table-striped" style={{marginTop:'20px'}}>
+        <div className="manage-users-container" style={{marginTop:'75px', backgroundColor:"lightcyan"}}>
+         <div
+  style={{
+    backgroundColor: "white",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.1)",
+    textAlign: "center",
+  }}
+>
+  <h2
+    className="dashboard-heading"
+    style={{
+      fontSize: "36px",
+      color: "#007bff",
+      textTransform: "uppercase",
+      letterSpacing: "2px",
+      fontWeight: "bold",
+      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+      fontFamily: 'Montserrat, sans-serif',
+      margin: "0",
+    }}
+  >
+    Manager Leaves
+  </h2>
+</div>
+         <table className="table table-striped" style={{marginTop:'20px'}}>
             <thead>
               <tr>
-                <th>From Date</th>
-                <th>To Date</th>
-                <th>Reason</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th  style={{backgroundColor:"lightblue"}}>From Date</th>
+                <th  style={{backgroundColor:"lightblue"}}>To Date</th>
+                <th  style={{backgroundColor:"lightblue"}}>Reason</th>
+                <th  style={{backgroundColor:"lightblue"}}>Status</th>
+                <th  style={{backgroundColor:"lightblue"}}>Actions</th>
               </tr>
             </thead>
             <tbody>

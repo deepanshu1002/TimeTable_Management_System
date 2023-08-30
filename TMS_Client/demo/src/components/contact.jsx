@@ -10,10 +10,10 @@ function contact() {
         rel="stylesheet"
       />
       <div class="container">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="contact-box center-version">
-              <a href="#profile.html">
+        <div class="row" >
+          <div class="col-md-3" >
+            <div class="contact-box center-version" >
+              <a href="#profile.html" style={{ backgroundColor: "lightcyan" }}>
                 <img
                   alt=""
                   class="img-circle"
@@ -42,7 +42,7 @@ function contact() {
           </div>
           <div class="col-md-3">
             <div class="contact-box center-version">
-              <a href="#profile.html">
+              <a href="#profile.html" style={{ backgroundColor: "lightcyan" }}>
                 <img
                   alt=""
                   class="img-circle"
@@ -71,7 +71,7 @@ function contact() {
           </div>
           <div class="col-md-3">
             <div class="contact-box center-version">
-              <a href="#profile.html">
+              <a href="#profile.html" style={{ backgroundColor: "lightcyan" }}>
                 <img
                   alt=""
                   class="img-circle"
@@ -100,7 +100,7 @@ function contact() {
           </div>
           <div class="col-md-3">
             <div class="contact-box center-version">
-              <a href="#profile.html">
+              <a href="#profile.html" style={{ backgroundColor: "lightcyan" }}>
                 <img
                   alt=""
                   class="img-circle"

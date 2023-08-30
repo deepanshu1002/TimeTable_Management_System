@@ -5,6 +5,8 @@ import '../../node_modules/bootstrap/dist/js/bootstrap.bundle'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../features/authSlice'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faInfoCircle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import '../css_file/navbar.css'
 
 function Navbar() {
@@ -58,8 +60,9 @@ function Navbar() {
   }
 
   return (<>
-    <nav className="navbar navbar-expand-md navbar-light bg-primary fixed-top">
-      <a className="navbar-brand" href="#" style={{ fontStyle: "normal", marginLeft: '8px', fontSize: '30px', color: 'white' }}>
+    <nav className="navbar navbar-expand-md navbar-light fixed-top" style={{ backgroundColor: 'lightblue' }}>
+      <a className="navbar-brand" href="#" style={{ fontStyle: "normal", marginLeft: '8px', fontSize: '30px', color: 'purple' }}>
+      <img src="http://127.0.0.1:3000/pics/icon.png" alt="Logo" style={{ marginRight: '15px', height: '45px' }} />
         Timetable Management System
       </a>
       <button
@@ -78,25 +81,25 @@ function Navbar() {
         &nbsp;&nbsp;&nbsp;&nbsp;
 
         <ul className="navbar-nav mr-auto" style={{ fontSize: '20px' }}>
-          <li className="nav-item">
-            <a className="nav-link" href={home}>
-              Home
+          <li className="nav-item" >
+            <a className="nav-link" href={home} style={{ color: 'black' }}>
+            <FontAwesomeIcon icon={faHome} style={{ color: 'black' }} /> Home
             </a>
           </li>
           &nbsp;&nbsp;
           <li className="nav-item">
-            <a className="nav-link" href="/aboutUs">
-              About
+            <a className="nav-link" href="/aboutUs" style={{ color: 'green' }}>
+            <FontAwesomeIcon icon={faInfoCircle} style={{ color: 'green' }}/> About
             </a>
           </li>
           &nbsp;&nbsp;
           <li className="nav-item">
-            <a className="nav-link" href="/contact">
-              Contact
+            <a className="nav-link" href="/contact" style={{ color: 'blue' }}>
+            <FontAwesomeIcon icon={faEnvelope} style={{ color: 'blue' }}/> Contact
             </a>
           </li>
           &nbsp;&nbsp;
-          <li className="nav-item dropdown">
+          <li className="nav-item dropdown" >
             <a
               className="nav-link dropdown-toggle"
               href="#"
@@ -105,10 +108,11 @@ function Navbar() {
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
+              style={{color: "red"}}
             >
               {sessionStorage['firstName']}
             </a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div className="dropdown-menu" aria-labelledby="navbarDropdown" style={{ backgroundColor: "lightcyan" }}>
               <a className="dropdown-item" href="/profileEdit">
                 Profile
               </a>
@@ -121,7 +125,7 @@ function Navbar() {
 
               })}
 
-              <div className="dropdown-divider"></div>
+              <div className="dropdown-divider" style={{borderColor:"black"}}></div>
               <a className="dropdown-item" href="#" onClick={logoutUser}>
                 Logout
               </a>

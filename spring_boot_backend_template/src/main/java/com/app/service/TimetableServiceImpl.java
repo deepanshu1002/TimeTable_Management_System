@@ -209,6 +209,7 @@ public class TimetableServiceImpl implements TimetableService {
 			Collections.shuffle(initialTimeTablelist);
 			weekDate=weekDate.plusDays(1);
 			System.out.println(subMetadataList);
+			System.out.println(initialTimeTablelist);
 		} // weekDate.plusDays(1);
 
 	}

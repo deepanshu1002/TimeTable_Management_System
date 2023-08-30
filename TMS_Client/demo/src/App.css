@@ -239,3 +239,19 @@ body{
   padding: 20px;
   /* Adjust other styles as needed */
 }
+
+/* In your CSS file or within a style tag in your component */
+.profile-edit-text {
+  visibility: hidden;
+  position: absolute;
+  top: 12%; /* Adjust the positioning as needed */
+  left: 50%; /* Adjust the positioning as needed */
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  pointer-events: none; /* Allows mouse events to pass through to the image */
+  z-index: 1; /* Adjust the z-index as needed */
+}
+
