@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { createUrl } from "../utils/utils";
-import { toast } from "react-toastify";
 import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 import { useParams } from "react-router-dom";
 
@@ -35,7 +34,7 @@ function Rating() {
         <h5 class="mb-0 mb-4">
           <div style={{ textAlign: "center" }}>
           <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-  <div>
+  <div style={{marginTop:'50px'}}>
     <h2 style={{ display: 'inline', fontSize: '24px', fontWeight: 'bold', color: 'purple' }}>Professor -</h2>{" "}
     <h2 style={{ display: 'inline', fontSize: '24px', fontWeight: 'bold', color: 'blue' }}>{feedback.teacherName}</h2>
   </div>
@@ -214,37 +213,3 @@ function Rating() {
   );
 }
 export default Rating;
-
-{
-  /* <button
-          style={{ display: generateBtnDisplay }}
-          type="button"
-          class="btn btn-purple btn-custom waves-effect waves-light m-b-5"
-          onClick={generateTimetable}
-        >
-          Click here to Generate timetable for {departmentName} for week{" "}
-          {uri.date}
-        </button>
-        <br/>
-        <button
-          
-          type="button"
-          class="btn btn-blue btn-custom waves-effect waves-light m-b-5"
-          
-        >
-
-        </button> 
-        
-        
-        <div
-            style={{ backgroundColor: "cornflowerblue" }}
-            class="rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews"
-          >
-        
-            <h4>{f.date}</h4>
-
-            <div class="reviews-members-body">
-              <p style={{ color: "darkblue" }}>{f.feedback} </p>
-            </div>
-          </div>*/
-}
