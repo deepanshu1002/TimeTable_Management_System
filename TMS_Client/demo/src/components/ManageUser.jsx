@@ -63,8 +63,22 @@ function ManageUsers() {
   };
 
   return (
-    <div className="manage-users-container">
-      <center><h1>Manage Users</h1></center>
+    <div className="manage-users-container" style={{marginTop:'75px'}}>
+      <center><h1
+          className="dashboard-heading"
+          style={{
+            textAlign: "center",
+            marginTop: "10px",
+            fontSize: "36px",
+            color: "#007bff",
+            textTransform: "uppercase",
+            letterSpacing: "2px",
+            fontWeight: "bold",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+          }}
+        >
+          Manage Users
+        </h1></center>
       <table className="table table-striped">
         <thead>
           <tr>
