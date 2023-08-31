@@ -190,7 +190,7 @@ function AdminDashboard() {
               <button
                 className="border-0 shadow-none"
                 style={{ backgroundColor: "white" }}
-                // onClick={() => navigate("/timetablemetadata")}
+                onClick={() => navigate("/viewtimetable")}
               >
                 <div class="card border-hover-primary hover-scale">
                   <div class="card-body">

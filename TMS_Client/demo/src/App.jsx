@@ -51,6 +51,7 @@ import TryAdmin from "./components/adminDashboard";
 import AdminDashboard from "./components/adminDashboard";
 import AboutUs from "./components/aboutUs";
 import Contact from "./components/contact";
+import AdminViewTimetable from "./components/viewTimetable";
 
 function App() {
   const loginStatus = useSelector((state) => state.auth.status);
@@ -176,6 +177,9 @@ function App() {
               <Route path="/aboutUs" element={<AboutUs />} />
 
               <Route path="/contact" element={<Contact />} />
+
+              <Route path="/viewtimetable" element={<AdminViewTimetable/>} />
+
             </Routes>
           </div>
         </div>
