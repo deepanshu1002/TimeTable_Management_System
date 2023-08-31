@@ -1,6 +1,6 @@
 import React from "react";
 import "../css_file/tryAdmin.css";
-import '../css_file/link_Button.css';
+import "../css_file/link_Button.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 
@@ -29,7 +29,8 @@ function AdminDashboard() {
         <div class="container">
           <div
             class="row row-cols-lg-3 row-cols-md-2 row-cols-1 text-center justify-content-center px-xl-6 aos-init aos-animate"
-            data-aos="fade-up" style={{marginTop:'100px'}}
+            data-aos="fade-up"
+            style={{ marginTop: "100px" }}
           >
             <div class="col my-3">
               <button
