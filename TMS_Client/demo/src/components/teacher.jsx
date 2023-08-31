@@ -35,7 +35,7 @@ function TeacherDashboard() {
               <button
                 className="border-0 shadow-none"
                 style={{ backgroundColor: "white" }}
-                onClick={() => navigate("/timetable")}
+                onClick={() => navigate("/timetableteacher/")}
               >
                 <div class="card border-hover-primary hover-scale">
                   <div class="card-body">
