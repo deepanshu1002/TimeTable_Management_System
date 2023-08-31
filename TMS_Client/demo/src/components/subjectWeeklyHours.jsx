@@ -117,7 +117,7 @@ function SubjectWeeklyHours() {
   };
 
   return (
-    <div>
+    <div style={{paddingTop:"100px"}}>
       <div class="container">
         <div class="col-12 col-sm-12 col-md-12">
           <div class="card">

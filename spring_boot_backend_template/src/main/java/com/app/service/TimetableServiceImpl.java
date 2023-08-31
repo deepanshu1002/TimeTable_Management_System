@@ -161,6 +161,7 @@ public class TimetableServiceImpl implements TimetableService {
 		for (int j = 0; j < metaData.getNoOfDaysThisWeek(); j++) {
 			int i = 0;
 			int timeSlot = 0;
+			int count=0;
 			for (; i <= (lectSlot + labSlot); i++) {
 
 				if (i <= initialTimeTablelist.size() - 1) {
@@ -184,7 +185,7 @@ public class TimetableServiceImpl implements TimetableService {
 				}
 
 				for (SubjectMetadataResp subResp : subMetadataList) {
-
+					System.out.println("subResp="+subResp.getSubjectName());
 					if (sub.getSubjectName().equals(subResp.getSubjectName())) {
 
 						if (subResp.getWeeklyHrs() != 0) {
@@ -202,6 +203,8 @@ public class TimetableServiceImpl implements TimetableService {
 							System.out.println(finalTimeTablelist);
 							subResp.setWeeklyHrs(subResp.getWeeklyHrs() - (int) lectHrsPerSlot);
 							timeSlot++;
+							
+							break;
 						}
 					}
 				}

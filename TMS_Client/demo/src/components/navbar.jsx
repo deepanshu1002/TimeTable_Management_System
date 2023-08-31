@@ -23,7 +23,7 @@ function Navbar() {
   const [dashboard, setDashboard] = useState([]);
 
   const homeForAdmin= ["/admindashboard"]
-  const homeForTeacher=["/teacher"]
+  const homeForTeacher=["/teacherdashboard"]
   const homeForStudent =["/timetable"]
 
   const [home, setHome]= useState([]);
