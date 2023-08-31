@@ -108,7 +108,7 @@ function Navbar() {
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-              style={{color: "red"}}
+              style={{color: "purple"}}
             >
               {sessionStorage['firstName']}
             </a>
