@@ -11,7 +11,6 @@ import RegisterUser from "./components/registerUser";
 import ManageUsers from "./components/ManageUser";
 import LoginUser from "./components/loginUser";
 import Student from "./components/student";
-import Teacher from "./components/teacher";
 import GetLeaveApplication from "./components/getLeaveApplications";
 import LeaveApplication from "./components/leaveApplication";
 import AddSubjectDetails from "./components/subjectDetails";
@@ -52,6 +51,8 @@ import AdminDashboard from "./components/adminDashboard";
 import AboutUs from "./components/aboutUs";
 import Contact from "./components/contact";
 import AdminViewTimetable from "./components/viewTimetable";
+import TeacherDashboard from "./components/teacher";
+
 
 function App() {
   const loginStatus = useSelector((state) => state.auth.status);
@@ -88,7 +89,7 @@ function App() {
               />
               <Route path="/student" element={<Student />} />
 
-              <Route path="/teacher" element={<Teacher />}></Route>
+              <Route path="/teacherdashboard" element={<TeacherDashboard/>}></Route>
               <Route path="/managedepartment" element={<AddDepartment />} />
 
               <Route path="/manageclassroom" element={<AddClassroom />} />

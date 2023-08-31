@@ -62,7 +62,7 @@ function LoginUser() {
                 }
 
                 else if(roleId == '2'){
-                    navigate('/teacher');
+                    navigate('/teacherdashboard');
                 }
 
                 else{

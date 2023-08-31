@@ -24,14 +24,29 @@ function  GetLeaveApplication() {
       }, []);
 
       return (
-        <div className="manage-users-container" style={{padding:'100px'}}>
-          <center><h1>Manage Leave Application</h1></center>
-          <button style={{marginTop:'50px', marginLeft:'930px'}}type="button" 
-          className="btn btn-primary"  onClick={()=>navigate("/leaveapplication")}>Add LeaveApplication</button>
+        <div className="manage-users-container" style={{marginTop:'80px'}}>
+          <center><h1
+           className="dashboard-heading"
+           style={{
+             textAlign: "center",
+             marginTop: "10px",
+             fontSize: "36px",
+             color: "#007bff",
+             textTransform: "uppercase",
+             letterSpacing: "2px",
+             fontWeight: "bold",
+             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+           }}
+          >Leave Applications</h1>
+          </center>
+          
+
+          <button style={{ marginLeft:'1600px'}}type="button" 
+          className="btn btn-info"  onClick={()=>navigate("/leaveapplication")}>Add Leave</button>
           <table className="table table-striped" style={{marginTop:'20px'}}>
             <thead>
               <tr>
-                <th>From Date</th>
+                <th>From Date</th>  
                 <th>To Date</th>
                 <th>Reason</th>
                 <th>Status</th>

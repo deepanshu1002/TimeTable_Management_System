@@ -44,7 +44,7 @@ function LeaveApplication(){
             if(response != null){
 
                 toast.success('Successfully submitted leave application')
-                navigate('/leaveApplication')
+                navigate('/getleaveApplication')
 
             } else {
                 toast.error('Error while submitting leave application, please try again')

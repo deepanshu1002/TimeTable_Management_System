@@ -29,7 +29,7 @@ public class ForgotPasswordService {
         mailMessage.setSubject("Password Reset Request");
         mailMessage.setText("We got a request to reset your Timetable Management System password."+
                    "Four digit verification code is: "+resetToken+
-        		 "If this is not you, please ignore");
+        		 " If this is not you, please ignore");
         ForgotPasswordCode code = new ForgotPasswordCode(userEmail,resetToken);
         forgotPassword.save(code);
         
