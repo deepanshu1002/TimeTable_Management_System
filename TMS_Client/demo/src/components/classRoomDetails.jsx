@@ -34,12 +34,12 @@ function AddClassroom()
          
           // parse the response
           if (response != null) {
-            toast.success('Successfully registered a new user')
+            toast.success('Successfully added the classroom')
     
           //   // go back to login
             // navigate('/')
           } else {
-            toast.error('Error while registering a new user, please try again')
+            toast.error('Error while adding the classroom, please try again')
           }
     }
     return (

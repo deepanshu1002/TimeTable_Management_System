@@ -73,9 +73,9 @@ function AddSubjectDetails()
             labId
           )
           if (response != null) {
-            toast.success('Successfully registered a new user')
+            toast.success('Successfully added the subject')
           } else {
-            toast.error('Error while registering a new user, please try again')
+            toast.error('Error while adding the subject, please try again')
           }
     
     }
