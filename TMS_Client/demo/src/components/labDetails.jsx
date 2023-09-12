@@ -37,12 +37,12 @@ function AddLabVenue()
       
        // parse the response
        if (response != null) {
-         toast.success('Successfully registered a new user')
+         toast.success('Successfully added  the lab venue')
  
        //   // go back to login
          // navigate('/')
        } else {
-         toast.error('Error while registering a new user, please try again')
+         toast.error('Error while adding the lab venue, please try again')
        }
      }
      return (

@@ -15,12 +15,12 @@ function AddDepartment()
          
           // parse the response
           if (response != null) {
-            toast.success('Successfully registered a new user')
+            toast.success('Successfully added the department')
     
           //   // go back to login
             // navigate('/')
           } else {
-            toast.error('Error while registering a new user, please try again')
+            toast.error('Error while adding the department, please try again')
           }
     }
     return (
