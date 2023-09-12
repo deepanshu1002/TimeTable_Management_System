@@ -13,6 +13,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.*;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +37,7 @@ import com.app.dto.SignupRequest;
 import com.app.dto.UserDTO;
 import com.app.dto.userEmailPasswordDTO;
 import com.app.entities.IsValidUser;
+import com.app.security.JwtUtil;
 import com.app.service.ImageHandlingService;
 import com.app.service.UserService;
 
@@ -43,6 +50,12 @@ public class UserController {
 	
 	@Autowired
 	private ImageHandlingService imgService;
+	
+	@Autowired
+	private AuthenticationManager authManager;
+	
+	@Autowired
+	private JwtUtil jwtUtil;
 
 	@PostMapping("/register")
 	public ResponseEntity<?> registerUser(@RequestBody @Valid SignupRequest request) {
@@ -51,8 +64,24 @@ public class UserController {
 
 	@PostMapping("/signIn")
 	public ResponseEntity<?> authenticateUser(@RequestBody @Valid AuthRequest request) {
-		System.out.println("request = "+request);
-		return new ResponseEntity<>(userService.authenticateUser(request), HttpStatus.OK);
+		try {
+			// authenticate user with authentication manager
+			Authentication auth = new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword());
+			System.out.println("BEFORE AUTH: " + auth);
+			auth = authManager.authenticate(auth);
+			System.out.println("AFTER AUTH: " + auth);
+			// after authentication, create JWT token and return.
+			String token = jwtUtil.createToken(auth);
+			return ResponseEntity.ok(token);
+		} 
+		catch (BadCredentialsException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.internalServerError().body(e.getMessage());
+		}
 	}
 
 	@DeleteMapping("/deleteuser/{userId}")
@@ -70,7 +99,8 @@ public class UserController {
 	public ResponseEntity<?> updateUserDetails(@RequestBody @Valid SignupRequest user) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUserDetails(user));
 	}
-
+	
+	
 	@GetMapping("/validuser")
 	public List<IsValidUser> getAllIsValidUsers() {
 		return userService.getAllIsValidUser();

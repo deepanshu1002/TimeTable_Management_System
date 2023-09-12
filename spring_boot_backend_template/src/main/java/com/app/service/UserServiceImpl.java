@@ -5,6 +5,12 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +33,7 @@ import com.app.repository.UserRepository;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService,UserDetailsService {
 	@Autowired
 	private ModelMapper mapper;
 	@Autowired
@@ -38,6 +44,19 @@ public class UserServiceImpl implements UserService {
 	private RoleRepository roleRepo;
 	@Autowired
 	private IsValidUserRepo isValidUser;
+	
+	
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Users user = userRepo.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+		String role = user.getRole().getRole();
+		//List<SimpleGrantedAuthority> authorities = List.of( new SimpleGrantedAuthority(role) );
+		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(role);
+		User authenticatedUser = new User(user.getEmail(), 
+						user.getPassword(), 
+						authorities);
+		return authenticatedUser;
+	}
 
 	public SignupResp registerUser(SignupRequest request) {
 		IsValidUser user = mapper.map(request, IsValidUser.class);
